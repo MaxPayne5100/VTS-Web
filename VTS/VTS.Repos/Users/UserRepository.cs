@@ -1,5 +1,6 @@
 using VTS.DAL;
 using VTS.DAL.Entities;
+using VTS.Repos.Generic;
 
 namespace VTS.Repos.Users
 {

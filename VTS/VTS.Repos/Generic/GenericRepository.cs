@@ -4,9 +4,9 @@ using VTS.DAL;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace VTS.Repos
+namespace VTS.Repos.Generic
 {
-    public abstract class GenericRepository<TEntity, TKey> where TEntity : class, IIdentifiable<TKey>
+    public abstract class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : class, IIdentifiable<TKey>
     {
         protected readonly VTSDbContext Context;
 

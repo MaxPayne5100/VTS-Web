@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTS.Web", "VTS.Web\VTS.Web.csproj", "{1BF47FEF-D4AC-45A1-8650-79D666ADBFF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Web", "VTS.Web\VTS.Web.csproj", "{1BF47FEF-D4AC-45A1-8650-79D666ADBFF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTS.DAL", "VTS.DAL\VTS.DAL.csproj", "{C81859B0-C2B4-4386-8590-10D6A4091048}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.DAL", "VTS.DAL\VTS.DAL.csproj", "{C81859B0-C2B4-4386-8590-10D6A4091048}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTS.Repos", "VTS.Repos\VTS.Repos.csproj", "{F7909D6B-BEA5-4F2E-ADED-CE1E0C0E2004}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Repos", "VTS.Repos\VTS.Repos.csproj", "{F7909D6B-BEA5-4F2E-ADED-CE1E0C0E2004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTS.Core", "VTS.Core\VTS.Core.csproj", "{D115A0D6-AF0E-4C81-B664-B95DE702ABC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Core", "VTS.Core\VTS.Core.csproj", "{D115A0D6-AF0E-4C81-B664-B95DE702ABC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTS.Services", "VTS.Services\VTS.Services.csproj", "{31679CE1-25A2-442D-BFE8-52365FE4694C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Services", "VTS.Services\VTS.Services.csproj", "{31679CE1-25A2-442D-BFE8-52365FE4694C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C3052E2B-C2B8-41EF-90E7-FAEFA786B8F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTS.Tests", "VTS.Tests\VTS.Tests.csproj", "{ADC4D7CE-F2A9-40C8-B471-0E58BDD1E871}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{31679CE1-25A2-442D-BFE8-52365FE4694C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31679CE1-25A2-442D-BFE8-52365FE4694C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31679CE1-25A2-442D-BFE8-52365FE4694C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC4D7CE-F2A9-40C8-B471-0E58BDD1E871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC4D7CE-F2A9-40C8-B471-0E58BDD1E871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC4D7CE-F2A9-40C8-B471-0E58BDD1E871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC4D7CE-F2A9-40C8-B471-0E58BDD1E871}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+		GlobalSection(NestedProjects) = preSolution
+		{ADC4D7CE-F2A9-40C8-B471-0E58BDD1E871} = {C3052E2B-C2B8-41EF-90E7-FAEFA786B8F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {33AA46B3-0ACF-4BD1-95B7-1F2E1A10B617}
