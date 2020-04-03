@@ -1,15 +1,13 @@
+@import "_const.scss";
+
 //fonts
 $second_font: 'Roboto Slab', serif;
 
 //colors
-$background_fill: rgba(27, 29, 34, .8);
 $background_form_fill: rgba(27, 29, 34, .7);
 $error_fill: #ed2121;
 $box_shadow_form_fill: rgba(0, 201, 209, .07);
 $login_button_fill: rgba(0, 146, 209, .7);
-
-//strings
-$image_dir: '../img/';
 
 %white_bold_roboto_slab
 {
