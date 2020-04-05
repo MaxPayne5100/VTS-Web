@@ -5,7 +5,6 @@ $second_font: 'Roboto Slab', serif;
 
 //colors
 $background_form_fill: rgba(27, 29, 34, .7);
-$error_fill: #ed2121;
 $box_shadow_form_fill: rgba(0, 201, 209, .07);
 $login_button_fill: rgba(0, 146, 209, .7);
 
@@ -34,16 +33,6 @@ h2
 p
 {
     font-size: .875rem;
-}
-
-.field-validation-error
-{
-    font-size: .875rem;
-    font-weight: normal;
-
-    display: block;
-
-    color: $error_fill;
 }
 
 .login-form
@@ -112,7 +101,6 @@ form button
 
     border: none;
     border-radius: .3125rem;
-    outline: none;
     background: $login_button_fill;
 
     @extend %white_bold_roboto_slab;
@@ -123,6 +111,10 @@ form button
         z-index: 2;
     }
 
+    &:focus {
+        outline: none;
+    }
+    
     &::before
     {
         position: absolute;

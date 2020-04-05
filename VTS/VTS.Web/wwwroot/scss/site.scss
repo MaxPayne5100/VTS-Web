@@ -1,5 +1,8 @@
 @import "_const.scss";
 
+//colors
+$error_fill: rgb(237, 33, 33);
+
 @mixin white_color_mixin ($property, $x) 
 {
     @if $property == border 
@@ -67,11 +70,21 @@ a
     }
 }
 
+.field-validation-error
+{
+    font-size: .875rem;
+    font-weight: normal;
+
+    display: block;
+
+    color: $error_fill;
+}
+
 .active
 {
   position: relative;
 
-  &:before 
+  &::before 
   {
     content: '';
     position: absolute;
@@ -112,7 +125,7 @@ a
         }
     }
 
-    &:after 
+    &::after 
     {
         content: '';
         position: absolute;
@@ -283,7 +296,7 @@ a
         display: initial;
     }
     .active {
-        &:before, &:after 
+        &::before, &::after 
         {
             border: 0;
         }
