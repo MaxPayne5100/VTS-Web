@@ -1,43 +1,43 @@
 @model VTS.Web.Models.ProfileModel
 
 @section Styles {
-    <link href="@Url.Content("~/css/profile.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/profile.css")" rel="stylesheet" type="text/css" />
 }
 
 @{
-    ViewData["Title"] = "Profile Page";
+ViewData["Title"] = "Profile Page";
 }
 
 @section Header {
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3">
-            <div class="container-fluid ml-4 mr-4">
-                <a class="nav-link mr-sm-2 main-link" asp-area="" asp-controller="Home" asp-action="Index">Бронювання</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <div class="animated-navbar-toggler-icon"><span></span><span></span><span></span><span></span></div>
-                </button>
-                <div class="navbar-collapse collapse justify-content-between flex-sm-row">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link mx-sm-1 px-sm-3" asp-area="" asp-controller="Home" asp-action="Privacy">Особисті бронювання</a>
-                        </li>
-                    </ul>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <ul class="navbar-nav justify-content-end">
-                            <li class="nav-item">
-                                <a class="nav-link active mr-sm-1 px-sm-3" asp-area="" asp-controller="Profile" asp-action="Edit">Профіль</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link ml-sm-2" asp-area="" asp-controller="Authentication" asp-action="LogOut">Вихід</a>
-                            </li>
-                        </ul>
-                    }
-                </div>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3">
+        <div class="container-fluid ml-4 mr-4">
+            <a class="nav-link mr-sm-2 main-link" asp-area="" asp-controller="Home" asp-action="Index">Бронювання</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <div class="animated-navbar-toggler-icon"><span></span><span></span><span></span><span></span></div>
+        </button>
+        <div class="navbar-collapse collapse justify-content-between flex-sm-row">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link mx-sm-1 px-sm-3" asp-area="" asp-controller="Home" asp-action="Privacy">Особисті бронювання</a>
+                </li>
+            </ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active mr-sm-1 px-sm-3" asp-area="" asp-controller="Profile" asp-action="Edit">Профіль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ml-sm-2" asp-area="" asp-controller="Authentication" asp-action="LogOut">Вихід</a>
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+</nav>
+</header>
 }
 
 <div class="container-fluid container-profile px-5 mt-5">
@@ -49,75 +49,79 @@
                         <img class="profile-img" src="~/img/avatar.png" alt="Profile" />
                     </div>
                     <div class="ml-sm-4 ml-0 
-                                mt-sm-0 mt-4 
-                                px-sm-0 px-5 pt-3 
-                                text-start-center">
-                        <h4 class="border-bottom">
-                            FirstName LastName
-                        </h4>
-                        <p class="blue font-weight-bold">Role</p>
-                    </div>
+                    mt-sm-0 mt-4 
+                    px-sm-0 px-5 pt-3 
+                    text-start-center">
+                    <h4 class="border-bottom">
+                        FirstName LastName
+                    </h4>
+                    <p class="blue font-weight-bold">Role</p>
                 </div>
             </div>
         </div>
-        <form>
-            <div class="row my-sm-5 my-4 d-flex justify-content-between">
-                <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
-                    <label class="ml-2">Ім'я</label>
-                    <input class="pl-3 py-2" />
-                </div>
-                <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
-                    <label class="ml-2">Прізвище</label>
-                    <input class="pl-3 py-2" />
-                </div>
-                <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
-                    <label class="ml-2">Емейл</label>
-                    <input class="pl-3 py-2" />
-                </div>
-            </div>
-            <div class="d-flex justify-content-center justify-content-sm-end mt-3 mb-2">
-                <button type="submit" class="profile-button px-3 py-2">
-                    <span>Зберегти зміни</span>
-                </button>
-            </div>
-        </form>
     </div>
-    <div class="profile-info-block mt-5 pt-5 pb-4">
-        <h3>
-            Інформація про тривалість відпуску
-        </h3>
-        <div class="vac-info d-flex flex-column justify-content-between">
-            <div class="row px-4 px-sm-0">
-                <div class="col-12 col-lg-6 text-center text-lg-left mb-4 mb-lg-0">
-                    <div>
-                        <p>
-                            Оплачувана відпустка (днів): <span class="ml-sm-2 ml-1">10</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            Неоплачувана відпустка (днів): <span class="ml-sm-2 ml-1">10</span>
-                        </p>
-                    </div>
-                </div>
-                <div class=" col-12 col-lg-6 text-center text-lg-right">
-                     <div>
-                        <p>
-                            Оплачуваний лікарняний (днів): <span class="ml-sm-2 ml-1">10</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            Неоплачувантй лікарняний (днів): <span class="ml-sm-2 ml-1">10</span>
-                        </p>
-                    </div>
-                </div>
+    <form>
+        <div class="row my-sm-5 my-4 d-flex justify-content-between">
+            <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
+                <label class="ml-2">Ім'я</label>
+                <input class="pl-3 py-2" />
             </div>
-            <div class="d-flex justify-content-center justify-content-lg-end mt-5 mb-2">
-                <p>
-                    Бонусні дні відпустки:  <span class="ml-sm-2 ml-1">0</span>
-                </p>  
+            <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
+                <label class="ml-2">Прізвище</label>
+                <input class="pl-3 py-2" />
+            </div>
+            <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
+                <label class="ml-2">Емейл</label>
+                <input class="pl-3 py-2" />
             </div>
         </div>
+        <div class="d-flex justify-content-center justify-content-sm-end mt-3 mb-2">
+            <button type="submit" class="profile-button px-3 py-2">
+                <span>Зберегти зміни</span>
+            </button>
+        </div>
+    </form>
+</div>
+<div class="profile-info-block mt-5 pt-5 pb-4">
+    <h3>
+        Інформація про тривалість відпуску
+    </h3>
+    <div class="vac-info d-flex flex-column justify-content-between">
+        <div class="row px-4 px-sm-0">
+            <div class="col-12 col-lg-6 text-center text-lg-left mb-4 mb-lg-0">
+                <div>
+                    <p>
+                        Оплачувана відпустка (днів): <span class="count ml-sm-2 ml-1">10</span>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        Неоплачувана відпустка (днів): <span class="count ml-sm-2 ml-1">30</span>
+                    </p>
+                </div>
+            </div>
+            <div class=" col-12 col-lg-6 text-center text-lg-right">
+               <div>
+                <p>
+                    Оплачуваний лікарняний (днів): <span class="count ml-sm-2 ml-1">10</span>
+                </p>
+            </div>
+            <div>
+                <p>
+                    Неоплачуваний лікарняний (днів): <span class="count ml-sm-2 ml-1">25</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center justify-content-lg-end mt-5 mb-2">
+        <p>
+            Бонусні дні відпустки:  <span class="count ml-sm-2 ml-1">0</span>
+        </p>
     </div>
 </div>
+</div>
+</div>
+
+@section Scripts {
+<script src="~/js/counter.js" asp-append-version="true"></script>
+}
