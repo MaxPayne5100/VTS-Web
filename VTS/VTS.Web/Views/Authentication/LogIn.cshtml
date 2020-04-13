@@ -2,7 +2,6 @@
 
 @section Styles {
 <link href="@Url.Content("~/css/login.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/lib/wow.js/css/animate.css")" rel="stylesheet" type="text/css" />
 }
 
 @{
@@ -14,7 +13,7 @@ ViewData["Title"] = "Login";
 <div class="login-form pt-5">
 	<h2>Залогіньтесь, щоб продовжити</h2>
 
-	<form asp-action="LogIn" method="post" class="mt-5 mb-5 pb-5 wow fadeIn" data-wow-duration="2s">
+	<form asp-action="LogIn" method="post" class="mt-5 mb-5 pb-5">
 		<div class="form-stuff mb-5">
 			<div class="d-flex flex-column mb-3">
 				<label asp-for="Id" class="ml-2">ID працівника</label>
@@ -38,10 +37,3 @@ ViewData["Title"] = "Login";
 		<button type="submit"><span>Логін</span></button>
 	</form>
 </div>
-
-@section Scripts {
-<script src="~/lib/wow.js/js/wow.min.js" asp-append-version="true"></script>
-<script>
-	new WOW().init();
-</script>
-}

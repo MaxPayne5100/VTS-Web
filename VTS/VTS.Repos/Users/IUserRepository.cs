@@ -1,11 +1,19 @@
+using System.Threading.Tasks;
 using VTS.DAL.Entities;
 using VTS.Repos.Generic;
-using System.Threading.Tasks;
 
 namespace VTS.Repos.Users
 {
-    public interface IUserRepository : IGenericRepository<User, uint> 
+    /// <summary>
+    /// Interface for User Repository.
+    /// </summary>
+    public interface IUserRepository : IGenericRepository<User, uint>
     {
+        /// <summary>
+        /// Find user by email.
+        /// </summary>
+        /// <param name="email">Email address.</param>
+        /// <returns>User.</returns>
         Task<User> FindByEmail(string email);
     }
 }

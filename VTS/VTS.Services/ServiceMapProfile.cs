@@ -6,6 +6,9 @@ namespace VTS.Services
     {
         public ServiceMapProfile()
         {
+            // DTO -> Entities
+
+            // Entities -> DTO
         }
     }
 }

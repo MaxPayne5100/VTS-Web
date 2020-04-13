@@ -1,61 +1,100 @@
-using Microsoft.EntityFrameworkCore;
-using VTS.Core.Helpers;
-using VTS.DAL;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using VTS.Core.Infrastructure;
+using VTS.DAL;
 
 namespace VTS.Repos.Generic
 {
-    public abstract class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : class, IIdentifiable<TKey>
+    /// <summary>
+    /// Base repository.
+    /// </summary>
+    /// <typeparam name="TEntity">Generic entity parameter.</typeparam>
+    /// <typeparam name="TKey">Generic key parameter.</typeparam>
+    public abstract class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey>
+        where TEntity : class, IIdentifiable<TKey>
     {
-        protected readonly VTSDbContext Context;
+        /// <summary>
+        /// DbContext.
+        /// </summary>
+        private readonly VTSDbContext context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericRepository{TEntity, TKey}"/> class.
+        /// </summary>
+        /// <param name="context">DbContext.</param>
         public GenericRepository(VTSDbContext context)
         {
-            Context = context;
+            this.context = context;
         }
 
-        public virtual TEntity Add(TEntity item)
+        /// <inheritdoc />
+        public virtual async Task<TKey> AddAsync(TEntity item)
         {
-            return Context.Set<TEntity>()
-                .Add(item)
-                .Entity;
+            var entity = await context.Set<TEntity>()
+                .AddAsync(item);
+
+            return entity.Entity.Id;
         }
 
-        public virtual void AddRange(IEnumerable<TEntity> items)
+        /// <inheritdoc />
+        public virtual async void AddRangeAsync(IEnumerable<TEntity> items)
         {
-            Context.Set<TEntity>()
-                .AddRange(items);
+            await context.Set<TEntity>()
+                .AddRangeAsync(items);
         }
 
+        /// <inheritdoc />
         public virtual void Remove(TEntity item)
         {
-            Context.Set<TEntity>()
+            context.Set<TEntity>()
                 .Remove(item);
         }
 
+        /// <inheritdoc />
         public virtual void RemoveRange(IEnumerable<TEntity> items)
         {
-            Context.Set<TEntity>()
+            context.Set<TEntity>()
                 .RemoveRange(items);
         }
 
+        /// <inheritdoc />
         public virtual async Task<TEntity> FindAsync(TKey key)
         {
-            return await Context.Set<TEntity>()
+            return await context.Set<TEntity>()
                 .FirstOrDefaultAsync(x => x.Id.Equals(key));
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAsync()
+        /// <inheritdoc />
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await Context.Set<TEntity>()
+            return await context.Set<TEntity>()
                 .ToListAsync();
         }
 
+        /// <inheritdoc />
         public async Task<int> CountAsync()
         {
-            return await Context.Set<TEntity>()
+            return await context.Set<TEntity>()
                 .CountAsync();
+        }
+
+        /// <inheritdoc />
+        public virtual IQueryable<TEntity> GetQuery(bool includeAllNavProp = false)
+        {
+            var query = context.Set<TEntity>()
+                .AsQueryable();
+
+            if (includeAllNavProp)
+            {
+                foreach (var property in context.Model.FindEntityType(typeof(TEntity)).GetNavigations())
+                {
+                    query = query.Include(property.Name);
+                }
+            }
+
+            return query;
         }
     }
 }

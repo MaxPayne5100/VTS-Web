@@ -51,7 +51,7 @@ namespace VTS.Web.Migrations
                     Start = table.Column<DateTime>(nullable: false),
                     Expires = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 256, nullable: false),
-                    SubmissionTime = table.Column<DateTime>(nullable: false, defaultValue:DateTime.Now)
+                    SubmissionTime = table.Column<DateTime>(nullable: false, defaultValue: DateTime.Now)
                 },
                 constraints: table =>
                 {

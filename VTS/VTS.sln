@@ -15,7 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Services", "VTS.Service
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C3052E2B-C2B8-41EF-90E7-FAEFA786B8F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTS.Tests", "VTS.Tests\VTS.Tests.csproj", "{ADC4D7CE-F2A9-40C8-B471-0E58BDD1E871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Tests", "VTS.Tests\VTS.Tests.csproj", "{ADC4D7CE-F2A9-40C8-B471-0E58BDD1E871}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StyleCop", "StyleCop", "{F48129D6-D930-48D9-BCA1-2F5AC806B852}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,7 +56,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-		GlobalSection(NestedProjects) = preSolution
+	GlobalSection(NestedProjects) = preSolution
 		{ADC4D7CE-F2A9-40C8-B471-0E58BDD1E871} = {C3052E2B-C2B8-41EF-90E7-FAEFA786B8F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

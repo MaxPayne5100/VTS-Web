@@ -1,15 +1,22 @@
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VTS.DAL;
 using VTS.Repos.Users;
-using System.Threading.Tasks;
 
 namespace VTS.Repos.UnitOfWork
 {
+    /// <summary>
+    ///  Unit of Work.
+    /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
         private readonly VTSDbContext _dbContext;
         private bool disposedValue = false;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
+        /// </summary>
+        /// <param name="context">DbContext.</param>
         public UnitOfWork(VTSDbContext context)
         {
             _dbContext = context;
@@ -17,14 +24,18 @@ namespace VTS.Repos.UnitOfWork
         }
 
         #region Repositories
+
+        /// <inheritdoc />
         public IUserRepository Users { get; }
         #endregion
 
+        /// <inheritdoc />
         public async Task CommitAsync()
         {
             await _dbContext.SaveChangesAsync();
         }
 
+        /// <inheritdoc />
         public async void Rollback()
         {
             foreach (var entry in _dbContext.ChangeTracker.Entries())
@@ -43,6 +54,19 @@ namespace VTS.Repos.UnitOfWork
         }
 
         #region IDisposable Support
+
+        /// <summary>
+        /// Method which calls Dispose(disposing = true).
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        /// <summary>
+        /// Dispose virtual methood.
+        /// </summary>
+        /// <param name="disposing">disposing bool.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -51,13 +75,9 @@ namespace VTS.Repos.UnitOfWork
                 {
                     _dbContext.Dispose();
                 }
+
                 disposedValue = true;
             }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
         }
         #endregion
     }

@@ -4,8 +4,15 @@ using VTS.DAL.Entities;
 
 namespace VTS.DAL.Configuration
 {
+    /// <summary>
+    /// Configuration for User Entity.
+    /// </summary>
     public class UserEntityConfiguration : IEntityTypeConfiguration<User>
     {
+        /// <summary>
+        /// Configure method.
+        /// </summary>
+        /// <param name="builder">A param with EntityTypeBuilder type.</param>
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(x => x.Id);
