@@ -1,10 +1,13 @@
+@import "_const.scss";
+
 //fonts
 $second_font: 'Roboto Slab', serif;
 
 //colors
 $box_shadow_profile_img: rgba(255, 255, 255, 0.4);
 $role_fill: rgba(0, 120, 220, .95);
-$background_fill: rgba(27, 29, 34, .7);
+$admin_manager_button_fill: rgba(0, 120, 220, .75);
+$profile_block_background_fill: rgba(27, 29, 34, .7);
 $submit_fill: rgb(20, 20, 20);
 $vacation_number: rgba(237, 33, 33, 0.9);
 
@@ -12,6 +15,14 @@ $vacation_number: rgba(237, 33, 33, 0.9);
 {
     font-family: $second_font;
     font-weight: bold;
+}
+
+body
+{
+    background: linear-gradient(to bottom, $background_fill_darker, $background_fill_darker), url($image_dir + 'Company (blurred)-min.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 input {
@@ -37,7 +48,7 @@ h3
 	min-height: 27rem;
 	padding-left: 6%;
 	padding-right: 7%;
-	background: $background_fill;
+	background: $profile_block_background_fill;
 }
 
 .user-info {
@@ -69,6 +80,24 @@ h3
 
 	@media (max-width: 576px) {
 		text-align: center;
+	}
+}
+
+.admin-manager-button {
+	width: 35%;
+	border-radius: 0.1875rem;
+	background: linear-gradient( to bottom, $admin_manager_button_fill 0%, $admin_manager_button_fill 100% );
+	background-position: 0 100%;
+	background-repeat: repeat-x;
+	background-size: 10% 10%;
+	transition: background-size .3s ease-in-out;
+
+	a {
+		@extend %bold_roboto_slab;
+	}
+	
+	&:hover {
+		background-size: 100% 100%;
 	}
 }
 
@@ -123,12 +152,23 @@ h3
 		}
 }
 
+@media (max-width: 768px) {
+	.admin-manager-button {
+		width: 45%;
+	}
+}
+
 @media (max-width: 576px) {
 	.profile-img {
 		width: 25%;
 		height: 25%;
 	}
+
 	.vac-info p {
 		font-size: 1rem;
+	}
+
+	.admin-manager-button {
+		width: 100%;
 	}
 }

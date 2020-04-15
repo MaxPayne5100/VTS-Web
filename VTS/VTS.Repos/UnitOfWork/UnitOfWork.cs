@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VTS.DAL;
-using VTS.Repos.Users;
 
 namespace VTS.Repos.UnitOfWork
 {
@@ -20,13 +19,18 @@ namespace VTS.Repos.UnitOfWork
         public UnitOfWork(VTSDbContext context)
         {
             _dbContext = context;
-            Users = new UserRepository(_dbContext);
+            Users = new Users.UserRepository(_dbContext);
+            UsersVacationInfo = new UsersVacationInfo.UserVacationInfoRepository(_dbContext);
         }
 
         #region Repositories
 
         /// <inheritdoc />
-        public IUserRepository Users { get; }
+        public Users.IUserRepository Users { get; }
+
+        /// <inheritdoc />
+        public UsersVacationInfo.IUserVacationInfoRepository UsersVacationInfo { get; }
+
         #endregion
 
         /// <inheritdoc />

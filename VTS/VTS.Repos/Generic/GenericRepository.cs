@@ -60,6 +60,13 @@ namespace VTS.Repos.Generic
         }
 
         /// <inheritdoc />
+        public void Update(TEntity item)
+        {
+            context.Set<TEntity>()
+                .Update(item);
+        }
+
+        /// <inheritdoc />
         public virtual async Task<TEntity> FindAsync(TKey key)
         {
             return await context.Set<TEntity>()

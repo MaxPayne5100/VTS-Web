@@ -42,7 +42,7 @@ namespace VTS.Web.Controllers
         }
 
         /// <summary>
-        /// Logout get method.
+        /// Asynchronous logout get method.
         /// </summary>
         /// <returns>IActionResult.</returns>
         [Authorize]
@@ -54,7 +54,7 @@ namespace VTS.Web.Controllers
         }
 
         /// <summary>
-        /// Login post method.
+        /// Asynchronous login post method.
         /// </summary>
         /// <param name="model">Login model.</param>
         /// <returns>IActionResult.</returns>

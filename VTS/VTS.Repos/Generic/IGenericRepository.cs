@@ -37,6 +37,12 @@ namespace VTS.Repos.Generic
         void RemoveRange(IEnumerable<TEntity> items);
 
         /// <summary>
+        /// Update entity.
+        /// </summary>
+        /// <param name="item">Entity.</param>
+        void Update(TEntity item);
+
+        /// <summary>
         /// Find an entity by primary key.
         /// </summary>
         /// <param name="key">Key.</param>

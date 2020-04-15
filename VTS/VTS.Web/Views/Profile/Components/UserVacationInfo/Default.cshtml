@@ -1,0 +1,40 @@
+﻿@model VTS.Core.DTO.UserVacationInfo
+
+<div class="profile-info-block mt-5 pt-5 pb-4 wow fadeIn" data-wow-duration="2s" data-wow-offset="150">
+    <h3>
+        Інформація про тривалість відпуску
+    </h3>
+    <div class="vac-info d-flex flex-column justify-content-between">
+        <div class="row px-4 px-sm-0">
+            <div class="col-12 col-lg-6 text-center text-lg-left mb-4 mb-lg-0">
+                <div>
+                    <p>
+                        Оплачувана відпустка (днів): <span class="count ml-sm-2 ml-1">@Model.PaidDayOffs</span>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        Неоплачувана відпустка (днів): <span class="count ml-sm-2 ml-1">@Model.UnPaidDayOffs</span>
+                    </p>
+                </div>
+            </div>
+            <div class=" col-12 col-lg-6 text-center text-lg-right">
+                <div>
+                    <p>
+                        Оплачуваний лікарняний (днів): <span class="count ml-sm-2 ml-1">@Model.PaidSickness</span>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        Неоплачуваний лікарняний (днів): <span class="count ml-sm-2 ml-1">@Model.UnPaidSickness</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center justify-content-lg-end mt-5 mb-2">
+            <p>
+                Бонусні дні відпустки:  <span class="count ml-sm-2 ml-1">@Model.BonusPaidDayOffs</span>
+            </p>
+        </div>
+    </div>
+</div>

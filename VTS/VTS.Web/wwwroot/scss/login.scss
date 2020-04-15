@@ -18,7 +18,6 @@ $login_button_fill: rgba(0, 146, 209, .7);
 
 body
 {
-    color: white;
     background: linear-gradient(to bottom, $background_fill, $background_fill), url($image_dir + 'Company (blurred)-min.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -73,13 +72,6 @@ p
         border: none;
         border-radius: .1875rem;
         outline: none;
-    }
-}
-@media (max-width: 768px)
-{
-    .form-stuff
-    {
-        width: 85%;
     }
 }
 
@@ -141,5 +133,13 @@ form button
     &:hover
     {
         color: white;
+    }
+}
+
+@media (max-width: 768px)
+{
+    .form-stuff
+    {
+        width: 85%;
     }
 }

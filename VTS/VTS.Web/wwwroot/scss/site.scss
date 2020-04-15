@@ -1,5 +1,3 @@
-@import "_const.scss";
-
 //colors
 $error_fill: rgb(237, 33, 33);
 
@@ -29,26 +27,10 @@ html
     min-height: 100%;
 }
 
-@media (min-width: 768px)
-{
-    html
-    {
-        font-size: 1rem;
-    }
-    nav a
-    {
-        font-size: .97rem;
-    }
-}
-
 body
 {
     color: white;
-    background: linear-gradient(to bottom, $background_fill, $background_fill), url($image_dir + 'Company (blurred)-min.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    margin-bottom: 3.75rem;
+    background: #000;
 }
 
 a
@@ -300,5 +282,16 @@ a
         {
             border: 0;
         }
+    }
+}
+
+@media (min-width: 768px)
+{
+    html {
+        font-size: 1rem;
+    }
+    
+    nav a {
+        font-size: .97rem;
     }
 }

@@ -33,6 +33,7 @@ namespace VTS.Services.AuthenticationService
             {
                 var claims = new List<Claim>
                 {
+                    new Claim(ClaimKeys.Id, user.Id.ToString()),
                     new Claim(ClaimKeys.FirstName, user.FirstName),
                     new Claim(ClaimKeys.LastName, user.LastName),
                     new Claim(ClaimKeys.Email, user.Email),

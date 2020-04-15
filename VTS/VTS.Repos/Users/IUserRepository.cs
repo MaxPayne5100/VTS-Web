@@ -10,7 +10,7 @@ namespace VTS.Repos.Users
     public interface IUserRepository : IGenericRepository<User, uint>
     {
         /// <summary>
-        /// Find user by email.
+        /// Find User by Email.
         /// </summary>
         /// <param name="email">Email address.</param>
         /// <returns>User.</returns>

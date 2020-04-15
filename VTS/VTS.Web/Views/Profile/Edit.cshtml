@@ -2,47 +2,77 @@
 @using VTS.Core.Constants
 
 @section Styles {
-    <link href="@Url.Content("~/css/profile.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/lib/wow.js/css/animate.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/profile.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/lib/wow.js/css/animate.css")" rel="stylesheet" type="text/css" />
 }
 
 @{
-    ViewData["Title"] = "Profile Page";
+ViewData["Title"] = "Profile Page";
 }
 
 @section Header {
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3">
-            <div class="container-fluid ml-4 mr-4">
-                <a class="nav-link mr-sm-2 main-link" asp-area="" asp-controller="Home" asp-action="Index">Бронювання</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <div class="animated-navbar-toggler-icon"><span></span><span></span><span></span><span></span></div>
-                </button>
-                <div class="navbar-collapse collapse justify-content-between flex-sm-row">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link mx-sm-1 px-sm-3" asp-area="" asp-controller="Home" asp-action="Privacy">Особисті бронювання</a>
-                        </li>
-                    </ul>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <ul class="navbar-nav justify-content-end">
-                            <li class="nav-item">
-                                <a class="nav-link active mr-sm-1 px-sm-3" asp-area="" asp-controller="Profile" asp-action="Edit">Профіль</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link ml-sm-2" asp-area="" asp-controller="Authentication" asp-action="LogOut">Вихід</a>
-                            </li>
-                        </ul>
-                    }
-                </div>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3">
+        <div class="container-fluid ml-4 mr-4">
+            <a class="nav-link mr-sm-2 main-link" asp-area="" asp-controller="Home" asp-action="Index">Бронювання</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <div class="animated-navbar-toggler-icon"><span></span><span></span><span></span><span></span></div>
+        </button>
+        <div class="navbar-collapse collapse justify-content-between flex-sm-row">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link ml-sm-1 px-sm-2" asp-area="" asp-controller="Home" asp-action="Privacy">Особисті бронювання</a>
+                </li>
+            </ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active mr-sm-1 px-sm-3" asp-area="" asp-controller="Profile" asp-action="Edit">Профіль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ml-sm-2" asp-area="" asp-controller="Authentication" asp-action="LogOut">Вихід</a>
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+</nav>
+</header>
 }
 
 <div class="container-fluid container-profile px-5 mt-5">
+    @if (User.IsInRole(Roles.Clerk))
+    {
+        <div class="d-flex justify-content-sm-between flex-sm-row flex-column mb-4">
+            <div class="admin-manager-button d-flex justify-content-center align-items-center">
+                <a class="my-2">
+                    Редагування користувачів
+                </a>
+            </div>
+            <div class="admin-manager-button d-flex justify-content-center align-items-center">
+                <a class="my-2">
+                    Підтвердження букінгу
+                </a>
+            </div>
+        </div>
+    }
+    else if (User.IsInRole(Roles.Manager))
+    {
+        <div class="d-flex justify-content-md-between flex-md-row flex-column mb-4">
+            <div class="admin-manager-button d-flex justify-content-center align-items-center">
+                <a class="my-2">
+                    Редагування користувачів
+                </a>
+            </div>
+            <div class="admin-manager-button d-flex justify-content-center align-items-center">
+                <a class="my-2">
+                    Підтвердження букінгу
+                </a>
+            </div>
+        </div>
+    }
     <div class="profile-info-block pt-5 pb-4 wow fadeIn" data-wow-duration="2s">
         <div class="row">
             <div class="col-12 mb-4 d-flex justify-content-center justify-content-sm-start">
@@ -55,7 +85,7 @@
                     px-sm-0 px-5 pt-3
                     text-start-center">
                         <h4 class="border-bottom">
-                            FirstName LastName
+                            @Model.FirstName @Model.LastName
                         </h4>
                         @if (User.IsInRole(Roles.Employee))
                         {
@@ -73,19 +103,26 @@
                 </div>
             </div>
         </div>
-        <form>
+        <form asp-action="Edit" method="post">
             <div class="row my-sm-5 my-4 d-flex justify-content-between">
                 <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
-                    <label class="ml-2">Ім'я</label>
-                    <input class="pl-3 py-2" />
+                    <label asp-for="FirstName" class="ml-2">Ім'я</label>
+                    <input asp-for="FirstName" class="pl-3 py-2" />
+                    <span asp-validation-for="FirstName" class="field-validation-error"></span>
                 </div>
                 <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
-                    <label class="ml-2">Прізвище</label>
-                    <input class="pl-3 py-2" />
+                    <label asp-for="LastName" class="ml-2">Прізвище</label>
+                    <input asp-for="LastName" class="pl-3 py-2" />
+                    <span asp-validation-for="LastName" class="field-validation-error"></span>
                 </div>
                 <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
-                    <label class="ml-2">Емейл</label>
-                    <input class="pl-3 py-2" />
+                    <label asp-for="Email" class="ml-2">Емейл</label>
+                    <input asp-for="Email" class="pl-3 py-2" />
+                    <span asp-validation-for="Email" class="field-validation-error">
+                        @{if (ViewBag.Error != null)
+                                @ViewBag.Error
+                        }
+                    </span>
                 </div>
             </div>
             <div class="d-flex justify-content-center justify-content-sm-end mt-3 mb-2">
@@ -95,50 +132,13 @@
             </div>
         </form>
     </div>
-    <div class="profile-info-block mt-5 pt-5 pb-4 wow fadeIn" data-wow-duration="2s" data-wow-offset="150">
-        <h3>
-            Інформація про тривалість відпуску
-        </h3>
-        <div class="vac-info d-flex flex-column justify-content-between">
-            <div class="row px-4 px-sm-0">
-                <div class="col-12 col-lg-6 text-center text-lg-left mb-4 mb-lg-0">
-                    <div>
-                        <p>
-                            Оплачувана відпустка (днів): <span class="count ml-sm-2 ml-1">10</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            Неоплачувана відпустка (днів): <span class="count ml-sm-2 ml-1">30</span>
-                        </p>
-                    </div>
-                </div>
-                <div class=" col-12 col-lg-6 text-center text-lg-right">
-                    <div>
-                        <p>
-                            Оплачуваний лікарняний (днів): <span class="count ml-sm-2 ml-1">10</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            Неоплачуваний лікарняний (днів): <span class="count ml-sm-2 ml-1">25</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center justify-content-lg-end mt-5 mb-2">
-                <p>
-                    Бонусні дні відпустки:  <span class="count ml-sm-2 ml-1">0</span>
-                </p>
-            </div>
-        </div>
-    </div>
+    @await Component.InvokeAsync("UserVacationInfo", new { id = Model.Id})
 </div>
 
 @section Scripts {
-    <script src="~/js/counter.js" asp-append-version="true"></script>
-    <script src="~/lib/wow.js/js/wow.min.js" asp-append-version="true"></script>
-    <script>
-        new WOW().init();
-    </script>
+<script src="~/js/counter.js" asp-append-version="true"></script>
+<script src="~/lib/wow.js/js/wow.min.js" asp-append-version="true"></script>
+<script>
+    new WOW().init();
+</script>
 }
