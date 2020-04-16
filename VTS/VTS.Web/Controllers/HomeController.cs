@@ -22,16 +22,6 @@ namespace VTS.Web.Controllers
         }
 
         /// <summary>
-        /// Privacy get method.
-        /// </summary>
-        /// <returns>IActionResult.</returns>
-        [HttpGet]
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// Error method.
         /// </summary>
         /// <returns>IActionResult.</returns>

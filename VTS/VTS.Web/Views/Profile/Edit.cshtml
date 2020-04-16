@@ -13,7 +13,7 @@ ViewData["Title"] = "Profile Page";
 @section Header {
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3">
-        <div class="container-fluid ml-4 mr-4">
+        <div class="container-fluid ml-3 mr-3">
             <a class="nav-link mr-sm-2 main-link" asp-area="" asp-controller="Home" asp-action="Index">Бронювання</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@ ViewData["Title"] = "Profile Page";
         <div class="navbar-collapse collapse justify-content-between flex-sm-row">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link ml-sm-1 px-sm-2" asp-area="" asp-controller="Home" asp-action="Privacy">Особисті бронювання</a>
+                    <a class="nav-link ml-sm-1 px-sm-3">Особисті бронювання</a>
                 </li>
             </ul>
             @if (User.Identity.IsAuthenticated)
@@ -47,7 +47,7 @@ ViewData["Title"] = "Profile Page";
     {
         <div class="d-flex justify-content-sm-between flex-sm-row flex-column mb-4">
             <div class="admin-manager-button d-flex justify-content-center align-items-center">
-                <a class="my-2">
+                <a class="my-2" asp-area="" asp-controller="Clerk" asp-action="UsersEdit">
                     Редагування користувачів
                 </a>
             </div>
@@ -62,7 +62,7 @@ ViewData["Title"] = "Profile Page";
     {
         <div class="d-flex justify-content-md-between flex-md-row flex-column mb-4">
             <div class="admin-manager-button d-flex justify-content-center align-items-center">
-                <a class="my-2">
+                <a class="my-2" asp-area="" asp-controller="Manager" asp-action="UsersEdit">
                     Редагування користувачів
                 </a>
             </div>

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using VTS.Core.Settings;
-using VTS.Web.Models;
 
 namespace VTS.Web.Controllers
 {
@@ -59,7 +58,7 @@ namespace VTS.Web.Controllers
         /// <param name="model">Login model.</param>
         /// <returns>IActionResult.</returns>
         [HttpPost]
-        public async Task<IActionResult> LogIn(LogInModel model)
+        public async Task<IActionResult> LogIn(Models.LogInModel model)
         {
             if (ModelState.IsValid)
             {

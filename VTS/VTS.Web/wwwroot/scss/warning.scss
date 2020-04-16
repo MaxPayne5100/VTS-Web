@@ -1,0 +1,33 @@
+@import "_const.scss";
+@import "background.scss";
+
+//colors
+$warning_fill: rgba(255, 255, 194, 0.7);
+
+body
+{
+    @include body_background(center, $background_fill_darker);
+}
+
+.warning {
+    height: 66vh;
+
+    h2 {
+    	color: black;
+    	background-color: $warning_fill;
+	}
+
+	h3 {
+	font-family: 'Roboto Slab', serif;
+	}
+
+	img {
+		margin-top: 0.25rem;
+	}
+}
+
+@media (max-width: 768px) {
+    .warning img {
+        display: none;
+    }
+}

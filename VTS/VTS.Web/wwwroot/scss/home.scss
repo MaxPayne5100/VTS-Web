@@ -1,0 +1,52 @@
+@import "_const.scss";
+@import "background.scss";
+
+//strings
+$image_dir: '../img/';
+//colors
+$block_info_fill: rgba(0, 146, 209, .7);
+
+//fonts
+$second_font: 'Roboto Slab', serif;
+
+body {
+	@include body_background(center bottom, $background_fill_darker, auto);
+}
+
+.info-block {
+	position: relative;
+	height: 35vh;
+	overflow: hidden;
+
+	h2 {
+		font-size: 2.25rem;
+		font-family: $second_font;
+		font-weight: bold;
+	}
+
+	p {
+		background: $block_info_fill;
+		border-radius: 0.1875rem;
+		font-size: 1.1rem;
+	}
+
+	span.skewed {
+		position: absolute;
+		bottom: -100%;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: white;
+		transform-origin: top left;
+	}
+}
+
+.main-content {
+	height: auto;
+	min-height: 120vh;
+	background: white; 
+}
+
+.footer {
+	background-color: black;
+}

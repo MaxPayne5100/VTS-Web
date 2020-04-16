@@ -1,0 +1,10 @@
+//strings
+$image_dir: '../img/';
+
+@mixin body_background ($position_value, $background_fill, $size_value: cover)
+{
+  background: linear-gradient(to bottom, $background_fill, $background_fill), url($image_dir + 'Company (blurred)-min.png');
+  background-repeat: no-repeat;
+  background-position: $position_value;
+  background-size: $size_value;
+}

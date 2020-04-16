@@ -1,4 +1,5 @@
 @import "_const.scss";
+@import "background.scss";
 
 //fonts
 $second_font: 'Roboto Slab', serif;
@@ -8,7 +9,7 @@ $background_form_fill: rgba(27, 29, 34, .7);
 $box_shadow_form_fill: rgba(0, 201, 209, .07);
 $login_button_fill: rgba(0, 146, 209, .7);
 
-%white_bold_roboto_slab
+%bold_roboto_slab
 {
     font-family: $second_font;
     font-weight: bold;
@@ -18,15 +19,12 @@ $login_button_fill: rgba(0, 146, 209, .7);
 
 body
 {
-    background: linear-gradient(to bottom, $background_fill, $background_fill), url($image_dir + 'Company (blurred)-min.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    @include body_background(center, $background_fill);
 }
 
 h2
 {
-    @extend %white_bold_roboto_slab;
+    @extend %bold_roboto_slab;
 }
 
 p
@@ -95,7 +93,7 @@ form button
     border-radius: .3125rem;
     background: $login_button_fill;
 
-    @extend %white_bold_roboto_slab;
+    @extend %bold_roboto_slab;
 
     span
     {

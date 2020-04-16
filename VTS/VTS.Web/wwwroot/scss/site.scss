@@ -30,7 +30,6 @@ html
 body
 {
     color: white;
-    background: #000;
 }
 
 a
@@ -44,6 +43,8 @@ a
 
     &:hover
     {
+        text-decoration: none;
+
         -webkit-transition: .2s ease-in-out;
         -o-transition: .2s ease-in-out;
         transition: .2s ease-in-out;

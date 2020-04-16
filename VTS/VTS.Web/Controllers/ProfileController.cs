@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using VTS.Core.Constants;
 using VTS.Services.AuthenticationService;
 using VTS.Services.UserService;
-using VTS.Web.Models;
 
 namespace VTS.Web.Controllers
 {
@@ -42,7 +41,7 @@ namespace VTS.Web.Controllers
         {
             var id = uint.Parse(User.FindFirst(ClaimKeys.Id).Value);
             var user = await _userService.Find(id);
-            var profileModel = _mapper.Map<ProfileModel>(user);
+            var profileModel = _mapper.Map<Models.ProfileModel>(user);
             return View(profileModel);
         }
 
@@ -52,7 +51,7 @@ namespace VTS.Web.Controllers
         /// <param name="profileModel">User profile model.</param>
         /// <returns>IActionResult.</returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(ProfileModel profileModel)
+        public async Task<IActionResult> Edit(Models.ProfileModel profileModel)
         {
             if (ModelState.IsValid)
             {

@@ -1,4 +1,5 @@
 @import "_const.scss";
+@import "background.scss";
 
 //fonts
 $second_font: 'Roboto Slab', serif;
@@ -19,10 +20,7 @@ $vacation_number: rgba(237, 33, 33, 0.9);
 
 body
 {
-    background: linear-gradient(to bottom, $background_fill_darker, $background_fill_darker), url($image_dir + 'Company (blurred)-min.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+	@include body_background(center, $background_fill_darker);
 }
 
 input {
@@ -160,8 +158,8 @@ h3
 
 @media (max-width: 576px) {
 	.profile-img {
-		width: 25%;
-		height: 25%;
+		width: 7.25rem;
+		height: 7.25rem;
 	}
 
 	.vac-info p {

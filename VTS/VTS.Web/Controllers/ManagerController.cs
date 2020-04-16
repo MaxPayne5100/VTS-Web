@@ -10,5 +10,21 @@ namespace VTS.Web.Controllers
     [Authorize(Policy = Policies.ManagerOnly)]
     public class ManagerController : Controller
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ManagerController"/> class.
+        /// </summary>
+        public ManagerController()
+        {
+        }
+
+        /// <summary>
+        /// Asynchronous users edit get method.
+        /// </summary>
+        /// <returns>IActionResult.</returns>
+        [HttpGet]
+        public IActionResult UsersEdit()
+        {
+            return View();
+        }
     }
 }

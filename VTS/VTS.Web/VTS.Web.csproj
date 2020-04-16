@@ -60,10 +60,5 @@
     <ProjectReference Include="..\VTS.Repos\VTS.Repos.csproj" />
     <ProjectReference Include="..\VTS.Services\VTS.Services.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Views\Clerk\" />
-    <Folder Include="Views\Manager\" />
-  </ItemGroup>
 
 </Project>
