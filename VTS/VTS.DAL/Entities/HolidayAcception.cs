@@ -4,31 +4,31 @@ using VTS.Core.Infrastructure;
 namespace VTS.DAL.Entities
 {
     /// <summary>
-    /// Type of HolidayAcception status.
-    /// </summary>
-    public enum StatusType
-    {
-        /// <summary>
-        /// Pending status
-        /// </summary>
-        Pending,
-
-        /// <summary>
-        /// Approved status
-        /// </summary>
-        Approved,
-
-        /// <summary>
-        /// Canceled status
-        /// </summary>
-        Canceled,
-    }
-
-    /// <summary>
     /// HolidayAcception Entity.
     /// </summary>
     public class HolidayAcception : IIdentifiable<Guid>
     {
+        /// <summary>
+        /// Type of HolidayAcception status.
+        /// </summary>
+        public enum StatusType
+        {
+            /// <summary>
+            /// Pending status
+            /// </summary>
+            Pending,
+
+            /// <summary>
+            /// Approved status
+            /// </summary>
+            Approved,
+
+            /// <summary>
+            /// Canceled status
+            /// </summary>
+            Canceled,
+        }
+
         /// <summary>
         /// Gets or sets HolidayAcception identifier.
         /// </summary>

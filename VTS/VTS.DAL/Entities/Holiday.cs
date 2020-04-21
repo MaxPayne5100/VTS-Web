@@ -4,36 +4,36 @@ using VTS.Core.Infrastructure;
 namespace VTS.DAL.Entities
 {
     /// <summary>
-    /// Type of Holiday category.
-    /// </summary>
-    public enum Categories
-    {
-        /// <summary>
-        /// PaidDayOffs category
-        /// </summary>
-        PaidDayOffs,
-
-        /// <summary>
-        /// UnPaidDayOffs category
-        /// </summary>
-        UnPaidDayOffs,
-
-        /// <summary>
-        /// PaidSickness category
-        /// </summary>
-        PaidSickness,
-
-        /// <summary>
-        /// UnPaidSickness category
-        /// </summary>
-        UnPaidSickness,
-    }
-
-    /// <summary>
     /// Holiday Entity.
     /// </summary>
     public class Holiday : IIdentifiable<Guid>
     {
+        /// <summary>
+        /// Type of Holiday category.
+        /// </summary>
+        public enum Categories
+        {
+            /// <summary>
+            /// PaidDayOffs category
+            /// </summary>
+            PaidDayOffs,
+
+            /// <summary>
+            /// UnPaidDayOffs category
+            /// </summary>
+            UnPaidDayOffs,
+
+            /// <summary>
+            /// PaidSickness category
+            /// </summary>
+            PaidSickness,
+
+            /// <summary>
+            /// UnPaidSickness category
+            /// </summary>
+            UnPaidSickness,
+        }
+
         /// <summary>
         /// Gets or sets Holiday identifier.
         /// </summary>

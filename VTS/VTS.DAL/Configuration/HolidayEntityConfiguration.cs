@@ -18,6 +18,7 @@ namespace VTS.DAL.Configuration
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Category)
+                .HasConversion<string>()
                 .IsRequired();
 
             builder.Property(x => x.Hours)
