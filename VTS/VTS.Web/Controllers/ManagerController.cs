@@ -18,7 +18,7 @@ namespace VTS.Web.Controllers
         }
 
         /// <summary>
-        /// Asynchronous users edit get method.
+        /// Users edit get method.
         /// </summary>
         /// <returns>IActionResult.</returns>
         [HttpGet]

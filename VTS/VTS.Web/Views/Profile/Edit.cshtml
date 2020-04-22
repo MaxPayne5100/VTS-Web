@@ -22,7 +22,7 @@ ViewData["Title"] = "Profile Page";
         <div class="navbar-collapse collapse justify-content-between flex-sm-row">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link ml-sm-1 px-sm-3">Особисті бронювання</a>
+                    <a class="nav-link ml-sm-1 px-sm-3" asp-area="" asp-controller="PersonalBooking" asp-action="Edit">Особисті бронювання</a>
                 </li>
             </ul>
             @if (User.Identity.IsAuthenticated)
@@ -104,6 +104,8 @@ ViewData["Title"] = "Profile Page";
             </div>
         </div>
         <form asp-action="Edit" method="post">
+            <input asp-for="Id" type="hidden" />
+
             <div class="row my-sm-5 my-4 d-flex justify-content-between">
                 <div class="col-12 col-sm-4 d-flex flex-column mb-4 mb-sm-0">
                     <label asp-for="FirstName" class="ml-2">Ім'я</label>
@@ -132,7 +134,7 @@ ViewData["Title"] = "Profile Page";
             </div>
         </form>
     </div>
-    @await Component.InvokeAsync("UserVacationInfo", new { id = Model.Id})
+    @await Component.InvokeAsync("UserVacationInfo", new { id = @Model.Id})
 </div>
 
 @section Scripts {

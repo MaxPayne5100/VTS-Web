@@ -1,9 +1,6 @@
 @import "_const.scss";
 @import "background.scss";
 
-//fonts
-$second_font: 'Roboto Slab', serif;
-
 //colors
 $box_shadow_profile_img: rgba(255, 255, 255, 0.4);
 $role_fill: rgba(0, 120, 220, .95);
@@ -26,6 +23,7 @@ body
 input {
 	border-radius: 0.2rem;
 	border: none;
+	outline: none;
 }
 
 h3

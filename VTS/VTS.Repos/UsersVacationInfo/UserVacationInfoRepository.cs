@@ -28,7 +28,7 @@ namespace VTS.Repos.UsersVacationInfo
         public async Task<UserVacationInfo> FindByUserId(uint id)
         {
             return await _dbContext.UsersVacationInfo
-                .FirstOrDefaultAsync(x => x.User.Id.Equals(id));
+                .SingleOrDefaultAsync(x => x.User.Id.Equals(id));
         }
     }
 }

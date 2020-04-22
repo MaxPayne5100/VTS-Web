@@ -1,28 +1,27 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VTS.Core.Constants;
 
 namespace VTS.Web.Controllers
 {
     /// <summary>
-    /// Controller for Clerk role.
+    /// Controller for personal bookings.
     /// </summary>
-    [Authorize(Policy = Policies.ClerkOnly)]
-    public class ClerkController : Controller
+    [Authorize]
+    public class PersonalBookingController : Controller
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClerkController"/> class.
+        /// Initializes a new instance of the <see cref="PersonalBookingController"/> class.
         /// </summary>
-        public ClerkController()
+        public PersonalBookingController()
         {
         }
 
         /// <summary>
-        /// Users edit get method.
+        /// Personal bookings edit get method.
         /// </summary>
         /// <returns>IActionResult.</returns>
         [HttpGet]
-        public IActionResult UsersEdit()
+        public IActionResult Edit()
         {
             return View();
         }

@@ -1,6 +1,105 @@
-﻿@{
-ViewData["Title"] = "Users Editing";
+﻿@section Styles {
+    <link href="@Url.Content("~/css/usersEdit.css")" rel="stylesheet" type="text/css" />
 }
 
-@section Header {}
+@{
+    ViewData["Title"] = "Users Editing";
+}
 
+@section Header {
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3">
+            <div class="container-fluid ml-3 mr-3">
+                <a class="nav-link mr-sm-2 main-link" asp-area="" asp-controller="Home" asp-action="Index">Бронювання</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="animated-navbar-toggler-icon"><span></span><span></span><span></span><span></span></div>
+                </button>
+                <div class="navbar-collapse collapse justify-content-between flex-sm-row">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link ml-sm-1 px-sm-3" asp-area="" asp-controller="PersonalBooking" asp-action="Edit">Особисті бронювання</a>
+                        </li>
+                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link active mr-sm-1 px-sm-3" asp-area="" asp-controller="Profile" asp-action="Edit">Профіль</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link ml-sm-2" asp-area="" asp-controller="Authentication" asp-action="LogOut">Вихід</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+}
+
+<div class="info-block d-flex align-items-center justify-content-center">
+    <div class="text-center pb-5">
+        <h2>Редагування робітників</h2>
+    </div>
+</div>
+<div class="main-content text-dark pb-5 d-flex justify-content-center">
+    <div class="users-list-block my-5">
+        <form id="live-search" action="" method="post">
+            <fieldset>
+                <p class="px-4 py-2 text-center">Використовуйте наведений нижче фільтр для пошуку ваших підлеглих</p>
+                <div class="mx-lg-0 mx-3">
+                    <input class="pl-3" type="text" id="filter" placeholder="Пошук ..." />
+                    <p class="text-right" id="filter-count"></p>
+                </div>
+            </fieldset>
+        </form>
+
+        <div class="liveSearchBar">
+            <div class="liveSearchItem mb-3 pb-3">
+                <p class="py-2 px-3 mb-0 text-center"><span>Jim James</span> <br />Електронна пошта: test@gmail.com</p>
+                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
+                    <button type="button" class="edit-button px-3 py-1 mr-2">
+                        Інфо про відпустку
+                    </button>
+                </div>
+            </div>
+            <div class="liveSearchItem mb-3 pb-3">
+                <p class="py-2 px-3 mb-0 text-center"><span>Alan Key</span> <br />Електронна пошта: test@gmail.com</p>
+                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
+                    <button type="button" class="edit-button px-3 py-1 mr-2">
+                        Інфо про відпустку
+                    </button>
+                </div>
+            </div>
+            <div class="liveSearchItem mb-3 pb-3">
+                <p class="py-2 px-3 mb-0 text-center"><span>Hello Bye</span> <br />Електронна пошта: test@gmail.com</p>
+                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
+                    <button type="button" class="edit-button px-3 py-1 mr-2">
+                        Інфо про відпустку
+                    </button>
+                </div>
+            </div>
+            <div class="liveSearchItem mb-3 pb-3">
+                <p class="py-2 px-3 mb-0 text-center"><span>Black James</span> <br />Електронна пошта: test@gmail.com</p>
+                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
+                    <button type="button" class="edit-button px-3 py-1 mr-2">
+                        Інфо про відпустку
+                    </button>
+                </div>
+            </div>
+            <div class="liveSearchItem mb-3 pb-3">
+                <p class="py-2 px-3 mb-0 text-center"><span>Wassup Food</span> <br />Електронна пошта: test@gmail.com</p>
+                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
+                    <button type="button" class="edit-button px-3 py-1 mr-2">
+                        Інфо про відпустку
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/liveSearch.js" asp-append-version="true"></script>
+}
