@@ -10,8 +10,8 @@ namespace VTS.Services.UserVacationInfoService
         /// <summary>
         /// Asynchronous find user's vacation info by user's id.
         /// </summary>
-        /// <param name="id">User id.</param>
+        /// <param name="userId">User id.</param>
         /// <returns>UsersVacationInfo.</returns>
-        Task<Core.DTO.UserVacationInfo> FindByUserId(uint id);
+        Task<Core.DTO.UserVacationInfo> FindByUserId(uint userId);
     }
 }

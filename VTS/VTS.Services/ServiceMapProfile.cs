@@ -14,11 +14,17 @@ namespace VTS.Services
         {
             // DTO -> Entities
             CreateMap<Core.DTO.User, DAL.Entities.User>();
+            CreateMap<Core.DTO.Employee, DAL.Entities.Employee>();
+            CreateMap<Core.DTO.Manager, DAL.Entities.Manager>();
+            CreateMap<Core.DTO.Head, DAL.Entities.Head>();
             CreateMap<Core.DTO.UserVacationInfo, DAL.Entities.UserVacationInfo>();
 
             // Entities -> DTO
             CreateMap<DAL.Entities.User, Core.DTO.User>();
             CreateMap<DAL.Entities.UserVacationInfo, Core.DTO.UserVacationInfo>();
+            CreateMap<DAL.Entities.Employee, Core.DTO.Employee>();
+            CreateMap<DAL.Entities.Manager, Core.DTO.Manager>();
+            CreateMap<DAL.Entities.Head, Core.DTO.Head>();
         }
     }
 }

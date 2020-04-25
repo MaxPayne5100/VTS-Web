@@ -24,9 +24,9 @@ namespace VTS.Services.UserVacationInfoService
         }
 
         /// <inheritdoc />
-        public async Task<Core.DTO.UserVacationInfo> FindByUserId(uint id)
+        public async Task<Core.DTO.UserVacationInfo> FindByUserId(uint userId)
         {
-            var usersVacationInfo = await _unitOfWork.UsersVacationInfo.FindByUserId(id);
+            var usersVacationInfo = await _unitOfWork.UsersVacationInfo.FindByUserId(userId);
             var usersVacationInfoDtos = _mapper.Map<Core.DTO.UserVacationInfo>(usersVacationInfo);
             return usersVacationInfoDtos;
         }

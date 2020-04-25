@@ -1,4 +1,6 @@
-﻿@section Styles {
+﻿@model uint
+
+@section Styles {
     <link href="@Url.Content("~/css/usersEdit.css")" rel="stylesheet" type="text/css" />
 }
 
@@ -56,46 +58,7 @@
         </form>
 
         <div class="liveSearchBar">
-            <div class="liveSearchItem mb-3 pb-3">
-                <p class="py-2 px-3 mb-0 text-center"><span>Jim James</span> <br />Електронна пошта: test@gmail.com</p>
-                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
-                    <button type="button" class="edit-button px-3 py-1 mr-2">
-                        Інфо про відпустку
-                    </button>
-                </div>
-            </div>
-            <div class="liveSearchItem mb-3 pb-3">
-                <p class="py-2 px-3 mb-0 text-center"><span>Alan Key</span> <br />Електронна пошта: test@gmail.com</p>
-                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
-                    <button type="button" class="edit-button px-3 py-1 mr-2">
-                        Інфо про відпустку
-                    </button>
-                </div>
-            </div>
-            <div class="liveSearchItem mb-3 pb-3">
-                <p class="py-2 px-3 mb-0 text-center"><span>Hello Bye</span> <br />Електронна пошта: test@gmail.com</p>
-                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
-                    <button type="button" class="edit-button px-3 py-1 mr-2">
-                        Інфо про відпустку
-                    </button>
-                </div>
-            </div>
-            <div class="liveSearchItem mb-3 pb-3">
-                <p class="py-2 px-3 mb-0 text-center"><span>Black James</span> <br />Електронна пошта: test@gmail.com</p>
-                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
-                    <button type="button" class="edit-button px-3 py-1 mr-2">
-                        Інфо про відпустку
-                    </button>
-                </div>
-            </div>
-            <div class="liveSearchItem mb-3 pb-3">
-                <p class="py-2 px-3 mb-0 text-center"><span>Wassup Food</span> <br />Електронна пошта: test@gmail.com</p>
-                <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
-                    <button type="button" class="edit-button px-3 py-1 mr-2">
-                        Інфо про відпустку
-                    </button>
-                </div>
-            </div>
+            @await Component.InvokeAsync("ManagerEmployees", new { id = Model })
         </div>
     </div>
 </div>

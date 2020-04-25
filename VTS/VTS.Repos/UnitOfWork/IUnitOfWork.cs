@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using VTS.Repos.Employees;
+using VTS.Repos.Managers;
 using VTS.Repos.Users;
 using VTS.Repos.UsersVacationInfo;
 
@@ -20,6 +22,16 @@ namespace VTS.Repos.UnitOfWork
         /// Gets UserVacationInfo repository.
         /// </summary>
         public IUserVacationInfoRepository UsersVacationInfo { get; }
+
+        /// <summary>
+        /// Gets Employee repository.
+        /// </summary>
+        public IEmployeeRepository Employees { get; }
+
+        /// <summary>
+        /// Gets Manager repository.
+        /// </summary>
+        public IManagerRepository Managers { get; }
         #endregion
 
         /// <summary>

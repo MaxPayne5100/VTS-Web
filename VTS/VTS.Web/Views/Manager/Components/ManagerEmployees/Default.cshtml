@@ -1,0 +1,13 @@
+﻿@model IEnumerable<VTS.Core.DTO.Employee>
+
+@foreach (var employee in Model)
+{
+    <div class="liveSearchItem mb-3 pb-3">
+        <p class="py-2 px-3 mb-0 text-center"><span>@employee.User.LastName @employee.User.FirstName</span> <br />Електронна пошта: @employee.User.Email</p>
+        <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
+            <button type="button" class="edit-button px-3 py-1 mr-2">
+                Інфо про відпустку
+            </button>
+        </div>
+    </div>
+}
