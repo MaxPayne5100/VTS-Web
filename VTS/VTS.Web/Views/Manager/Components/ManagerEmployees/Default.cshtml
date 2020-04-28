@@ -2,12 +2,21 @@
 
 @foreach (var employee in Model)
 {
-    <div class="liveSearchItem mb-3 pb-3">
+    <div class="liveSearchItem mb-3 pb-3 wow fadeIn" data-wow-duration="2s" data-wow-offset="150">
         <p class="py-2 px-3 mb-0 text-center"><span>@employee.User.LastName @employee.User.FirstName</span> <br />Електронна пошта: @employee.User.Email</p>
         <div class="d-flex justify-content-center justify-content-sm-end mx-0 mx-sm-3">
-            <button type="button" class="edit-button px-3 py-1 mr-2">
+            @{
+                var routeData = new Dictionary<string, string>                                                                                                                                                                                                                   {
+                    { "Id", employee.UserId.ToString() },
+                };
+            }
+            <button type="button" class="edit-button px-3 py-1 mr-2" data-target="#changeBonusDayOffsModal"
+                    data-toggle="ajax-modal" data-url="@Url.Action("ChangeBonusDayOffs", @routeData)" data-placeholder="#changeBonusDayOffsModalPlaceholder">
                 Інфо про відпустку
             </button>
         </div>
     </div>
 }
+
+<!-- Modal -->
+<div id="changeBonusDayOffsModalPlaceholder"></div>

@@ -4,7 +4,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VTS.Core.Constants;
-using VTS.Services.AuthenticationService;
 using VTS.Services.UserService;
 
 namespace VTS.Web.Controllers
@@ -17,19 +16,16 @@ namespace VTS.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
-        private readonly IAuthenticationService _authService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProfileController"/> class.
         /// </summary>
         /// <param name="mapper">Automapper.</param>
         /// <param name="userService">Service for user logic.</param>
-        /// <param name="authService">Service for Authentication.</param>
-        public ProfileController(IMapper mapper, IUserService userService, IAuthenticationService authService)
+        public ProfileController(IMapper mapper, IUserService userService)
         {
             _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
             _userService = userService ?? throw new ArgumentException(nameof(userService));
-            _authService = authService ?? throw new ArgumentException(nameof(authService));
         }
 
         /// <summary>

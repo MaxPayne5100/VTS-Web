@@ -10,14 +10,14 @@ body {
 }
 
 .info-block {
-	min-height: 25vh;
-
+	min-height: 22vh;
+	
 	@extend %header_info_block;
 }
 
 .main-content {
 	height: auto;
-	min-height: 75vh;
+	min-height: 78vh;
 	background: white; 
 }
 
@@ -50,21 +50,24 @@ body {
   	font-weight: bold;
   	font-size: 1.1rem;
   }
+}
 
-  button {
-  	color: white;
-		background: $edit_button_fill;
-		border: none;
-    outline: none;
+.edit-button {
+	color: white;
+	background: $edit_button_fill;
+	border: none;
 
-    border-radius: 0.2rem;
-    -webkit-transition: .4s ease-out;
-    -o-transition: .4s ease-out;
-    transition: .4s ease-out;
+  border-radius: 0.2rem;
+  -webkit-transition: .4s ease-out;
+  -o-transition: .4s ease-out;
+  transition: .4s ease-out;
+
+  &:hover {
+  	background: $edit_button_fill_hover;
   }
 
-  button:hover {
-  		background: $edit_button_fill_hover;
+  &:focus {
+  	outline: none;
   }
 }
 

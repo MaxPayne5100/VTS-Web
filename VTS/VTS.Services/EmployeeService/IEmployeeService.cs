@@ -9,6 +9,13 @@ namespace VTS.Services.EmployeeService
     public interface IEmployeeService
     {
         /// <summary>
+        /// Asynchronous find employee by user's id.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <returns>Employee.</returns>
+        Task<Core.DTO.Employee> FindEmployeeByUserId(uint userId);
+
+        /// <summary>
         /// Asynchronous find list of employees by manager's id.
         /// </summary>
         /// <param name="managerId">Manager Id.</param>

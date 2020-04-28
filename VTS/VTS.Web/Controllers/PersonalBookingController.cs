@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VTS.Core.Constants;
 
 namespace VTS.Web.Controllers
 {
@@ -9,11 +12,15 @@ namespace VTS.Web.Controllers
     [Authorize]
     public class PersonalBookingController : Controller
     {
+        private readonly IMapper _mapper;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonalBookingController"/> class.
         /// </summary>
-        public PersonalBookingController()
+        /// <param name="mapper">Automapper.</param>
+        public PersonalBookingController(IMapper mapper)
         {
+            _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
         }
 
         /// <summary>
@@ -23,7 +30,8 @@ namespace VTS.Web.Controllers
         [HttpGet]
         public IActionResult Edit()
         {
-            return View();
+            var id = uint.Parse(User.FindFirst(ClaimKeys.Id).Value);
+            return View(id);
         }
     }
 }

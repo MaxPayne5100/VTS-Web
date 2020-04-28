@@ -46,7 +46,7 @@ namespace VTS.Services.AuthenticationService
                 return new ClaimsPrincipal(claimsIdentity);
             }
 
-            throw new ArgumentException("Wrong id or email");
+            throw new ArgumentException("Неправильний ID або пошта");
         }
     }
 }

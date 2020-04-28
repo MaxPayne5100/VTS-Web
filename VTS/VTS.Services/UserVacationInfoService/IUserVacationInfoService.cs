@@ -13,5 +13,12 @@ namespace VTS.Services.UserVacationInfoService
         /// <param name="userId">User id.</param>
         /// <returns>UsersVacationInfo.</returns>
         Task<Core.DTO.UserVacationInfo> FindByUserId(uint userId);
+
+        /// <summary>
+        /// Asynchronous update user's bonus paid day offs.
+        /// </summary>
+        /// <param name="userVacationInfoDto">Updated UserVacationInfo data.</param>
+        /// <returns>Task.</returns>
+        Task UpdateBonusDayOffs(Core.DTO.UserVacationInfo userVacationInfoDto);
     }
 }

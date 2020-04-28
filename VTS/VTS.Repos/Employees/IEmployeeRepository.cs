@@ -11,6 +11,13 @@ namespace VTS.Repos.Employees
     public interface IEmployeeRepository : IGenericRepository<Employee, uint>
     {
         /// <summary>
+        /// Find Employee by User Id.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <returns>Employee.</returns>
+        Task<Employee> FindEmployeeByUserId(uint userId);
+
+        /// <summary>
         /// Find list of Employees by Manager Id.
         /// </summary>
         /// <param name="id">Manager id.</param>

@@ -26,6 +26,15 @@ namespace VTS.Repos.Employees
         }
 
         /// <inheritdoc />
+        public async Task<Employee> FindEmployeeByUserId(uint userId)
+        {
+            return await _dbContext.Employees.Include(x => x.Manager)
+                                                .ThenInclude(y => y.Head)
+                                                    .ThenInclude(z => z.User)
+                                            .SingleOrDefaultAsync(x => x.UserId.Equals(userId));
+        }
+
+        /// <inheritdoc />
         public async Task<List<Employee>> FindByManagerId(uint id)
         {
             return await _dbContext.Employees.Include(x => x.User)

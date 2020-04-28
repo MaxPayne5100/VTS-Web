@@ -1,5 +1,7 @@
 //colors
 $error_fill: rgb(237, 33, 33);
+$modal_header_line_fill: rgba(222, 226, 230, 0.6);
+$modal_disabled_input_fill: rgba(255,255,255,.85);
 
 @mixin white_color_mixin ($property, $x) 
 {
@@ -59,6 +61,7 @@ a
     font-weight: normal;
 
     display: block;
+    text-align: center;
 
     color: $error_fill;
 }
@@ -251,6 +254,29 @@ a
 
 .link-mobile {
     display: none;
+}
+
+.modal-header {
+    border-bottom: 0.0625rem solid $modal_header_line_fill;
+
+    button {
+        outline: none;
+        
+        &:hover {
+            -webkit-transition: .2s ease-in-out;
+            -o-transition: .2s ease-in-out;
+            transition: .2s ease-in-out;
+
+            opacity: 1 !important;
+        }
+    }
+}
+
+.modal-body {
+    input {
+        border-radius: .1875rem;
+        outline: none;
+    }
 }
 
 .footer

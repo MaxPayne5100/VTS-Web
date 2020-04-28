@@ -88,9 +88,7 @@ h3
 	background-size: 10% 10%;
 	transition: background-size .3s ease-in-out;
 
-	a {
-		@extend %bold_roboto_slab;
-	}
+	@extend %bold_roboto_slab;
 	
 	&:hover {
 		background-size: 100% 100%;

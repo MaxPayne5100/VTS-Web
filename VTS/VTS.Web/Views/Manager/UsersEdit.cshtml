@@ -1,7 +1,8 @@
 ﻿@model uint
 
 @section Styles {
-    <link href="@Url.Content("~/css/usersEdit.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/usersEdit.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/lib/wow.js/css/animate.css")" rel="stylesheet" type="text/css" />
 }
 
 @{
@@ -64,5 +65,10 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/liveSearch.js" asp-append-version="true"></script>
+<script src="~/js/liveSearch.js" asp-append-version="true"></script>
+<script src="~/js/ajaxModal.js" asp-append-version="true"></script>
+<script src="~/lib/wow.js/js/wow.min.js" asp-append-version="true"></script>
+<script>
+    new WOW().init();
+</script>
 }
