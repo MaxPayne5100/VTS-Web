@@ -1,1 +1,2 @@
 # Web UI Layer
+Contains all frontend (views, partial views, view components, js files, scss files), models, controllers, migrations and such basic things as Program.cs and Startup.cs for running the application. That is implementation of MVC web pattern.
