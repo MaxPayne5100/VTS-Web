@@ -42,7 +42,7 @@ namespace VTS.DAL.Entities
         /// <summary>
         /// Gets or sets User identifier.
         /// </summary>
-        public uint UserId { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Gets or sets User.

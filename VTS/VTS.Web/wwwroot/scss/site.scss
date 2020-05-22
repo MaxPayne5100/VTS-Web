@@ -1,3 +1,5 @@
+@import "_const.scss";
+
 //colors
 $error_fill: rgb(237, 33, 33);
 $modal_header_line_fill: rgba(222, 226, 230, 0.6);
@@ -34,10 +36,14 @@ body
     color: white;
 }
 
+.nav-link {
+    color: white !important;
+}
+
 a
 {
     cursor: pointer;
-    color: white !important;
+    color: white;
     
     nav & {
         font-size: 1.05rem;
@@ -277,6 +283,33 @@ a
         border-radius: .1875rem;
         outline: none;
     }
+}
+
+.bootstrap-select .dropdown-toggle:focus {
+  outline: none !important;
+}
+
+.selected.active {
+  &::before {
+    border: none;
+  }
+  &::after {
+    border: none;
+  }
+}
+
+.btn-light {
+  color: black;
+  background: white;
+}
+
+.main-selectors {
+  font-weight: bold;
+  border: 0.125rem solid $block_info_fill;
+}
+
+.btn-light, .btn-light:focus {
+  box-shadow: none !important;
 }
 
 .footer

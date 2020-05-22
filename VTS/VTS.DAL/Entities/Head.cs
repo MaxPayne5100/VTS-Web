@@ -6,17 +6,17 @@ namespace VTS.DAL.Entities
     /// <summary>
     /// Head Entity.
     /// </summary>
-    public class Head : IIdentifiable<uint>
+    public class Head : IIdentifiable<int>
     {
         /// <summary>
         /// Gets or sets Head identifier.
         /// </summary>
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets User identifier.
         /// </summary>
-        public uint UserId { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Gets or sets User.

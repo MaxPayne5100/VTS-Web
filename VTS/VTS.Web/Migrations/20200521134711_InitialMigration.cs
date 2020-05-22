@@ -11,7 +11,8 @@ namespace VTS.Web.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 100, nullable: false),
                     LastName = table.Column<string>(maxLength: 100, nullable: false),
                     Email = table.Column<string>(nullable: false),
@@ -26,8 +27,9 @@ namespace VTS.Web.Migrations
                 name: "Heads",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
-                    UserId = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,13 +47,13 @@ namespace VTS.Web.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    UserId = table.Column<long>(nullable: false),
-                    Category = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    Category = table.Column<string>(nullable: false),
                     Hours = table.Column<long>(nullable: false),
                     Start = table.Column<DateTime>(nullable: false),
                     Expires = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 256, nullable: false),
-                    SubmissionTime = table.Column<DateTime>(nullable: false, defaultValue: DateTime.Now)
+                    SubmissionTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,7 +71,7 @@ namespace VTS.Web.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    UserId = table.Column<long>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     PaidDayOffs = table.Column<long>(nullable: false),
                     BonusPaidDayOffs = table.Column<long>(nullable: false),
                     UnPaidDayOffs = table.Column<long>(nullable: false),
@@ -92,8 +94,9 @@ namespace VTS.Web.Migrations
                 name: "Clerks",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
-                    HeadId = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HeadId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,8 +113,9 @@ namespace VTS.Web.Migrations
                 name: "Managers",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
-                    HeadId = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HeadId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -129,9 +133,9 @@ namespace VTS.Web.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    HeadId = table.Column<long>(nullable: false),
+                    HeadId = table.Column<int>(nullable: false),
                     HolidayId = table.Column<Guid>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
+                    Status = table.Column<string>(nullable: false),
                     Description = table.Column<string>(maxLength: 256, nullable: false)
                 },
                 constraints: table =>
@@ -154,9 +158,10 @@ namespace VTS.Web.Migrations
                 name: "Employees",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
-                    UserId = table.Column<long>(nullable: false),
-                    ManagerId = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    ManagerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

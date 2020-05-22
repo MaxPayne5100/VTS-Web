@@ -25,7 +25,7 @@ namespace VTS.Services.EmployeeService
         }
 
         /// <inheritdoc />
-        public async Task<Core.DTO.Employee> FindEmployeeByUserId(uint userId)
+        public async Task<Core.DTO.Employee> FindEmployeeByUserId(int userId)
         {
             var employee = await _unitOfWork.Employees.FindEmployeeByUserId(userId);
             var employeeDtos = _mapper.Map<Core.DTO.Employee>(employee);
@@ -33,7 +33,7 @@ namespace VTS.Services.EmployeeService
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<Core.DTO.Employee>> FindByManagerId(uint managerId)
+        public async Task<IEnumerable<Core.DTO.Employee>> FindByManagerId(int managerId)
         {
             var employees = await _unitOfWork.Employees.FindByManagerId(managerId);
             var employeesDto = _mapper.Map<List<Core.DTO.Employee>>(employees);

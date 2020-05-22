@@ -5,17 +5,17 @@ namespace VTS.DAL.Entities
     /// <summary>
     /// Employee Entity.
     /// </summary>
-    public class Employee : IIdentifiable<uint>
+    public class Employee : IIdentifiable<int>
     {
         /// <summary>
         /// Gets or sets Employee identifier.
         /// </summary>
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets User identifier.
         /// </summary>
-        public uint UserId { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Gets or sets User.
@@ -25,7 +25,7 @@ namespace VTS.DAL.Entities
         /// <summary>
         /// Gets or sets Manager identifier.
         /// </summary>
-        public uint ManagerId { get; set; }
+        public int ManagerId { get; set; }
 
         /// <summary>
         /// Gets or sets Manager.

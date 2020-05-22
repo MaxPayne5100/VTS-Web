@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace VTS.Services.UserService
 {
@@ -19,7 +20,7 @@ namespace VTS.Services.UserService
         /// </summary>
         /// <param name="id">User's id.</param>
         /// <returns>User.</returns>
-        Task<Core.DTO.User> Find(uint id);
+        Task<Core.DTO.User> Find(int id);
 
         /// <summary>
         /// Asynchronous update all user's properties.
@@ -40,6 +41,21 @@ namespace VTS.Services.UserService
         /// </summary>
         /// <param name="id">User's id.</param>
         /// <returns>Task.</returns>
-        Task Remove(uint id);
+        Task Remove(int id);
+
+        /// <summary>
+        /// Find users by role without own data.
+        /// </summary>
+        /// <param name="role">User's role.</param>
+        /// <param name="id">User's id.</param>
+        /// <returns>List of users.</returns>
+        Task<IEnumerable<Core.DTO.User>> FindByRoleWithoutOwnData(string role, int id);
+
+        /// <summary>
+        /// Find user with manager info by id.
+        /// </summary>
+        /// <param name="id">User identifier.</param>
+        /// <returns>User.</returns>
+        Task<Core.DTO.User> FindWithManagerInfoById(int id);
     }
 }

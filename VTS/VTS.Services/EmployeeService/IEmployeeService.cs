@@ -13,13 +13,13 @@ namespace VTS.Services.EmployeeService
         /// </summary>
         /// <param name="userId">User id.</param>
         /// <returns>Employee.</returns>
-        Task<Core.DTO.Employee> FindEmployeeByUserId(uint userId);
+        Task<Core.DTO.Employee> FindEmployeeByUserId(int userId);
 
         /// <summary>
         /// Asynchronous find list of employees by manager's id.
         /// </summary>
         /// <param name="managerId">Manager Id.</param>
         /// <returns>List of Employees.</returns>
-        Task<IEnumerable<Core.DTO.Employee>> FindByManagerId(uint managerId);
+        Task<IEnumerable<Core.DTO.Employee>> FindByManagerId(int managerId);
     }
 }

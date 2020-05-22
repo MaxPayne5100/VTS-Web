@@ -5,17 +5,17 @@ namespace VTS.DAL.Entities
     /// <summary>
     /// Clerk Entity.
     /// </summary>
-    public class Clerk : IIdentifiable<uint>
+    public class Clerk : IIdentifiable<int>
     {
         /// <summary>
         /// Gets or sets Clerk identifier.
         /// </summary>
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets Head identifier.
         /// </summary>
-        public uint HeadId { get; set; }
+        public int HeadId { get; set; }
 
         /// <summary>
         /// Gets or sets Head.

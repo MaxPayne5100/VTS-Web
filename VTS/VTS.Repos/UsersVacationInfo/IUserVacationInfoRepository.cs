@@ -15,6 +15,6 @@ namespace VTS.Repos.UsersVacationInfo
         /// </summary>
         /// <param name="id">User id.</param>
         /// <returns>UserVacationInfo.</returns>
-        Task<UserVacationInfo> FindByUserId(uint id);
+        Task<UserVacationInfo> FindByUserId(int id);
     }
 }

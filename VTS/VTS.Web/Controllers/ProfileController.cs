@@ -35,7 +35,7 @@ namespace VTS.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit()
         {
-            var id = uint.Parse(User.FindFirst(ClaimKeys.Id).Value);
+            var id = int.Parse(User.FindFirst(ClaimKeys.Id).Value);
             var user = await _userService.Find(id);
             var profileModel = _mapper.Map<Models.ProfileModel>(user);
             return View(profileModel);
@@ -54,7 +54,7 @@ namespace VTS.Web.Controllers
                 try
                 {
                     var userDto = _mapper.Map<Core.DTO.User>(profileModel);
-                    userDto.Id = uint.Parse(User.FindFirst(ClaimKeys.Id).Value);
+                    userDto.Id = int.Parse(User.FindFirst(ClaimKeys.Id).Value);
                     await _userService.UpdateProfile(userDto);
                     return View(profileModel);
                 }

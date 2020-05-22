@@ -22,12 +22,16 @@ body {
 }
 
 .users-list-block {
-	width: 55rem;
-	max-width: 55rem;
+  width: 100%;
+  max-width: 68.75rem;
+  min-height: 25rem;
+  margin-bottom: 4rem;
+  border-radius: 0.2rem;
+  background: rgba(27, 29, 34, 0.85);
 
 	fieldset > p {
 		background: $block_info_fill;
-		color: black;
+		color: white;
 		border-radius: 0.1875rem;
 		font-size: 1.07rem;
 	}
@@ -52,7 +56,7 @@ body {
   }
 }
 
-.edit-button {
+.edit-button, .butt, .close-button {
 	color: white;
 	background: $edit_button_fill;
 	border: none;
@@ -69,6 +73,20 @@ body {
   &:focus {
   	outline: none;
   }
+}
+
+.butt.white {
+    background: white;
+    color: black;
+
+		&:hover {
+		    color: white;
+        background: $edit_button_fill_hover;
+		}
+}
+
+#hidden-field {
+    display: none;
 }
 
 .footer {

@@ -25,7 +25,7 @@ namespace VTS.Services.AuthenticationService
         }
 
         /// <inheritdoc />
-        public async Task<ClaimsPrincipal> LogIn(uint id, string email)
+        public async Task<ClaimsPrincipal> LogIn(int id, string email)
         {
             var user = await _unitOfWork.Users.FindByEmail(email);
 

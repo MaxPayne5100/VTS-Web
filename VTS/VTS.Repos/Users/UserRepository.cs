@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VTS.DAL;
@@ -9,7 +11,7 @@ namespace VTS.Repos.Users
     /// <summary>
     /// User Repository.
     /// </summary>
-    public class UserRepository : GenericRepository<User, uint>, IUserRepository
+    public class UserRepository : GenericRepository<User, int>, IUserRepository
     {
         private readonly VTSDbContext _dbContext;
 
@@ -28,6 +30,26 @@ namespace VTS.Repos.Users
         {
             return await _dbContext.Users
                 .FirstOrDefaultAsync(user => user.Email.Equals(email));
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<User>> FindByRoleWithoutOwnData(string role, int id)
+        {
+            return await _dbContext.Users.Where(x => x.Role == role && x.Id != id)
+                                         .OrderBy(x => x.LastName).ThenBy(y => y.FirstName)
+                                         .ToListAsync();
+        }
+
+        /// <inheritdoc />
+        public async Task<User> FindWithAllRolesInfoById(int id)
+        {
+            return await _dbContext.Users.Include(x => x.Head)
+                                            .ThenInclude(x => x.Manager)
+                                         .Include(x => x.Head)
+                                            .ThenInclude(x => x.Clerk)
+                                         .Include(x => x.Employee)
+                                         .Where(x => x.Id == id)
+                                         .SingleOrDefaultAsync();
         }
     }
 }

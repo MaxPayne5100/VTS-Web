@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
+using VTS.Repos.Clerks;
 using VTS.Repos.Employees;
+using VTS.Repos.Heads;
 using VTS.Repos.Managers;
 using VTS.Repos.Users;
 using VTS.Repos.UsersVacationInfo;
@@ -32,6 +34,16 @@ namespace VTS.Repos.UnitOfWork
         /// Gets Manager repository.
         /// </summary>
         public IManagerRepository Managers { get; }
+
+        /// <summary>
+        /// Gets Clerk repository.
+        /// </summary>
+        public IClerkRepository Clerks { get; }
+
+        /// <summary>
+        /// Gets Head repository.
+        /// </summary>
+        public IHeadRepository Heads { get; }
         #endregion
 
         /// <summary>

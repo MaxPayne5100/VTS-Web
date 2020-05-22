@@ -25,7 +25,7 @@ namespace VTS.Services.UserVacationInfoService
         }
 
         /// <inheritdoc />
-        public async Task<Core.DTO.UserVacationInfo> FindByUserId(uint userId)
+        public async Task<Core.DTO.UserVacationInfo> FindByUserId(int userId)
         {
             var usersVacationInfo = await _unitOfWork.UsersVacationInfo.FindByUserId(userId);
             var usersVacationInfoDtos = _mapper.Map<Core.DTO.UserVacationInfo>(usersVacationInfo);
@@ -46,7 +46,33 @@ namespace VTS.Services.UserVacationInfoService
             }
             else
             {
-                throw new ArgumentException($"Can not find user with id {userVacationInfoDto.UserId}");
+                throw new ArgumentException($"Неможливо знайти користувача з id {userVacationInfoDto.UserId}");
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task UpdateVacationInfo(Core.DTO.UserVacationInfo userVacationInfoDto)
+        {
+            var userVacationInfo = await _unitOfWork.UsersVacationInfo.FindByUserId(userVacationInfoDto.UserId);
+
+            if (userVacationInfo != null)
+            {
+                userVacationInfo.PaidDayOffs = userVacationInfoDto.PaidDayOffs;
+                userVacationInfo.UnPaidDayOffs = userVacationInfoDto.UnPaidDayOffs;
+                userVacationInfo.PaidSickness = userVacationInfoDto.PaidSickness;
+                userVacationInfo.UnPaidSickness = userVacationInfoDto.UnPaidSickness;
+                userVacationInfo.BonusPaidDayOffs = userVacationInfoDto.BonusPaidDayOffs;
+                userVacationInfo.StartedWorking = userVacationInfoDto.StartedWorking;
+
+                _unitOfWork.UsersVacationInfo.Update(userVacationInfo);
+                await _unitOfWork.CommitAsync();
+            }
+            else
+            {
+                userVacationInfo = _mapper.Map<DAL.Entities.UserVacationInfo>(userVacationInfoDto);
+
+                await _unitOfWork.UsersVacationInfo.AddAsync(userVacationInfo);
+                await _unitOfWork.CommitAsync();
             }
         }
     }

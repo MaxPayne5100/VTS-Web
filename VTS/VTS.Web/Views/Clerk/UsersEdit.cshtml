@@ -1,6 +1,140 @@
-﻿@{
-ViewData["Title"] = "Users Editing";
+﻿@model VTS.Web.Models.EditUsersModel
+
+@section Styles {
+    <link href="@Url.Content("~/css/usersEdit.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/lib/wow.js/css/animate.css")" rel="stylesheet" type="text/css" />
 }
 
-@section Header {}
+@{
+    ViewData["Title"] = "Users Editing";
+}
 
+@section Header {
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3">
+            <div class="container-fluid ml-3 mr-3">
+                <a class="nav-link mr-sm-2 main-link" asp-area="" asp-controller="Home" asp-action="Index">Бронювання</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="animated-navbar-toggler-icon"><span></span><span></span><span></span><span></span></div>
+                </button>
+                <div class="navbar-collapse collapse justify-content-between flex-sm-row">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link ml-sm-1 px-sm-3" asp-area="" asp-controller="PersonalBooking" asp-action="Edit">Особисті бронювання</a>
+                        </li>
+                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link active mr-sm-1 px-sm-3" asp-area="" asp-controller="Profile" asp-action="Edit">Профіль</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link ml-sm-2" asp-area="" asp-controller="Authentication" asp-action="LogOut">Вихід</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+}
+
+<div class="info-block d-flex align-items-center justify-content-center">
+    <div class="text-center pb-5">
+        <h2>Редагування робітників</h2>
+    </div>
+</div>
+<div class="main-content text-dark py-5 d-flex justify-content-center">
+    <div class="users-list-block py-4 px-5">
+        <div class="mb-4">
+            <form asp-action="UsersEdit" method="get" class="col-2 p-0">
+                <select asp-for="Role" class="selectpicker" onchange="this.form.submit()"
+                        data-style="btn-light main-selectors py-2 px-4">
+                    <option disabled selected>-- Оберіть роль --</option>
+                    <option>Employee</option>
+                    <option>Manager</option>
+                    <option>Clerk</option>
+                </select>
+            </form>
+        </div>
+        @if (Model.Role != null)
+        {
+
+            <form id="live-search" action="" method="post">
+                <fieldset>
+                    <p class="px-4 py-2 text-center">Використовуйте наведений нижче фільтр для пошуку ваших підлеглих</p>
+                    <div class="mx-lg-0 mx-3">
+                        <input class="pl-3" type="text" id="filter" placeholder="Пошук ..." />
+                        <p class="text-right" id="filter-count"></p>
+                    </div>
+                </fieldset>
+            </form>
+            @foreach (var user in Model.Users)
+            {
+                <div class="liveSearchItem mb-3 pb-3">
+                    <p class="py-2 px-3 mb-0 text-center"><span>@user.LastName @user.FirstName</span> <br />Електронна пошта: @user.Email</p>
+                    <div class="edit-delete-buttons d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end mx-3">
+                        @{
+                            var routeData = new Dictionary<string, string>
+                                                                            {
+                                { "Id", user.Id.ToString() }
+                            };
+                        }
+                        <button type="button" class="edit-button px-3 py-1 mr-0 mr-sm-2 my-2 my-sm-0"
+                                data-toggle="ajax-modal" data-url="@Url.Action("ChangeVacationInfo", @routeData)">
+                            Інфо про відпустку
+                        </button>
+                        <button type="button" class="edit-button px-3 py-1 mr-0 mr-sm-2 my-2 my-sm-0"
+                                data-toggle="ajax-modal" data-url="@Url.Action("EditUser", @routeData)">
+                            Редагувати
+                        </button>
+                        <button type="button" class="edit-button px-3 py-1 my-2 my-sm-0" data-toggle="modal" data-target="#confirmModal" 
+                                data-url="@Url.Action("RemoveUser", @routeData)">
+                            Видалити
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="d-flex justify-content-center justify-content-sm-end">
+                <button type="button" class="butt px-4 py-1" data-target="#AddingUser"
+                        data-toggle="ajax-modal" data-url="@Url.Action("AddUser")">
+                    Додати користувача
+                </button>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade confirm" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <p class="modal-title" id="confirmModalTitle">Ви впевнені, що хочете видалити користувача?</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-danger">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body d-flex justify-content-center">
+                <button type="button" class="close-button px-3 py-1 mr-3">
+                    Видалити
+                </button>
+                <button type="button" class="butt white px-3 py-1" data-dismiss="modal">Закрити</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="UserPlaceholder"></div>
+
+@section Scripts {
+    <script src="~/js/liveSearch.js" asp-append-version="true"></script>
+    <script src="~/js/EditUsers.js" asp-append-version="true"></script>
+    <script src="~/lib/wow.js/js/wow.min.js" asp-append-version="true"></script>
+    <script>
+        new WOW().init();
+    </script>
+}

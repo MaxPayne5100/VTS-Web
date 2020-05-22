@@ -10,7 +10,7 @@ namespace VTS.Web.Models
         /// <summary>
         /// Gets or sets user id.
         /// </summary>
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets user firstname.

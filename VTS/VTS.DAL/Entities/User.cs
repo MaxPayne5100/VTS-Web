@@ -6,12 +6,12 @@ namespace VTS.DAL.Entities
     /// <summary>
     /// User Entity.
     /// </summary>
-    public class User : IIdentifiable<uint>
+    public class User : IIdentifiable<int>
     {
         /// <summary>
         /// Gets or sets User identifier.
         /// </summary>
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets User firstname.

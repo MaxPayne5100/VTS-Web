@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets or sets User identifier.
         /// </summary>
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets User firstname.
@@ -29,5 +29,10 @@
         /// Gets or sets User role.
         /// </summary>
         public string Role { get; set; }
+
+        /// <summary>
+        /// Gets or sets Employee Manager.
+        /// </summary>
+        public int ManagerId { get; set; }
     }
 }

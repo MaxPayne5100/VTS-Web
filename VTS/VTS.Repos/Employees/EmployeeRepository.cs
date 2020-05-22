@@ -11,7 +11,7 @@ namespace VTS.Repos.Employees
     /// <summary>
     /// Employee Repository.
     /// </summary>
-    public class EmployeeRepository : GenericRepository<Employee, uint>, IEmployeeRepository
+    public class EmployeeRepository : GenericRepository<Employee, int>, IEmployeeRepository
     {
         private readonly VTSDbContext _dbContext;
 
@@ -26,7 +26,7 @@ namespace VTS.Repos.Employees
         }
 
         /// <inheritdoc />
-        public async Task<Employee> FindEmployeeByUserId(uint userId)
+        public async Task<Employee> FindEmployeeByUserId(int userId)
         {
             return await _dbContext.Employees.Include(x => x.Manager)
                                                 .ThenInclude(y => y.Head)
@@ -35,7 +35,7 @@ namespace VTS.Repos.Employees
         }
 
         /// <inheritdoc />
-        public async Task<List<Employee>> FindByManagerId(uint id)
+        public async Task<List<Employee>> FindByManagerId(int id)
         {
             return await _dbContext.Employees.Include(x => x.User)
                                                 .ThenInclude(y => y.UserVacationInfo)

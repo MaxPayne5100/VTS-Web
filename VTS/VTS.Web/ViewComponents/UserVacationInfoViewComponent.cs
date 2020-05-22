@@ -26,7 +26,7 @@ namespace VTS.Web.ViewComponents
         /// </summary>
         /// <param name="id">User Id.</param>
         /// <returns>IViewComponentResult.</returns>
-        public async Task<IViewComponentResult> InvokeAsync(uint id)
+        public async Task<IViewComponentResult> InvokeAsync(int id)
         {
             var usersVacationInfoDtos = await _userVacationInfoService.FindByUserId(id);
             return View(usersVacationInfoDtos);

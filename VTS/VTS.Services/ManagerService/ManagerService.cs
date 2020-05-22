@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using VTS.Repos.UnitOfWork;
 
@@ -24,11 +25,19 @@ namespace VTS.Services.ManagerService
         }
 
         /// <inheritdoc />
-        public async Task<Core.DTO.Manager> FindManageByUserId(uint userId)
+        public async Task<Core.DTO.Manager> FindManageByUserId(int userId)
         {
             var manager = await _unitOfWork.Managers.FindManageByUserId(userId);
             var managerDtos = _mapper.Map<Core.DTO.Manager>(manager);
             return managerDtos;
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<Core.DTO.Manager>> GetAllWithUserInfo()
+        {
+            var managers = await _unitOfWork.Managers.GetAllWithUserInfo();
+            var managersDtos = _mapper.Map<IEnumerable<Core.DTO.Manager>>(managers);
+            return managersDtos;
         }
     }
 }

@@ -14,11 +14,13 @@ namespace VTS.Web
         {
             // Model -> DTO
             CreateMap<Models.ProfileModel, Core.DTO.User>();
-            CreateMap<Models.ChangeBonusDayOffsModel, Core.DTO.UserVacationInfo>();
+            CreateMap<Models.UserModel, Core.DTO.User>();
+            CreateMap<Models.ChangeDayOffsModel, Core.DTO.UserVacationInfo>();
 
             // DTO -> Model
             CreateMap<Core.DTO.User, Models.ProfileModel>();
-            CreateMap<Core.DTO.UserVacationInfo, Models.ChangeBonusDayOffsModel>();
+            CreateMap<Core.DTO.User, Models.UserModel>();
+            CreateMap<Core.DTO.UserVacationInfo, Models.ChangeDayOffsModel>();
         }
     }
 }

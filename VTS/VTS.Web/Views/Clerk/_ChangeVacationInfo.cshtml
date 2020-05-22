@@ -1,0 +1,66 @@
+﻿@model VTS.Web.Models.ChangeDayOffsModel
+
+<div class="modal fade" id="changeDayOffsModal" tabindex="-1" role="dialog" aria-labelledby="changeDayOffsModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeDayOffsModalTitle">Зміна інформації про відпустку</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-danger">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="ChangeVacationInfo">
+                    <div asp-validation-summary="ModelOnly" class="field-validation-error"></div>
+                    <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <input asp-for="UserId" type="hidden" />
+
+                    <div class="mb-3">
+                        <label asp-for="PaidDayOffs" class="ml-2">Оплачувана відпустка (днів)</label>
+                        <input asp-for="PaidDayOffs" class="pl-3 py-2 border w-100" />
+                        <span asp-validation-for="PaidDayOffs" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="UnPaidDayOffs" class="ml-2">Неоплачувана відпустка (днів)</label>
+                        <input asp-for="UnPaidDayOffs" class="pl-3 py-2 border w-100" />
+                        <span asp-validation-for="UnPaidDayOffs" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PaidSickness" class="ml-2">Оплачуваний лікарняний (днів)</label>
+                        <input asp-for="PaidSickness" class="pl-3 py-2 border w-100" />
+                        <span asp-validation-for="PaidSickness" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="UnPaidSickness" class="ml-2">Неоплачуваний лікарняний (днів)</label>
+                        <input asp-for="UnPaidSickness" class="pl-3 py-2 border w-100" />
+                        <span asp-validation-for="UnPaidSickness" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="BonusPaidDayOffs" class="ml-2">Введіть бонусні дні відпустки</label>
+                        <input asp-for="BonusPaidDayOffs" class="pl-3 py-2 border w-100" />
+                        <span asp-validation-for="BonusPaidDayOffs" class="field-validation-error">
+                            @{if (ViewBag.Error != null)
+                                    @ViewBag.Error
+                            }
+                        </span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="StartedWorking" class="ml-2">Почав працювати</label>
+                        <input asp-for="StartedWorking" type="date" class="pl-3 py-2 border w-100" />
+                        <span asp-validation-for="StartedWorking" class="field-validation-error"></span>
+                    </div>
+                </form>
+                <div class="d-flex justify-content-center justify-content-sm-end">
+                    <button type="submit" class="edit-button px-3 py-1 mb-2" id="Submit">
+                        Зберегти зміни
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

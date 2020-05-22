@@ -30,7 +30,7 @@ namespace VTS.Web.Controllers
         [HttpGet]
         public IActionResult Edit()
         {
-            var id = uint.Parse(User.FindFirst(ClaimKeys.Id).Value);
+            var id = int.Parse(User.FindFirst(ClaimKeys.Id).Value);
             return View(id);
         }
     }

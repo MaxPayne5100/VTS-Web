@@ -39,7 +39,7 @@ namespace VTS.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> UsersEdit()
         {
-            var userId = uint.Parse(User.FindFirst(ClaimKeys.Id).Value);
+            var userId = int.Parse(User.FindFirst(ClaimKeys.Id).Value);
             var managerDto = await _managerService.FindManageByUserId(userId);
             return View(managerDto.Id);
         }
@@ -50,10 +50,10 @@ namespace VTS.Web.Controllers
         /// <param name="id">User Id.</param>
         /// <returns>IActionResult.</returns>
         [HttpGet]
-        public async Task<IActionResult> ChangeBonusDayOffs(uint id)
+        public async Task<IActionResult> ChangeBonusDayOffs(int id)
         {
             var usersVacationInfoDtos = await _userVacationInfoService.FindByUserId(id);
-            var changeBonusDayOffsModel = _mapper.Map<Models.ChangeBonusDayOffsModel>(usersVacationInfoDtos);
+            var changeBonusDayOffsModel = _mapper.Map<Models.ChangeDayOffsModel>(usersVacationInfoDtos);
             return PartialView("_ChangeBonusDayOffs", changeBonusDayOffsModel);
         }
 
@@ -63,7 +63,7 @@ namespace VTS.Web.Controllers
         /// <param name="bonusDayOffs">ChangeBonusDayOffs model.</param>
         /// <returns>IActionResult.</returns>
         [HttpPost]
-        public async Task<IActionResult> ChangeBonusDayOffs(Models.ChangeBonusDayOffsModel bonusDayOffs)
+        public async Task<IActionResult> ChangeBonusDayOffs(Models.ChangeDayOffsModel bonusDayOffs)
         {
             if (ModelState.IsValid)
             {

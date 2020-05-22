@@ -1,0 +1,13 @@
+﻿@model ManagerOptionsModel
+
+@foreach (var manager in Model.Managers)
+{
+    @if (manager.Id == int.Parse(Model.ManagerId))
+    {
+        <option value="@manager.Id" selected>@(manager.Head.User.FirstName + " " + manager.Head.User.LastName)</option>
+    }
+    else
+    {
+        <option value="@manager.Id">@(manager.Head.User.FirstName + " " + manager.Head.User.LastName)</option>
+    }
+}

@@ -65,7 +65,7 @@ namespace VTS.Web.Controllers
                 try
                 {
                     var claimsPrinciple = await _authenticationService.LogIn(
-                        Convert.ToUInt32(model.Id), model.Email);
+                        Convert.ToInt32(model.Id), model.Email);
 
                     await HttpContext.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme,

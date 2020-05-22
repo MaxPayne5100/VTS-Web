@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace VTS.Services.ManagerService
 {
@@ -12,6 +13,12 @@ namespace VTS.Services.ManagerService
         /// </summary>
         /// <param name="userId">User id.</param>
         /// <returns>Manager.</returns>
-        Task<Core.DTO.Manager> FindManageByUserId(uint userId);
+        Task<Core.DTO.Manager> FindManageByUserId(int userId);
+
+        /// <summary>
+        /// Get all managers.
+        /// </summary>
+        /// <returns>IEnumerable of managers.</returns>
+        Task<IEnumerable<Core.DTO.Manager>> GetAllWithUserInfo();
     }
 }

@@ -6,17 +6,17 @@ namespace VTS.DAL.Entities
     /// <summary>
     /// Manager Entity.
     /// </summary>
-    public class Manager : IIdentifiable<uint>
+    public class Manager : IIdentifiable<int>
     {
         /// <summary>
         /// Gets or sets Manager identifier.
         /// </summary>
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets Head identifier.
         /// </summary>
-        public uint HeadId { get; set; }
+        public int HeadId { get; set; }
 
         /// <summary>
         /// Gets or sets Head.

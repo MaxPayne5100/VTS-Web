@@ -16,6 +16,8 @@ namespace VTS.DAL.Configuration
         public void Configure(EntityTypeBuilder<Clerk> builder)
         {
             builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
         }
     }
 }

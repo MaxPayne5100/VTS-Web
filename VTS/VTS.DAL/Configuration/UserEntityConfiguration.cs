@@ -17,6 +17,8 @@ namespace VTS.DAL.Configuration
         {
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+
             builder.Property(x => x.FirstName)
                 .HasMaxLength(100)
                 .IsRequired();

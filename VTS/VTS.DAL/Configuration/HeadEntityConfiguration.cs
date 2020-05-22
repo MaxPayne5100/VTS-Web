@@ -17,6 +17,8 @@ namespace VTS.DAL.Configuration
         {
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+
             builder.HasOne(x => x.Manager)
                 .WithOne(x => x.Head)
                 .OnDelete(DeleteBehavior.Cascade);

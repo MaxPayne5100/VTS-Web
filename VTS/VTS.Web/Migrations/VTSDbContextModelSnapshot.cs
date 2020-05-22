@@ -21,12 +21,13 @@ namespace VTS.Web.Migrations
 
             modelBuilder.Entity("VTS.DAL.Entities.Clerk", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("HeadId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("HeadId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -38,15 +39,16 @@ namespace VTS.Web.Migrations
 
             modelBuilder.Entity("VTS.DAL.Entities.Employee", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("ManagerId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("ManagerId")
+                        .HasColumnType("int");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -60,12 +62,13 @@ namespace VTS.Web.Migrations
 
             modelBuilder.Entity("VTS.DAL.Entities.Head", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -102,8 +105,8 @@ namespace VTS.Web.Migrations
                     b.Property<DateTime>("SubmissionTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -123,8 +126,8 @@ namespace VTS.Web.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<long>("HeadId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("HeadId")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("HolidayId")
                         .HasColumnType("uniqueidentifier");
@@ -145,12 +148,13 @@ namespace VTS.Web.Migrations
 
             modelBuilder.Entity("VTS.DAL.Entities.Manager", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("HeadId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("HeadId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -162,9 +166,10 @@ namespace VTS.Web.Migrations
 
             modelBuilder.Entity("VTS.DAL.Entities.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -213,8 +218,8 @@ namespace VTS.Web.Migrations
                     b.Property<long>("UnPaidSickness")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

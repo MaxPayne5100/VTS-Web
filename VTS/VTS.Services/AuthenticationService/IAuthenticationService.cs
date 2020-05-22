@@ -14,6 +14,6 @@ namespace VTS.Services.AuthenticationService
         /// <param name="id">Id.</param>
         /// <param name="email">Email.</param>
         /// <returns>User claims.</returns>
-        Task<ClaimsPrincipal> LogIn(uint id, string email);
+        Task<ClaimsPrincipal> LogIn(int id, string email);
     }
 }

@@ -25,10 +25,11 @@ namespace VTS.Repos.UsersVacationInfo
         }
 
         /// <inheritdoc />
-        public async Task<UserVacationInfo> FindByUserId(uint id)
+        public async Task<UserVacationInfo> FindByUserId(int id)
         {
             return await _dbContext.UsersVacationInfo
-                .SingleOrDefaultAsync(x => x.User.Id.Equals(id));
+                                   .Include(x => x.User)
+                                   .SingleOrDefaultAsync(x => x.User.Id.Equals(id));
         }
     }
 }

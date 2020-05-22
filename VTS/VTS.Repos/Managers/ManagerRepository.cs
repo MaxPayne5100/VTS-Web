@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VTS.DAL;
 using VTS.DAL.Entities;
@@ -9,7 +10,7 @@ namespace VTS.Repos.Managers
     /// <summary>
     /// Manager Repository.
     /// </summary>
-    public class ManagerRepository : GenericRepository<Manager, uint>, IManagerRepository
+    public class ManagerRepository : GenericRepository<Manager, int>, IManagerRepository
     {
         private readonly VTSDbContext _dbContext;
 
@@ -24,11 +25,19 @@ namespace VTS.Repos.Managers
         }
 
         /// <inheritdoc />
-        public async Task<Manager> FindManageByUserId(uint userId)
+        public async Task<Manager> FindManageByUserId(int userId)
         {
             return await _dbContext.Managers.Include(x => x.Head)
                                                 .ThenInclude(y => y.User)
                                             .SingleOrDefaultAsync(x => x.Head.UserId.Equals(userId));
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<Manager>> GetAllWithUserInfo()
+        {
+            return await _dbContext.Managers.Include(x => x.Head)
+                                                .ThenInclude(y => y.User)
+                                            .ToListAsync();
         }
     }
 }
