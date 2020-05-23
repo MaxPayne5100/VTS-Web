@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using VTS.Repos.Clerks;
 using VTS.Repos.Employees;
 using VTS.Repos.Heads;
+using VTS.Repos.Holidays;
 using VTS.Repos.Managers;
 using VTS.Repos.Users;
 using VTS.Repos.UsersVacationInfo;
@@ -44,6 +45,11 @@ namespace VTS.Repos.UnitOfWork
         /// Gets Head repository.
         /// </summary>
         public IHeadRepository Heads { get; }
+
+        /// <summary>
+        /// Gets Holiday repository.
+        /// </summary>
+        public IHolidayRepository Holidays { get; }
         #endregion
 
         /// <summary>

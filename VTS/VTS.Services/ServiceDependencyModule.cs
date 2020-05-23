@@ -1,5 +1,6 @@
 using Autofac;
 using VTS.Services.AuthenticationService;
+using VTS.Services.BookingService;
 using VTS.Services.EmployeeService;
 using VTS.Services.ManagerService;
 using VTS.Services.UserService;
@@ -28,6 +29,10 @@ namespace VTS.Services
                 .As<IEmployeeService>();
             builder.RegisterType<ManagerService.ManagerService>()
                 .As<IManagerService>();
+            builder.RegisterType<BookingService.BookingService>()
+                .As<IBookingService>();
+            builder.RegisterType<AbstractHandler>()
+                .As<IHandler>();
         }
     }
 }

@@ -18,6 +18,7 @@ namespace VTS.Services
             CreateMap<Core.DTO.Manager, DAL.Entities.Manager>();
             CreateMap<Core.DTO.Head, DAL.Entities.Head>();
             CreateMap<Core.DTO.UserVacationInfo, DAL.Entities.UserVacationInfo>();
+            CreateMap<Core.DTO.Holiday, DAL.Entities.Holiday>();
 
             // Entities -> DTO
             CreateMap<DAL.Entities.User, Core.DTO.User>();
@@ -25,6 +26,7 @@ namespace VTS.Services
             CreateMap<DAL.Entities.Employee, Core.DTO.Employee>();
             CreateMap<DAL.Entities.Manager, Core.DTO.Manager>();
             CreateMap<DAL.Entities.Head, Core.DTO.Head>();
+            CreateMap<DAL.Entities.Holiday, Core.DTO.Holiday>();
         }
     }
 }

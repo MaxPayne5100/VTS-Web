@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace VTS.Services.UserVacationInfoService
 {
@@ -27,5 +28,15 @@ namespace VTS.Services.UserVacationInfoService
         /// <param name="userVacationInfoDto">Updated UserVacationInfo data.</param>
         /// <returns>Task.</returns>
         Task UpdateVacationInfo(Core.DTO.UserVacationInfo userVacationInfoDto);
+
+        /// <summary>
+        /// Asynchronous update user's vacation info after booking.
+        /// </summary>
+        /// <param name="days">Days of holiday.</param>
+        /// <param name="category">Category.</param>
+        /// <param name="start">Start of holiday.</param>
+        /// <param name="userVacationInfoDto">UserVacationInfo data.</param>
+        /// <returns>Task.</returns>
+        Task AfterBookingUpdate(uint days, string category, DateTime start, Core.DTO.UserVacationInfo userVacationInfoDto);
     }
 }

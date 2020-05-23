@@ -312,6 +312,35 @@ a
   box-shadow: none !important;
 }
 
+.edit-button, .butt, .close-button {
+    color: white;
+    background: $edit_button_fill;
+    border: none;
+
+  border-radius: 0.2rem;
+  -webkit-transition: .4s ease-out;
+  -o-transition: .4s ease-out;
+  transition: .4s ease-out;
+
+  &:hover {
+    background: $edit_button_fill_hover;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.butt.white {
+    background: white;
+    color: black;
+
+    &:hover {
+        color: white;
+    background: $edit_button_fill_hover;
+    }
+}
+
 .footer
 {
     font-size: .9375rem;
