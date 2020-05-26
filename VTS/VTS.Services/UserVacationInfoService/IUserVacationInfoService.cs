@@ -38,5 +38,14 @@ namespace VTS.Services.UserVacationInfoService
         /// <param name="userVacationInfoDto">UserVacationInfo data.</param>
         /// <returns>Task.</returns>
         Task AfterBookingUpdate(uint days, string category, DateTime start, Core.DTO.UserVacationInfo userVacationInfoDto);
+
+        /// <summary>
+        /// Asynchronous update user's vacation info after delete booking.
+        /// </summary>
+        /// <param name="days">Days of holiday.</param>
+        /// <param name="category">Category.</param>
+        /// <param name="userVacationInfoDto">UserVacationInfo data.</param>
+        /// <returns>Task.</returns>
+        Task AfterDeleteBookingUpdate(uint days, string category, Core.DTO.UserVacationInfo userVacationInfoDto);
     }
 }

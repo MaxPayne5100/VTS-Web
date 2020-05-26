@@ -26,7 +26,7 @@ namespace VTS.Repos.Users
         Task<IEnumerable<User>> FindByRoleWithoutOwnData(string role, int id);
 
         /// <summary>
-        /// Find user with manager info by id.
+        /// Find user with all roles info by id.
         /// </summary>
         /// <param name="id">User identifier.</param>
         /// <returns>User.</returns>

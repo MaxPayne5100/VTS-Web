@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VTS.Core.Constants;
+using VTS.Services.BookingService;
 using VTS.Services.UserService;
 using VTS.Services.UserVacationInfoService;
 using VTS.Web.Models;
@@ -19,6 +20,7 @@ namespace VTS.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
         private readonly IUserVacationInfoService _userVacationInfoService;
+        private readonly IBookingService _bookingService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClerkController"/> class.
@@ -26,12 +28,14 @@ namespace VTS.Web.Controllers
         /// <param name="mapper">Automapper.</param>
         /// <param name="userService">Service for user logic.</param>
         /// <param name="userVacationInfoService">UserVacationInfo service.</param>
-        public ClerkController(IMapper mapper, IUserService userService, IUserVacationInfoService userVacationInfoService)
+        /// <param name="bookingService">Booking service.</param>
+        public ClerkController(IMapper mapper, IUserService userService, IUserVacationInfoService userVacationInfoService, IBookingService bookingService)
         {
             _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
             _userService = userService ?? throw new ArgumentException(nameof(userService));
             _userVacationInfoService = userVacationInfoService ?? throw new ArgumentException(nameof(userVacationInfoService));
-    }
+            _bookingService = bookingService ?? throw new ArgumentException(nameof(bookingService));
+        }
 
         /// <summary>
         /// Get method for calling users edit page.
@@ -194,6 +198,54 @@ namespace VTS.Web.Controllers
             else
             {
                 return PartialView("_EditUserPartial", model);
+            }
+        }
+
+        /// <summary>
+        /// Get method for calling booking approval page.
+        /// </summary>
+        /// <param name="startDate">Date after which booking should be found.</param>
+        /// <returns>IActionResult.</returns>
+        [HttpGet]
+        public async Task<IActionResult> BookingsApproval(DateTime? startDate)
+        {
+            var personalBookings = await _bookingService.FindAllBookingsByDate(startDate);
+            var model = new PersonalBookings() { StartDate = startDate, Bookings = personalBookings };
+            return View(model);
+        }
+
+        /// <summary>
+        /// Post method for approving booking.
+        /// </summary>
+        /// <param name="model">ApproveBookingModel.</param>
+        /// <returns>Task.</returns>
+        [HttpPost]
+        public async Task<IActionResult> BookingsApproval(ApproveBookingModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var modelDto = new Core.DTO.HolidayAcception() { Description = model.Description, Status = model.State };
+                    var id = int.Parse(User.FindFirst(ClaimKeys.Id).Value);
+
+                    var headDto = await _userService.FindWithHeadInfoById(id);
+                    modelDto.HeadId = headDto.Id;
+
+                    modelDto.HolidayId = model.Id;
+
+                    await _bookingService.Approve(modelDto);
+                    return RedirectToAction("BookingsApproval");
+                }
+                catch (ArgumentException e)
+                {
+                    ModelState.AddModelError(string.Empty, e.Message);
+                    return View(model);
+                }
+            }
+            else
+            {
+                return View(model);
             }
         }
     }

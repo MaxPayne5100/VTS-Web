@@ -3,6 +3,8 @@
 
 //colors
 $light_gray_color: rgba(255, 255, 255, 0.8);
+$gray: rgba(196, 196, 196, 0.4);
+$red: rgba(237, 33, 33, 0.9);
 
 body {
 	@include body_background(center bottom, $background_fill_darker, auto);
@@ -26,6 +28,44 @@ body {
 	background: white; 
 }
 
+.bookings-list-block {
+  width: 100%;
+  max-width: 68.75rem;
+  min-height: 25rem;
+  margin-bottom: 4rem;
+  border-radius: 0.2rem;
+  background: rgba(27, 29, 34, 0.85);
+ }
+
+.items-block {
+  background: $gray;
+  border-radius: 0.2rem;
+}
+
+p.status {
+	background: $block_info_fill;
+}
+
+.cancel-button {
+    border: 0.125rem solid $red;
+    border-radius: 0.1875rem;
+    background: none;
+    color: $red;
+
+		&:focus {
+		    outline: none;
+		}
+
+		&:hover {
+	    color: white;
+	    background: $red;
+	    opacity: 0.95;
+	    -webkit-transition: .35s ease-out;
+	    -o-transition: .35s ease-out;
+	    transition: .35s ease-out;
+		}
+}
+
 .manager-label {
 	width: 100%;
 	height: 100%;
@@ -45,6 +85,16 @@ body {
 	span:nth-child(1) {
     font-size: 1.2rem;
 	}
+}
+
+input {
+    border-radius: .1875rem;
+    outline: none;
+}	
+
+input[type=date] {
+  font-weight: bold;
+  border: 0.125rem solid $block_info_fill !important;
 }
 
 .footer {

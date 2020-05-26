@@ -3,6 +3,7 @@ using VTS.Repos.Clerks;
 using VTS.Repos.Employees;
 using VTS.Repos.Heads;
 using VTS.Repos.Holidays;
+using VTS.Repos.HolidaysAcception;
 using VTS.Repos.Managers;
 using VTS.Repos.Users;
 using VTS.Repos.UsersVacationInfo;
@@ -50,6 +51,11 @@ namespace VTS.Repos.UnitOfWork
         /// Gets Holiday repository.
         /// </summary>
         public IHolidayRepository Holidays { get; }
+
+        /// <summary>
+        /// Gets HolidaysAcception repository.
+        /// </summary>
+        public IHolidayAcceptionRepository HolidaysAcception { get; }
         #endregion
 
         /// <summary>

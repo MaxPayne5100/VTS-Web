@@ -1,4 +1,6 @@
-﻿using VTS.DAL;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using VTS.DAL;
 using VTS.DAL.Entities;
 using VTS.Repos.Generic;
 
@@ -19,6 +21,13 @@ namespace VTS.Repos.Heads
             : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        /// <inheritdoc />
+        public async Task<Head> FindHeadByUserId(int userId)
+        {
+            return await _dbContext.Heads.Include(x => x.User)
+                                         .SingleOrDefaultAsync(x => x.UserId.Equals(userId));
         }
     }
 }

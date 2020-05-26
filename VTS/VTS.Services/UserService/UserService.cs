@@ -263,5 +263,13 @@ namespace VTS.Services.UserService
 
             return userDto;
         }
+
+        /// <inheritdoc/>
+        public async Task<Core.DTO.Head> FindWithHeadInfoById(int id)
+        {
+            var head = await _unitOfWork.Heads.FindHeadByUserId(id);
+            var headDto = _mapper.Map<Core.DTO.Head>(head);
+            return headDto;
+        }
     }
 }

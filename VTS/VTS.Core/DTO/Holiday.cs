@@ -51,5 +51,10 @@ namespace VTS.Core.DTO
         /// Gets or sets submission time.
         /// </summary>
         public DateTime SubmissionTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets HolidayAcception.
+        /// </summary>
+        public HolidayAcception HolidayAcception { get; set; }
     }
 }

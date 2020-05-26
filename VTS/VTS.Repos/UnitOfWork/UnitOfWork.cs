@@ -27,6 +27,7 @@ namespace VTS.Repos.UnitOfWork
             Clerks = new Clerks.ClerkRepository(_dbContext);
             Heads = new Heads.HeadRepository(_dbContext);
             Holidays = new Holidays.HolidayRepository(_dbContext);
+            HolidaysAcception = new HolidaysAcception.HolidayAcceptionRepository(_dbContext);
         }
 
         #region Repositories
@@ -51,6 +52,9 @@ namespace VTS.Repos.UnitOfWork
 
         /// <inheritdoc />
         public Holidays.IHolidayRepository Holidays { get; }
+
+        /// <inheritdoc />
+        public HolidaysAcception.IHolidayAcceptionRepository HolidaysAcception { get; }
         #endregion
 
         /// <inheritdoc />

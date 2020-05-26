@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using VTS.Repos.UnitOfWork;
@@ -74,6 +75,55 @@ namespace VTS.Services.BookingService
             {
                 throw new ArgumentException($"Терміни відпустки неправильно вказані");
             }
+        }
+
+        /// <inheritdoc/>
+        public async Task Approve(Core.DTO.HolidayAcception holidayaccDto)
+        {
+            if (holidayaccDto.Status == "Прийняти")
+            {
+                holidayaccDto.Status = "Approved";
+            }
+            else if (holidayaccDto.Status == "Скасувати")
+            {
+                holidayaccDto.Status = "Canceled";
+            }
+
+            var bookingAcc = _mapper.Map<DAL.Entities.HolidayAcception>(holidayaccDto);
+            await _unitOfWork.HolidaysAcception.AddAsync(bookingAcc);
+            await _unitOfWork.CommitAsync();
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<Core.DTO.Holiday>> FindPersonalBookingsByDate(int userId, DateTime? startDate)
+        {
+            var bookings = await _unitOfWork.Holidays.FindPersonalBookingsByDate(userId, startDate);
+            var bookingDtos = _mapper.Map<IEnumerable<Core.DTO.Holiday>>(bookings);
+            return bookingDtos;
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<Core.DTO.Holiday>> FindAllBookingsByDate(DateTime? startDate)
+        {
+            var bookings = await _unitOfWork.Holidays.FindAllBookingsByDate(startDate);
+            var bookingDtos = _mapper.Map<IEnumerable<Core.DTO.Holiday>>(bookings);
+            return bookingDtos;
+        }
+
+        /// <inheritdoc/>
+        public async Task<Core.DTO.Holiday> FindPersonalBooking(Guid id)
+        {
+            var booking = await _unitOfWork.Holidays.FindPersonalBooking(id);
+            var bookingDtos = _mapper.Map<Core.DTO.Holiday>(booking);
+            return bookingDtos;
+        }
+
+        /// <inheritdoc/>
+        public async Task Remove(Guid id)
+        {
+            var booking = await _unitOfWork.Holidays.FindAsync(id);
+            _unitOfWork.Holidays.Remove(booking);
+            await _unitOfWork.CommitAsync();
         }
     }
 }
