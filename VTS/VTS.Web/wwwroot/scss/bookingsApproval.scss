@@ -8,23 +8,26 @@ body {
 	@include body_background(center bottom, $background_fill_darker, auto);
 }
 
-.info-block {
-	min-height: 22vh;
-	
-	@extend %header_info_block;
-}
-
-.user-name p {
-	background: $block_info_fill;
-	color: white;
-	border-radius: 0.1875rem;
-	font-size: 1.07rem;
-}
-
 textarea {
   border: none;
   outline: none;
   border-radius: 0.2rem;
   color: $gray;
   font-size: 0.9375rem;
+}
+
+.info-block {
+	min-height: 22vh;
+	
+	@extend %header_info_block;
+}
+
+.user-name {
+  p {
+    font-size: 1.07rem;
+
+    color: white;
+    border-radius: .1875rem;
+    background: $block_info_fill;
+  }
 }

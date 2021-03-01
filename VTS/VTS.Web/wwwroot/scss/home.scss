@@ -1,18 +1,32 @@
 @import "_const.scss";
 @import "background.scss";
 
-body {
-	@include body_background(center bottom, $background_fill_darker, auto);
-}
-
 //colors
 $vacation_number: rgba(237, 33, 33, 0.9);
 $gray: rgba(70, 70, 70, 0.9);
 
-%bold_roboto_slab
-{
-    font-family: $second_font;
-    font-weight: bold;
+%bold_roboto_slab {
+  font-family: $second_font;
+  font-weight: bold;
+}
+
+body {
+	@include body_background(center bottom, $background_fill_darker, auto);
+}
+
+input {
+  border-radius: .1875rem;
+  outline: none;
+}	
+
+textarea {
+	width: 100%;
+	min-height: 10rem;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  color: $gray;
+  font-size: 0.9375rem;
 }
 
 .info-block {
@@ -87,25 +101,10 @@ $gray: rgba(70, 70, 70, 0.9);
   background: rgba(27, 29, 34, 0.85);
 }
 
-span.count {
+.count {
 	@extend %bold_roboto_slab;
 	font-size: 1.1rem;
 	color: $vacation_number;
-}
-
-input {
-    border-radius: .1875rem;
-    outline: none;
-}	
-
-textarea {
-	width: 100%;
-	min-height: 10rem;
-  border: none;
-  outline: none;
-  border-radius: 0.2rem;
-  color: $gray;
-  font-size: 0.9375rem;
 }
 
 .footer {
@@ -114,10 +113,9 @@ textarea {
 
 @media (max-width: 768px)
 {
-    .info-block
-    {
-        span.skewed {
-        	display: none;
-        }
+  .info-block {
+    span.skewed {
+    	display: none;
     }
+  }
 }

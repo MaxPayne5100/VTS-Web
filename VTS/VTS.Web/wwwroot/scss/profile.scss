@@ -9,14 +9,12 @@ $profile_block_background_fill: rgba(27, 29, 34, .7);
 $submit_fill: rgb(20, 20, 20);
 $vacation_number: rgba(237, 33, 33, 0.9);
 
-%bold_roboto_slab
-{
-    font-family: $second_font;
-    font-weight: bold;
+%bold_roboto_slab {
+  font-family: $second_font;
+  font-weight: bold;
 }
 
-body
-{
+body {
 	@include body_background(center, $background_fill_darker);
 }
 
@@ -26,11 +24,10 @@ input {
 	outline: none;
 }
 
-h3
-{
-    @extend %bold_roboto_slab;
-    font-size: 1.625rem;
-    text-align: center;
+h3 {
+  @extend %bold_roboto_slab;
+  font-size: 1.625rem;
+  text-align: center;
 }
 
 .container-profile {
@@ -106,15 +103,15 @@ h3
 	}
 
 	&::before {
-	transition: all 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-	content: '';
-	width: 60%;
-	height: 100%;
-	background:  $submit_fill;
-	border-radius: 0.2rem;
-	position: absolute;
-	top: 0;
-	left: 0;
+		transition: all 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+		content: '';
+		width: 60%;
+		height: 100%;
+		background:  $submit_fill;
+		border-radius: 0.2rem;
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 	
 	& span {
@@ -123,8 +120,7 @@ h3
 	}
 
 	&:hover {
-		&::before
-		{
+		&::before {
 				background: $submit_fill;
 				width: 100%;
 		}
@@ -132,18 +128,17 @@ h3
 }
 
 .vac-info {
-		margin-top: 5rem;
+	margin-top: 5rem;
 
-		p 
-		{
-			font-size: 1.1rem;
+	p {
+		font-size: 1.1rem;
 
-			span {
-				@extend %bold_roboto_slab;
-				font-size: 1.3rem;
-				color: $vacation_number;
-			}
+		span {
+			@extend %bold_roboto_slab;
+			font-size: 1.3rem;
+			color: $vacation_number;
 		}
+	}
 }
 
 @media (max-width: 768px) {

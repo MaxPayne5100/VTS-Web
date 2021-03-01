@@ -10,6 +10,20 @@ body {
 	@include body_background(center bottom, $background_fill_darker, auto);
 }
 
+input {
+  border-radius: .1875rem;
+  outline: none;
+
+  &[type=date] {
+	  font-weight: bold;
+	  border: 0.125rem solid $block_info_fill !important;
+	}
+}	
+
+.status {
+	background: $block_info_fill;
+}
+
 .info-block {
 	min-height: 30vh;
 
@@ -42,28 +56,24 @@ body {
   border-radius: 0.2rem;
 }
 
-p.status {
-	background: $block_info_fill;
-}
-
 .cancel-button {
-    border: 0.125rem solid $red;
-    border-radius: 0.1875rem;
-    background: none;
-    color: $red;
+  border: 0.125rem solid $red;
+  border-radius: 0.1875rem;
+  background: none;
+  color: $red;
 
-		&:focus {
-		    outline: none;
-		}
+	&:focus {
+    outline: none;
+	}
 
-		&:hover {
-	    color: white;
-	    background: $red;
-	    opacity: 0.95;
-	    -webkit-transition: .35s ease-out;
-	    -o-transition: .35s ease-out;
-	    transition: .35s ease-out;
-		}
+	&:hover {
+    color: white;
+    background: $red;
+    opacity: 0.95;
+    -webkit-transition: .35s ease-out;
+    -o-transition: .35s ease-out;
+    transition: .35s ease-out;
+	}
 }
 
 .manager-label {
@@ -85,16 +95,6 @@ p.status {
 	span:nth-child(1) {
     font-size: 1.2rem;
 	}
-}
-
-input {
-    border-radius: .1875rem;
-    outline: none;
-}	
-
-input[type=date] {
-  font-weight: bold;
-  border: 0.125rem solid $block_info_fill !important;
 }
 
 .footer {

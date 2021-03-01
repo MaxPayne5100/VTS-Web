@@ -12,7 +12,7 @@
 * Open solution in Visual Studio 2019
 * Set connection string in appsettings.json
 * Restoring client side libraries
-* Set SCCB.Web project as Startup Project and build it.
+* Set VTS.Web project as Startup Project and build it.
 * In package manager console write `update-database`
 * Run! 📆
 
