@@ -30,7 +30,7 @@ namespace VTS.Services.UserService
             }
             else
             {
-                throw new ArgumentException($"Can not find user with id {id}");
+                throw new ArgumentException($"Неможливо найти користувача з id {id}");
             }
         }
 
@@ -114,7 +114,7 @@ namespace VTS.Services.UserService
             }
             else
             {
-                throw new ArgumentException($"User with email {userDto.Email} already exists");
+                throw new ArgumentException($"Користувач з email {userDto.Email} вже існує");
             }
         }
 
@@ -141,7 +141,7 @@ namespace VTS.Services.UserService
 
             if (user == null)
             {
-                throw new ArgumentException($"Can not find user with id {userDto.Id}");
+                throw new ArgumentException($"Неможливо найти користувача з id {userDto.Id}");
             }
 
             if (user.Email == userDto.Email || await CheckIfEmailAllowed(userDto.Email))
@@ -211,7 +211,7 @@ namespace VTS.Services.UserService
             }
             else
             {
-                throw new ArgumentException($"User with email {userDto.Email} already exists");
+                throw new ArgumentException($"Користувач з email {userDto.Email} вже існує");
             }
     }
 
@@ -231,7 +231,7 @@ namespace VTS.Services.UserService
             }
             else
             {
-                throw new ArgumentException($"User with email {userDto.Email} already exists");
+                throw new ArgumentException($"Користувач з email {userDto.Email} вже існує");
             }
         }
 
