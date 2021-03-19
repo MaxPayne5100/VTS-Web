@@ -40,7 +40,7 @@ namespace VTS.Web.Controllers
         public async Task<IActionResult> UsersEdit()
         {
             var userId = int.Parse(User.FindFirst(ClaimKeys.Id).Value);
-            var managerDto = await _managerService.FindManageByUserId(userId);
+            var managerDto = await _managerService.FindManagerByUserId(userId);
             return View(managerDto.Id);
         }
 

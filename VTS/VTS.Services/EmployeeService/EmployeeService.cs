@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using VTS.Repos.UnitOfWork;
@@ -28,16 +29,32 @@ namespace VTS.Services.EmployeeService
         public async Task<Core.DTO.Employee> FindEmployeeByUserId(int userId)
         {
             var employee = await _unitOfWork.Employees.FindEmployeeByUserId(userId);
-            var employeeDtos = _mapper.Map<Core.DTO.Employee>(employee);
-            return employeeDtos;
+
+            if (employee != null)
+            {
+                var employeeDto = _mapper.Map<Core.DTO.Employee>(employee);
+                return employeeDto;
+            }
+            else
+            {
+                throw new ArgumentException($"Неможливо найти працівника з id користувача {userId}");
+            }
         }
 
         /// <inheritdoc />
         public async Task<IEnumerable<Core.DTO.Employee>> FindByManagerId(int managerId)
         {
             var employees = await _unitOfWork.Employees.FindByManagerId(managerId);
-            var employeesDto = _mapper.Map<List<Core.DTO.Employee>>(employees);
-            return employeesDto;
+
+            if (employees != null)
+            {
+                var employeesDtos = _mapper.Map<List<Core.DTO.Employee>>(employees);
+                return employeesDtos;
+            }
+            else
+            {
+                return new List<Core.DTO.Employee>();
+            }
         }
     }
 }

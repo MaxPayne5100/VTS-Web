@@ -111,8 +111,8 @@ namespace VTS.Tests
             _employeeRepositoryMock.Setup(repo => repo.AddAsync(It.IsAny<Employee>())).Returns(Task.FromResult(0));
 
             _unitOfWorkMock = new Mock<IUnitOfWork>();
-            _unitOfWorkMock.Setup(uow => uow.Users).Returns(_repositoryMock.Object);
             _unitOfWorkMock.Setup(uow => uow.Employees).Returns(_employeeRepositoryMock.Object);
+            _unitOfWorkMock.Setup(uow => uow.Users).Returns(_repositoryMock.Object);
             _unitOfWorkMock.Setup(uow => uow.CommitAsync());
             #endregion
 

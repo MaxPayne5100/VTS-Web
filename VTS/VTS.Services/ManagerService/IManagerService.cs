@@ -13,7 +13,7 @@ namespace VTS.Services.ManagerService
         /// </summary>
         /// <param name="userId">User id.</param>
         /// <returns>Manager.</returns>
-        Task<Core.DTO.Manager> FindManageByUserId(int userId);
+        Task<Core.DTO.Manager> FindManagerByUserId(int userId);
 
         /// <summary>
         /// Get all managers.

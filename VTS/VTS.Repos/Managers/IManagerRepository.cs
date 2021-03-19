@@ -15,7 +15,7 @@ namespace VTS.Repos.Managers
         /// </summary>
         /// <param name="userId">User id.</param>
         /// <returns>Manager.</returns>
-        Task<Manager> FindManageByUserId(int userId);
+        Task<Manager> FindManagerByUserId(int userId);
 
         /// <summary>
         /// Get all managers with info about user.

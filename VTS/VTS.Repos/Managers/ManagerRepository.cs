@@ -25,7 +25,7 @@ namespace VTS.Repos.Managers
         }
 
         /// <inheritdoc />
-        public async Task<Manager> FindManageByUserId(int userId)
+        public async Task<Manager> FindManagerByUserId(int userId)
         {
             return await _dbContext.Managers.Include(x => x.Head)
                                                 .ThenInclude(y => y.User)
