@@ -30,7 +30,7 @@ namespace VTS.Services.UserService
             }
             else
             {
-                throw new ArgumentException($"Неможливо найти користувача з id {id}");
+                throw new ArgumentException($"Неможливо знайти користувача з id {id}");
             }
         }
 
@@ -141,7 +141,7 @@ namespace VTS.Services.UserService
 
             if (user == null)
             {
-                throw new ArgumentException($"Неможливо найти користувача з id {userDto.Id}");
+                throw new ArgumentException($"Неможливо знайти користувача з id {userDto.Id}");
             }
 
             if (user.Email == userDto.Email || await CheckIfEmailAllowed(userDto.Email))
@@ -262,14 +262,6 @@ namespace VTS.Services.UserService
             }
 
             return userDto;
-        }
-
-        /// <inheritdoc/>
-        public async Task<Core.DTO.Head> FindWithHeadInfoById(int id)
-        {
-            var head = await _unitOfWork.Heads.FindHeadByUserId(id);
-            var headDto = _mapper.Map<Core.DTO.Head>(head);
-            return headDto;
         }
     }
 }

@@ -76,10 +76,10 @@
 								class="w-100 p-0 selectpicker"
 								data-live-search="true" title="--Оберіть категорію відпуску--"
 								data-style="btn-light py-2 px-4">
-							<option>Оплачувана відпустка</option>
-							<option>Неоплачувана відпустка</option>
-							<option>Оплачуваний лікарняний</option>
-							<option>Неоплачуваний лікарняний</option>
+							<option>@VacationCategories.PaidDayOffs</option>
+                            <option>@VacationCategories.UnPaidDayOffs</option>
+							<option>@VacationCategories.PaidSickness</option>
+							<option>@VacationCategories.UnPaidDaySickness</option>
 						</select>
 						<span asp-validation-for="Category" class="field-validation-error"></span>
 					</div>

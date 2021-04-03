@@ -114,16 +114,24 @@ namespace VTS.Services.BookingService
         public async Task<Core.DTO.Holiday> FindPersonalBooking(Guid id)
         {
             var booking = await _unitOfWork.Holidays.FindPersonalBooking(id);
-            var bookingDtos = _mapper.Map<Core.DTO.Holiday>(booking);
-            return bookingDtos;
+            var bookingDto = _mapper.Map<Core.DTO.Holiday>(booking);
+            return bookingDto;
         }
 
         /// <inheritdoc/>
         public async Task Remove(Guid id)
         {
             var booking = await _unitOfWork.Holidays.FindAsync(id);
-            _unitOfWork.Holidays.Remove(booking);
-            await _unitOfWork.CommitAsync();
+
+            if (booking != null)
+            {
+                _unitOfWork.Holidays.Remove(booking);
+                await _unitOfWork.CommitAsync();
+            }
+            else
+            {
+                throw new ArgumentException($"Неможливо знайти відпустку з id (Guid){id}");
+            }
         }
     }
 }

@@ -1,10 +1,4 @@
 using Autofac;
-using VTS.Services.AuthenticationService;
-using VTS.Services.BookingService;
-using VTS.Services.EmployeeService;
-using VTS.Services.ManagerService;
-using VTS.Services.UserService;
-using VTS.Services.UserVacationInfoService;
 
 namespace VTS.Services
 {
@@ -20,19 +14,21 @@ namespace VTS.Services
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AuthenticationService.AuthenticationService>()
-                .As<IAuthenticationService>();
+                .As<AuthenticationService.IAuthenticationService>();
             builder.RegisterType<UserService.UserService>()
-                .As<IUserService>();
+                .As<UserService.IUserService>();
             builder.RegisterType<UserVacationInfoService.UserVacationInfoService>()
-                .As<IUserVacationInfoService>();
+                .As<UserVacationInfoService.IUserVacationInfoService>();
             builder.RegisterType<EmployeeService.EmployeeService>()
-                .As<IEmployeeService>();
+                .As<EmployeeService.IEmployeeService>();
+            builder.RegisterType<HeadService.HeadService>()
+                .As<HeadService.IHeadService>();
             builder.RegisterType<ManagerService.ManagerService>()
-                .As<IManagerService>();
+                .As<ManagerService.IManagerService>();
             builder.RegisterType<BookingService.BookingService>()
-                .As<IBookingService>();
-            builder.RegisterType<AbstractHandler>()
-                .As<IHandler>();
+                .As<BookingService.IBookingService>();
+            builder.RegisterType<BookingService.AbstractHandler>()
+                .As<BookingService.IHandler>();
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VTS.Core.Constants;
 using VTS.Services.BookingService;
+using VTS.Services.HeadService;
 using VTS.Services.UserService;
 using VTS.Services.UserVacationInfoService;
 using VTS.Web.Models;
@@ -19,6 +20,7 @@ namespace VTS.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
+        private readonly IHeadService _headService;
         private readonly IUserVacationInfoService _userVacationInfoService;
         private readonly IBookingService _bookingService;
 
@@ -27,12 +29,19 @@ namespace VTS.Web.Controllers
         /// </summary>
         /// <param name="mapper">Automapper.</param>
         /// <param name="userService">Service for user logic.</param>
+        /// <param name="headService">Service for head logic.</param>
         /// <param name="userVacationInfoService">UserVacationInfo service.</param>
         /// <param name="bookingService">Booking service.</param>
-        public ClerkController(IMapper mapper, IUserService userService, IUserVacationInfoService userVacationInfoService, IBookingService bookingService)
+        public ClerkController(
+            IMapper mapper,
+            IUserService userService,
+            IUserVacationInfoService userVacationInfoService,
+            IBookingService bookingService,
+            IHeadService headService)
         {
             _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
             _userService = userService ?? throw new ArgumentException(nameof(userService));
+            _headService = headService ?? throw new ArgumentException(nameof(headService));
             _userVacationInfoService = userVacationInfoService ?? throw new ArgumentException(nameof(userVacationInfoService));
             _bookingService = bookingService ?? throw new ArgumentException(nameof(bookingService));
         }
@@ -227,9 +236,9 @@ namespace VTS.Web.Controllers
                 try
                 {
                     var modelDto = new Core.DTO.HolidayAcception() { Description = model.Description, Status = model.State };
-                    var id = int.Parse(User.FindFirst(ClaimKeys.Id).Value);
+                    var userId = int.Parse(User.FindFirst(ClaimKeys.Id).Value);
 
-                    var headDto = await _userService.FindWithHeadInfoById(id);
+                    var headDto = await _headService.FindHeadByUserId(userId);
                     modelDto.HeadId = headDto.Id;
 
                     modelDto.HolidayId = model.Id;

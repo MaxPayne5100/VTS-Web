@@ -29,8 +29,8 @@ namespace VTS.Services.UserVacationInfoService
         public async Task<Core.DTO.UserVacationInfo> FindByUserId(int userId)
         {
             var usersVacationInfo = await _unitOfWork.UsersVacationInfo.FindByUserId(userId);
-            var usersVacationInfoDtos = _mapper.Map<Core.DTO.UserVacationInfo>(usersVacationInfo);
-            return usersVacationInfoDtos;
+            var usersVacationInfoDto = _mapper.Map<Core.DTO.UserVacationInfo>(usersVacationInfo);
+            return usersVacationInfoDto;
         }
 
         /// <inheritdoc />
@@ -84,18 +84,15 @@ namespace VTS.Services.UserVacationInfoService
 
             if (userVacationInfo != null)
             {
-                // average days in a month.
-                const double daysToMonths = 30.4368499;
-
                 var months = (start - userVacationInfoDto.StartedWorking).TotalDays;
-                months /= daysToMonths;
+                months /= GeneralConstants.DaysToMonths;
 
                 if (months < CompanyPolicy.MinExpInCompany)
                 {
                     throw new ArgumentException($"У вас замало досвіду в компанії щоб замовити відпустку");
                 }
 
-                if (category == "Оплачувана відпустка")
+                if (category == VacationCategories.PaidDayOffs)
                 {
                     if (days > userVacationInfo.PaidDayOffs)
                     {
@@ -107,7 +104,7 @@ namespace VTS.Services.UserVacationInfoService
                         userVacationInfo.PaidDayOffs = userVacationInfoDto.PaidDayOffs;
                     }
                 }
-                else if (category == "Неоплачувана відпустка")
+                else if (category == VacationCategories.UnPaidDayOffs)
                 {
                     if (days > userVacationInfo.UnPaidDayOffs)
                     {
@@ -119,7 +116,7 @@ namespace VTS.Services.UserVacationInfoService
                         userVacationInfo.UnPaidDayOffs = userVacationInfoDto.UnPaidDayOffs;
                     }
                 }
-                else if (category == "Оплачуваний лікарняний")
+                else if (category == VacationCategories.PaidSickness)
                 {
                     if (days > userVacationInfo.PaidSickness)
                     {
@@ -131,7 +128,7 @@ namespace VTS.Services.UserVacationInfoService
                         userVacationInfo.PaidSickness = userVacationInfoDto.PaidSickness;
                     }
                 }
-                else if (category == "Неоплачуваний лікарняний")
+                else if (category == VacationCategories.UnPaidDaySickness)
                 {
                     if (days > userVacationInfo.UnPaidSickness)
                     {
@@ -145,6 +142,7 @@ namespace VTS.Services.UserVacationInfoService
                 }
 
                 _unitOfWork.UsersVacationInfo.Update(userVacationInfo);
+                await _unitOfWork.CommitAsync();
             }
             else
             {
@@ -159,28 +157,33 @@ namespace VTS.Services.UserVacationInfoService
 
             if (userVacationInfo != null)
             {
-                if (category == "PaidDayOffs")
+                if (category == VacationCategories.PaidDayOffs)
                 {
                     userVacationInfoDto.PaidDayOffs += days;
                     userVacationInfo.PaidDayOffs = userVacationInfoDto.PaidDayOffs;
                 }
-                else if (category == "UnPaidDayOffs")
+                else if (category == VacationCategories.UnPaidDayOffs)
                 {
                     userVacationInfoDto.UnPaidDayOffs += days;
                     userVacationInfo.UnPaidDayOffs = userVacationInfoDto.UnPaidDayOffs;
                 }
-                else if (category == "PaidSickness")
+                else if (category == VacationCategories.PaidSickness)
                 {
                     userVacationInfoDto.PaidSickness += days;
                     userVacationInfo.PaidSickness = userVacationInfoDto.PaidSickness;
                 }
-                else if (category == "UnPaidSickness")
+                else if (category == VacationCategories.UnPaidDaySickness)
                 {
                     userVacationInfoDto.UnPaidSickness += days;
                     userVacationInfo.UnPaidSickness = userVacationInfoDto.UnPaidSickness;
                 }
 
                 _unitOfWork.UsersVacationInfo.Update(userVacationInfo);
+                await _unitOfWork.CommitAsync();
+            }
+            else
+            {
+                throw new ArgumentException($"Не знайдено ваші дані про відпуск");
             }
         }
     }

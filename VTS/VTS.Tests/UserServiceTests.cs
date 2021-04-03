@@ -122,7 +122,7 @@ namespace VTS.Tests
         /// <summary>
         /// Test new user addition.
         /// </summary>
-        /// <returns>User claims.</returns>
+        /// <returns>Task.</returns>
         [Test]
         public async Task Add_NewUser()
         {
@@ -155,7 +155,7 @@ namespace VTS.Tests
         /// <summary>
         /// Test user finding in db.
         /// </summary>
-        /// <returns>User claims.</returns>
+        /// <returns>User Dto.</returns>
         [Test]
         public async Task Find_RegisteredUser()
         {
@@ -180,39 +180,39 @@ namespace VTS.Tests
         {
             Assert.That(
                 () => _service.Find(_newUser.Id),
-                Throws.ArgumentException.With.Message.EqualTo($"Неможливо найти користувача з id {_newUser.Id}"));
+                Throws.ArgumentException.With.Message.EqualTo($"Неможливо знайти користувача з id {_newUser.Id}"));
         }
 
         /// <summary>
         /// Test finding users by role without own data.
         /// </summary>
-        /// <returns>List of users.</returns>
+        /// <returns>List of user Dtos.</returns>
         [Test]
         public async Task Find_Users_ByRole()
         {
             _registeredUser.Role = Roles.Employee;
 
-            var usersDto = await _service.FindByRoleWithoutOwnData(_registeredUser.Role, _registeredUser.Id);
+            var usersDtos = await _service.FindByRoleWithoutOwnData(_registeredUser.Role, _registeredUser.Id);
 
             Assert.That(
-                usersDto.First().Role,
+                usersDtos.First().Role,
                 Is.EqualTo(_registeredUser.Role));
 
             Assert.That(
-                usersDto.First().Id,
+                usersDtos.First().Id,
                 Is.EqualTo(_registeredUser.Id));
 
             Assert.That(
-                usersDto.Last().Id,
+                usersDtos.Last().Id,
                 Is.EqualTo(_registeredUser2.Id));
 
-            Assert.AreEqual(usersDto.Count(), 2);
+            Assert.AreEqual(usersDtos.Count(), 2);
         }
 
         /// <summary>
         /// Test finding users by null role without own data.
         /// </summary>
-        /// <returns>List of users.</returns>
+        /// <returns>List of user Dtos.</returns>
         [Test]
         public async Task Find_Users_ByNullRole()
         {
@@ -249,7 +249,7 @@ namespace VTS.Tests
         {
             Assert.That(
                 () => _service.Remove(_newUser.Id),
-                Throws.ArgumentException.With.Message.EqualTo($"Неможливо найти користувача з id {_newUser.Id}"));
+                Throws.ArgumentException.With.Message.EqualTo($"Неможливо знайти користувача з id {_newUser.Id}"));
         }
 
         /// <summary>
@@ -308,7 +308,7 @@ namespace VTS.Tests
 
             Assert.That(
                 () => _service.Update(userDto),
-                Throws.ArgumentException.With.Message.EqualTo($"Неможливо найти користувача з id {_newUser.Id}"));
+                Throws.ArgumentException.With.Message.EqualTo($"Неможливо знайти користувача з id {_newUser.Id}"));
         }
 
         /// <summary>

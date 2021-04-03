@@ -57,12 +57,5 @@ namespace VTS.Services.UserService
         /// <param name="id">User identifier.</param>
         /// <returns>User.</returns>
         Task<Core.DTO.User> FindWithManagerInfoById(int id);
-
-        /// <summary>
-        /// Find head by user id.
-        /// </summary>
-        /// <param name="id">User identifier.</param>
-        /// <returns>Head.</returns>
-        Task<Core.DTO.Head> FindWithHeadInfoById(int id);
     }
 }
