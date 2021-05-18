@@ -57,46 +57,49 @@
 			</button>
 		</div>
 		<div class="block-bg py-5 px-5 wow fadeIn" data-wow-duration="2s">
-			<form asp-action="Index" method="post">
-				<div asp-validation-summary="ModelOnly" class="field-validation-error"></div>
-				<div class="d-flex flex-column flex-lg-row justify-content-between align-items-center mb-4">
-					<div class="col-12 col-md-10 col-lg-4 p-0 mb-3 mb-lg-0">
-						<label asp-for="Start" class="ml-2">Вкажіть початок відпустки</label>
-						<input asp-for="Start" type="date" id="firstDateId" class="w-100 pl-3 py-2 border" />
-						<span asp-validation-for="Start" class="field-validation-error"></span>
-					</div>
-					<div class="col-12 col-md-10 col-lg-4 p-0 ml-0 ml-lg-3 mb-3 mb-lg-0">
-						<label asp-for="Expires" class="ml-2">Вкажіть завершення відпустки</label>
-						<input asp-for="Expires" type="date" id="secondDateId" class="w-100 pl-3 py-2 border" />
-						<span asp-validation-for="Expires" class="field-validation-error"></span>
-					</div>
-					<div class="col-12 col-md-10 col-lg-4 mb-3 mb-lg-0 p-0 p-lg-3">
-						<label asp-for="Category" class="ml-2">Вкажіть категорію відпустки</label>
-						<select asp-for="Category"
-								class="w-100 p-0 selectpicker"
-								data-live-search="true" title="--Оберіть категорію відпуску--"
-								data-style="btn-light py-2 px-4">
-							<option>@VacationCategories.PaidDayOffs</option>
-                            <option>@VacationCategories.UnPaidDayOffs</option>
-							<option>@VacationCategories.PaidSickness</option>
-							<option>@VacationCategories.UnPaidDaySickness</option>
-						</select>
-						<span asp-validation-for="Category" class="field-validation-error"></span>
-					</div>
-				</div>
-				<div class="row mt-4 mb-2">
-					<div class="w-100 mx-3">
-						<label asp-for="Description" class="ml-2">Вкажіть коментар для бронювання відпустки</label>
-						<textarea asp-for="Description" class="px-3 py-2">Добавте ваш коментар...</textarea>
-						<span asp-validation-for="Description" class="field-validation-error"></span>
-					</div>
-				</div>
-				<div class="d-flex justify-content-sm-end justify-content-center">
-					<button class="butt px-4 py-2 mt-4">
-						Забронювати
-					</button>
-				</div>
-			</form>
+            <form asp-action="Index" method="post" name="main-form">
+                <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                <div asp-validation-summary="ModelOnly" class="field-validation-error"></div>
+                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center mb-4">
+                    <div class="col-12 col-md-10 col-lg-4 p-0 mb-3 mb-lg-0">
+                        <label asp-for="Start" class="ml-2">Вкажіть початок відпустки</label>
+                        <input asp-for="Start" type="date" id="firstDateId" class="w-100 pl-3 py-2 border" />
+                        <span asp-validation-for="Start" class="field-validation-error"></span>
+                    </div>
+                    <div class="col-12 col-md-10 col-lg-4 p-0 ml-0 ml-lg-3 mb-3 mb-lg-0">
+                        <label asp-for="Expires" class="ml-2">Вкажіть завершення відпустки</label>
+                        <input asp-for="Expires" type="date" id="secondDateId" class="w-100 pl-3 py-2 border" />
+                        <span asp-validation-for="Expires" class="field-validation-error"></span>
+                    </div>
+                    <div class="col-12 col-md-10 col-lg-4 mb-3 mb-lg-0 p-0 p-lg-3">
+                        <label asp-for="Category" class="ml-2">Вкажіть категорію відпустки</label>
+                        <select asp-for="Category"
+                                class="w-100 p-0 selectpicker"
+                                data-live-search="true" title="--Оберіть категорію відпуску--"
+                                data-style="btn-light py-2 px-4">
+                            <option>Оплачувана відпустка</option>
+                            <option>Неоплачувана відпустка</option>
+                            <option>Оплачуваний лікарняний</option>
+                            <option>Неоплачуваний лікарняний</option>
+                        </select>
+                        <span asp-validation-for="Category" class="field-validation-error" id="input-validation-error"></span>
+                    </div>
+                </div>
+                <div class="row mt-4 mb-2">
+                    <div class="w-100 mx-3">
+                        <label asp-for="Description" class="ml-2">Вкажіть коментар для бронювання відпустки</label>
+                        <textarea asp-for="Description" class="px-3 py-2">Добавте ваш коментар...</textarea>
+                        <span asp-validation-for="Description" class="field-validation-error"></span>
+                    </div>
+                </div>
+                <div class="d-flex flex-sm-row justify-content-sm-between
+					 justify-content-center flex-column mt-4">
+                    <button type="button" class="clear-all py-2 px-3">Очистити все</button>
+                    <button class="butt px-4 py-2 mt-sm-0 mt-3">
+                        Забронювати
+                    </button>
+                </div>
+            </form>
 		</div>
 	</div>
 </div>
@@ -153,6 +156,7 @@
 @section Scripts {
 	<script src="~/js/skewOnScroll.js" asp-append-version="true"></script>
 	<script src="~/js/booking.js" asp-append-version="true"></script>
+    <script src="~/js/resetButton.js" asp-append-version="true"></script>
 	<script src="~/lib/wow.js/js/wow.min.js" asp-append-version="true"></script>
 	<script>
 		new WOW().init();

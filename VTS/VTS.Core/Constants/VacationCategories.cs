@@ -8,21 +8,21 @@
         /// <summary>
         /// Paid day offs category name.
         /// </summary>
-        public const string PaidDayOffs = "Оплачувана відпустка";
+        public const string PaidDayOffs = "PaidDayOffs";
 
         /// <summary>
         /// Unpaid day offs category name.
         /// </summary>
-        public const string UnPaidDayOffs = "Неоплачувана відпустка";
+        public const string UnPaidDayOffs = "UnPaidDayOffs";
 
         /// <summary>
         /// Paid sickness category name.
         /// </summary>
-        public const string PaidSickness = "Оплачуваний лікарняний";
+        public const string PaidSickness = "PaidSickness";
 
         /// <summary>
         /// Unpaid sickness category name.
         /// </summary>
-        public const string UnPaidDaySickness = "Неоплачуваний лікарняний";
+        public const string UnPaidSickness = "UnPaidSickness";
     }
 }

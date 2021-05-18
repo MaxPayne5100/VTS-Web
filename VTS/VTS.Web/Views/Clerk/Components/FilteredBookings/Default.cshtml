@@ -1,9 +1,10 @@
 ﻿@model ApproveBookingModel
 
 <div class="mt-2">
-    <form asp-action="BookingsApproval" method="post">
+    <form asp-action="BookingsApproval" name="approve-form" method="post">
         <div asp-validation-summary="ModelOnly" class="field-validation-error"></div>
         <input asp-for="Id" type="hidden" />
+        <input asp-for="UserId" id="HiddenField" type="hidden" />
         <div class="d-flex flex-column w-100">
             <label asp-for="Description" class="ml-2">Вкажіть коментар для підтвердження/скасування відпустки</label>
             <textarea asp-for="Description" class="px-3 py-2">Добавте ваш коментар...</textarea>
@@ -12,7 +13,7 @@
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-end">
             <div class="col-12 col-sm-6 p-0 mt-1">
                 <label asp-for="State" class="ml-2">Вкажіть статус відпустки</label>
-                <select asp-for="State"
+                <select asp-for="State" id="StateSelect"
                         class="w-100 p-0 selectpicker"
                         data-live-search="true" title="--Оберіть статус відпустки--"
                         data-style="btn-light py-2 px-4">

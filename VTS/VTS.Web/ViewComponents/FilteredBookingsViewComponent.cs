@@ -29,7 +29,7 @@ namespace VTS.Web.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(Guid id)
         {
             var bookingDto = await _bookingService.FindPersonalBooking(id);
-            var model = new Models.ApproveBookingModel() { Id = bookingDto.Id };
+            var model = new Models.ApproveBookingModel() { Id = bookingDto.Id, UserId = bookingDto.UserId };
             return View(model);
         }
     }

@@ -1,6 +1,6 @@
 ﻿//js code for home page frontend logic
 $(document).ready(function () {
-    $(".input-validation-error").parent().css('margin-top', 20);
+    $("$input-validation-error").parent().css('margin-top', 20);
 
     var today = new Date();
     var dd = today.getDate();

@@ -9,6 +9,11 @@ namespace VTS.Web.Models
     public class ApproveBookingModel
     {
         /// <summary>
+        /// Gets or sets user id [to be notified].
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
         /// Gets or sets holiday id.
         /// </summary>
         public Guid Id { get; set; }

@@ -14,6 +14,30 @@ namespace VTS.Services.UserVacationInfoService
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
+        private string MapToEnum(string dtoCategory)
+        {
+            if (dtoCategory == "Оплачувана відпустка")
+            {
+                return "PaidDayOffs";
+            }
+            else if (dtoCategory == "Неоплачувана відпустка")
+            {
+                return "UnPaidDayOffs";
+            }
+            else if (dtoCategory == "Оплачуваний лікарняний")
+            {
+                return "PaidSickness";
+            }
+            else if (dtoCategory == "Неоплачуваний лікарняний")
+            {
+                return "UnPaidSickness";
+            }
+            else
+            {
+                return dtoCategory;
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UserVacationInfoService"/> class.
         /// </summary>
@@ -82,6 +106,8 @@ namespace VTS.Services.UserVacationInfoService
         {
             var userVacationInfo = await _unitOfWork.UsersVacationInfo.FindByUserId(userVacationInfoDto.UserId);
 
+            category = MapToEnum(category);
+
             if (userVacationInfo != null)
             {
                 var months = (start - userVacationInfoDto.StartedWorking).TotalDays;
@@ -128,7 +154,7 @@ namespace VTS.Services.UserVacationInfoService
                         userVacationInfo.PaidSickness = userVacationInfoDto.PaidSickness;
                     }
                 }
-                else if (category == VacationCategories.UnPaidDaySickness)
+                else if (category == VacationCategories.UnPaidSickness)
                 {
                     if (days > userVacationInfo.UnPaidSickness)
                     {
@@ -155,6 +181,8 @@ namespace VTS.Services.UserVacationInfoService
         {
             var userVacationInfo = await _unitOfWork.UsersVacationInfo.FindByUserId(userVacationInfoDto.UserId);
 
+            category = MapToEnum(category);
+
             if (userVacationInfo != null)
             {
                 if (category == VacationCategories.PaidDayOffs)
@@ -172,7 +200,7 @@ namespace VTS.Services.UserVacationInfoService
                     userVacationInfoDto.PaidSickness += days;
                     userVacationInfo.PaidSickness = userVacationInfoDto.PaidSickness;
                 }
-                else if (category == VacationCategories.UnPaidDaySickness)
+                else if (category == VacationCategories.UnPaidSickness)
                 {
                     userVacationInfoDto.UnPaidSickness += days;
                     userVacationInfo.UnPaidSickness = userVacationInfoDto.UnPaidSickness;

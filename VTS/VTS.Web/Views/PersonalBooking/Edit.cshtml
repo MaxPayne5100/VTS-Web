@@ -51,11 +51,12 @@
 <div class="main-content text-dark pb-5 d-flex flex-column justify-content-center align-items-center">
     @if (User.IsInRole(Roles.Employee))
     {
-        @await Component.InvokeAsync("EmployeeManager", new { id = Model.Bookings.FirstOrDefault().UserId });
+        @await Component.InvokeAsync("EmployeeManager", new { id = Model.Bookings.SingleOrDefault().UserId });
     }
     <div class="bookings-list-block mt-5 py-4 px-5">
-        <div class="mb-4">
+        <div class="mt-2 mb-4">
             <form asp-action="Edit" method="get" class="col-6 col-sm-4 col-md-3 p-0">
+                <label asp-for="StartDate" class="ml-2">Вкажіть початок відпустки</label>
                 <input asp-for="StartDate" type="date" class="w-100 pl-3 py-2 border" onchange="this.form.submit()" />
             </form>
         </div>
@@ -77,19 +78,19 @@
                             <span>Відпуск (@booking.Start.ToShortDateString() - @booking.Expires.ToShortDateString())</span>
                         </div>
                         <div class="mr-sm-4">
-                            @if (@booking.Category == "PaidDayOffs")
+                            @if (@booking.Category == VacationCategories.PaidDayOffs)
                             {
                                 <span>Тип: Оплачувана відпустка</span>
                             }
-                            else if (@booking.Category == "UnPaidDayOffs")
+                            else if (@booking.Category == VacationCategories.UnPaidDayOffs)
                             {
                                 <span>Тип: Неоплачувана відпустка</span>
                             }
-                            else if (@booking.Category == "PaidSickness")
+                            else if (@booking.Category == VacationCategories.PaidSickness)
                             {
                                 <span>Тип: Оплачуваний лікарняний</span>
                             }
-                            else if (@booking.Category == "UnPaidSickness")
+                            else if (@booking.Category == VacationCategories.UnPaidSickness)
                             {
                                 <span>Тип: Неоплачуваний лікарняний</span>
                             }
@@ -158,7 +159,7 @@
             </div>
             <div class="modal-body d-flex justify-content-center">
                 <button type="button" class="close-button px-3 py-1 mr-3">
-                    Видалити
+                   Скасувати
                 </button>
                 <button type="button" class="butt white px-3 py-1" data-dismiss="modal">Закрити</button>
             </div>

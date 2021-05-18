@@ -258,7 +258,7 @@ namespace VTS.Tests
         {
             var userVacationInfoDto = _mapper.Map<Core.DTO.UserVacationInfo>(_newUserVacationInfo);
             uint days = 7;
-            string category = VacationCategories.UnPaidDaySickness;
+            string category = VacationCategories.UnPaidSickness;
             DateTime start = DateTime.Today.AddDays(5);
 
             Assert.That(

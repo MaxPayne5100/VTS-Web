@@ -70,6 +70,11 @@ namespace VTS.Web.Controllers
                     ModelState.AddModelError(string.Empty, e.Message);
                     return View(model);
                 }
+                catch (OverflowException)
+                {
+                    ModelState.AddModelError(string.Empty, "Неправильно введено тривалість відпустки");
+                    return View(model);
+                }
             }
             else
             {

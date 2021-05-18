@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ using VTS.Core.Settings;
 using VTS.DAL;
 using VTS.Repos;
 using VTS.Services;
+using VTS.Web.Hubs;
 
 namespace VTS.Web
 {
@@ -94,6 +96,9 @@ namespace VTS.Web
                 typeof(ServiceMapProfile).Assembly,
                 typeof(WebApiMapProfile).Assembly);
 
+            services.AddSignalR();
+            services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
+
             var builder = new ContainerBuilder();
 
             builder.Populate(services);
@@ -148,6 +153,7 @@ namespace VTS.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Authentication}/{action=LogIn}/{id?}");
+                endpoints.MapHub<BookingHub>("/bookingHub");
             });
         }
     }
