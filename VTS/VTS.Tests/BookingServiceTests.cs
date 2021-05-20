@@ -118,12 +118,22 @@ namespace VTS.Tests
             _repositoryMock.Setup(repo => repo.FindAsync(_registeredholiday.Id)).ReturnsAsync(_registeredholiday);
             _repositoryMock.Setup(repo => repo.FindPersonalBookingsByDate(_registeredUser.Id, It.IsAny<DateTime>()))
                 .ReturnsAsync((List<Holiday>)null);
+
             _repositoryMock.Setup(repo => repo.FindPersonalBookingsByDate(_registeredUser.Id, _registeredholiday.Start))
                 .ReturnsAsync(new List<Holiday> { _registeredholiday });
+            _repositoryMock.Setup(repo => repo.FindPersonalBookingsByDateAndCategoryAndStatus(
+                _registeredUser.Id,
+                _registeredholiday.Start,
+                _registeredholiday.Category.ToString(),
+                _registeredholidayacception.Status.ToString()))
+                .ReturnsAsync(new List<Holiday> { _registeredholiday });
             _repositoryMock.Setup(repo => repo.FindPersonalBooking(_registeredholiday.Id)).ReturnsAsync(_registeredholiday);
-            _repositoryMock.Setup(repo => repo.FindAllBookingsByDate(It.IsAny<DateTime>()))
-                .ReturnsAsync((List<Holiday>)null);
+
             _repositoryMock.Setup(repo => repo.FindAllBookingsByDate(_registeredholiday.Start))
+                .ReturnsAsync(new List<Holiday> { _registeredholiday });
+            _repositoryMock.Setup(repo => repo.FindAllBookingsWithIncludedInfo(
+                _registeredholiday.Start,
+                _registeredholiday.Category.ToString()))
                 .ReturnsAsync(new List<Holiday> { _registeredholiday });
 
             _holidayacceptionRepositoryMock = new Mock<IHolidayAcceptionRepository>();
@@ -283,6 +293,32 @@ namespace VTS.Tests
         }
 
         /// <summary>
+        /// Test all holiday bookings finding by date and category in db.
+        /// </summary>
+        /// <returns>Holiday Dtos.</returns>
+        [Test]
+        public async Task Find_AllBookings_ByDateAndCategory()
+        {
+            var holidayDtos = await _service.FindAllBookingsWithIncludedInfo(
+                _registeredholiday.Start,
+                _registeredholiday.Category.ToString());
+
+            Assert.That(
+                holidayDtos.First().Id,
+                Is.EqualTo(_registeredholiday.Id));
+
+            Assert.That(
+                holidayDtos.First().Start,
+                Is.EqualTo(_registeredholiday.Start));
+
+            Assert.That(
+                holidayDtos.First().Category,
+                Is.EqualTo(_registeredholiday.Category.ToString()));
+
+            Assert.AreEqual(holidayDtos.Count(), 1);
+        }
+
+        /// <summary>
         /// Test personal holiday bookings finding by user id and date in db.
         /// </summary>
         /// <returns>Holiday Dtos.</returns>
@@ -300,6 +336,38 @@ namespace VTS.Tests
             Assert.That(
                 holidayDtos.First().Start,
                 Is.EqualTo(_registeredholiday.Start));
+
+            Assert.AreEqual(holidayDtos.Count(), 1);
+        }
+
+        /// <summary>
+        /// Test personal holiday bookings finding by user id, date and category in db.
+        /// </summary>
+        /// <returns>Holiday Dtos.</returns>
+        [Test]
+        public async Task Find_PersonalBookings_ByDateAndCategoryAndStatus()
+        {
+            var holidayDtos = await _service.FindPersonalBookingsByDateAndCategoryAndStatus(
+                _registeredholiday.UserId,
+                _registeredholiday.Start,
+                _registeredholiday.Category.ToString(),
+                _registeredholiday.HolidayAcception.Status.ToString());
+
+            Assert.That(
+                holidayDtos.First().Id,
+                Is.EqualTo(_registeredholiday.Id));
+
+            Assert.That(
+                holidayDtos.First().Start,
+                Is.EqualTo(_registeredholiday.Start));
+
+            Assert.That(
+                holidayDtos.First().Category,
+                Is.EqualTo(_registeredholiday.Category.ToString()));
+
+            Assert.That(
+                holidayDtos.First().HolidayAcception.Status,
+                Is.EqualTo(_registeredholiday.HolidayAcception.Status.ToString()));
 
             Assert.AreEqual(holidayDtos.Count(), 1);
         }

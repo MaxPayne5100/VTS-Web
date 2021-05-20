@@ -41,6 +41,39 @@ namespace VTS.Repos.Holidays
         }
 
         /// <inheritdoc/>
+        public async Task<IEnumerable<Holiday>> FindPersonalBookingsByDateAndCategoryAndStatus(
+            int userId,
+            DateTime? startDate,
+            string category,
+            string status)
+        {
+            var bookings = _dbContext.Holidays.Include(x => x.HolidayAcception)
+                                              .Where(x => x.UserId.Equals(userId));
+
+            if (startDate != null)
+            {
+                bookings = bookings.Where(x => x.Start >= startDate);
+            }
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                Holiday.Categories result = (Holiday.Categories)Enum.Parse(typeof(Holiday.Categories), category);
+
+                bookings = bookings.Where(x => x.Category == result);
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                HolidayAcception.StatusType result =
+                    (HolidayAcception.StatusType)Enum.Parse(typeof(HolidayAcception.StatusType), status);
+
+                bookings = bookings.Where(x => x.HolidayAcception.Status == result);
+            }
+
+            return await bookings.OrderBy(x => x.SubmissionTime).ToListAsync();
+        }
+
+        /// <inheritdoc/>
         public async Task<IEnumerable<Holiday>> FindAllBookingsByDate(DateTime? startDate)
         {
             if (startDate != null)
@@ -59,6 +92,28 @@ namespace VTS.Repos.Holidays
 
                 return await bookings.OrderBy(x => x.SubmissionTime).ToListAsync();
             }
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<Holiday>> FindAllBookingsWithIncludedInfo(DateTime? startDate, string category)
+        {
+            var bookings = _dbContext.Holidays.Include(x => x.HolidayAcception)
+                                              .Include(x => x.User)
+                                              .Where(x => x.HolidayAcception == null);
+
+            if (startDate != null)
+            {
+                bookings = bookings.Where(x => x.Start >= startDate);
+            }
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                Holiday.Categories result = (Holiday.Categories)Enum.Parse(typeof(Holiday.Categories), category);
+
+                bookings = bookings.Where(x => x.Category == result);
+            }
+
+            return await bookings.OrderBy(x => x.SubmissionTime).ToListAsync();
         }
 
         /// <inheritdoc/>

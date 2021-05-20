@@ -15,19 +15,16 @@ namespace VTS.Web.Controllers
     [Authorize]
     public class PersonalBookingController : Controller
     {
-        private readonly IMapper _mapper;
         private readonly IBookingService _bookingService;
         private readonly IUserVacationInfoService _userVacationInfoService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonalBookingController"/> class.
         /// </summary>
-        /// <param name="mapper">Automapper.</param>
         /// <param name="bookingService">Booking service.</param>
         /// <param name="userVacationInfoService">UserVacationInfo service.</param>
-        public PersonalBookingController(IMapper mapper, IBookingService bookingService, IUserVacationInfoService userVacationInfoService)
+        public PersonalBookingController(IBookingService bookingService, IUserVacationInfoService userVacationInfoService)
         {
-            _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
             _bookingService = bookingService ?? throw new ArgumentException(nameof(bookingService));
             _userVacationInfoService = userVacationInfoService ?? throw new ArgumentException(nameof(userVacationInfoService));
         }
@@ -35,14 +32,27 @@ namespace VTS.Web.Controllers
         /// <summary>
         /// Personal bookings edit get method.
         /// </summary>
-        /// <param name="startDate">Date after which booking should be found.</param>
+        /// <param name="startDate">Date after which bookings should be found.</param>
+        /// <param name="category">Category in which bookings should be found.</param>
+        /// <param name="status">Status on which bookings should be found.</param>
         /// <returns>IActionResult.</returns>
         [HttpGet]
-        public async Task<IActionResult> Edit(DateTime? startDate)
+        public async Task<IActionResult> Edit(DateTime? startDate, string category, string status)
         {
             var userId = int.Parse(User.FindFirst(ClaimKeys.Id).Value);
-            var personalBookings = await _bookingService.FindPersonalBookingsByDate(userId, startDate);
-            var model = new Models.PersonalBookings() { StartDate = startDate, Bookings = personalBookings };
+            var personalBookings = await _bookingService.FindPersonalBookingsByDateAndCategoryAndStatus(
+                userId,
+                startDate,
+                category,
+                status);
+
+            var model = new Models.PersonalBookings()
+            {
+                StartDate = startDate,
+                Category = category,
+                Status = status,
+                Bookings = personalBookings,
+            };
             return View(model);
         }
 

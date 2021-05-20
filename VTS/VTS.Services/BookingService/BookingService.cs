@@ -12,7 +12,7 @@ namespace VTS.Services.BookingService
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        private string MapToEnum(string dtoCategory)
+        private string MapToEnumCategory(string dtoCategory)
         {
             if (dtoCategory == "Оплачувана відпустка")
             {
@@ -33,6 +33,22 @@ namespace VTS.Services.BookingService
             else
             {
                 return dtoCategory;
+            }
+        }
+
+        private string MapToEnumStatus(string dtoStatus)
+        {
+            if (dtoStatus == "Підтверджено" || dtoStatus == "Прийняти")
+            {
+                return "Approved";
+            }
+            else if (dtoStatus == "Скасовано" || dtoStatus == "Скасувати")
+            {
+                return "Cancelled";
+            }
+            else
+            {
+                return dtoStatus;
             }
         }
 
@@ -57,7 +73,7 @@ namespace VTS.Services.BookingService
                 bookingDto.Hours = Convert.ToUInt32(hours);
                 bookingDto.SubmissionTime = DateTime.Now;
 
-                bookingDto.Category = MapToEnum(bookingDto.Category);
+                bookingDto.Category = MapToEnumCategory(bookingDto.Category);
 
                 var paidDayOffs = new PaidDayOffs();
                 var unpaidDayOffs = new UnPaidDayOffs();
@@ -80,14 +96,7 @@ namespace VTS.Services.BookingService
         /// <inheritdoc/>
         public async Task Approve(Core.DTO.HolidayAcception holidayaccDto)
         {
-            if (holidayaccDto.Status == "Прийняти")
-            {
-                holidayaccDto.Status = "Approved";
-            }
-            else if (holidayaccDto.Status == "Скасувати")
-            {
-                holidayaccDto.Status = "Canceled";
-            }
+            holidayaccDto.Status = MapToEnumStatus(holidayaccDto.Status);
 
             var bookingAcc = _mapper.Map<DAL.Entities.HolidayAcception>(holidayaccDto);
             await _unitOfWork.HolidaysAcception.AddAsync(bookingAcc);
@@ -103,9 +112,42 @@ namespace VTS.Services.BookingService
         }
 
         /// <inheritdoc/>
+        public async Task<IEnumerable<Core.DTO.Holiday>> FindPersonalBookingsByDateAndCategoryAndStatus(
+            int userId,
+            DateTime? startDate,
+            string category,
+            string status)
+        {
+            category = MapToEnumCategory(category);
+            status = MapToEnumStatus(status);
+
+            var bookings = await _unitOfWork.Holidays.FindPersonalBookingsByDateAndCategoryAndStatus(
+                userId,
+                startDate,
+                category,
+                status);
+
+            var bookingDtos = _mapper.Map<IEnumerable<Core.DTO.Holiday>>(bookings);
+
+            return bookingDtos;
+        }
+
+        /// <inheritdoc/>
         public async Task<IEnumerable<Core.DTO.Holiday>> FindAllBookingsByDate(DateTime? startDate)
         {
             var bookings = await _unitOfWork.Holidays.FindAllBookingsByDate(startDate);
+            var bookingDtos = _mapper.Map<IEnumerable<Core.DTO.Holiday>>(bookings);
+            return bookingDtos;
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<Core.DTO.Holiday>> FindAllBookingsWithIncludedInfo(
+            DateTime? startDate,
+            string category)
+        {
+            category = MapToEnumCategory(category);
+
+            var bookings = await _unitOfWork.Holidays.FindAllBookingsWithIncludedInfo(startDate, category);
             var bookingDtos = _mapper.Map<IEnumerable<Core.DTO.Holiday>>(bookings);
             return bookingDtos;
         }

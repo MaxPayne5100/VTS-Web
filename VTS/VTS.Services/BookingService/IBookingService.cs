@@ -27,16 +27,40 @@ namespace VTS.Services.BookingService
         /// Find personal bookings by user identifier and date.
         /// </summary>
         /// <param name="userId">User identifier.</param>
-        /// <param name="startDate">Date after which booking should be found.</param>
+        /// <param name="startDate">Date after which bookings should be found.</param>
         /// <returns>Holiday Dtos.</returns>
         Task<IEnumerable<Core.DTO.Holiday>> FindPersonalBookingsByDate(int userId, DateTime? startDate);
 
         /// <summary>
+        /// Find personal bookings by user identifier, date and category.
+        /// </summary>
+        /// <param name="userId">User identifier.</param>
+        /// <param name="startDate">Date after which bookings should be found.</param>
+        /// <param name="category">Category in which bookings should be found.</param>
+        /// <param name="status">Status on which bookings should be found.</param>
+        /// <returns>Holiday Dtos.</returns>
+        Task<IEnumerable<Core.DTO.Holiday>> FindPersonalBookingsByDateAndCategoryAndStatus(
+            int userId,
+            DateTime? startDate,
+            string category,
+            string status);
+
+        /// <summary>
         /// Find all holiday bookings by date.
         /// </summary>
-        /// <param name="startDate">Date after which booking should be found.</param>
+        /// <param name="startDate">Date after which bookings should be found.</param>
         /// <returns>Holiday Dtos.</returns>
         Task<IEnumerable<Core.DTO.Holiday>> FindAllBookingsByDate(DateTime? startDate);
+
+        /// <summary>
+        /// Find all holiday bookings by date and category.
+        /// </summary>
+        /// <param name="startDate">Date after which bookings should be found.</param>
+        /// <param name="category">Category in which bookings should be found.</param>
+        /// <returns>Holiday Dtos.</returns>
+        Task<IEnumerable<Core.DTO.Holiday>> FindAllBookingsWithIncludedInfo(
+            DateTime? startDate,
+            string category);
 
         /// <summary>
         /// Find personal booking by GUID identifier.

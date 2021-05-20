@@ -51,18 +51,43 @@
 <div class="main-content text-dark pb-5 d-flex flex-column justify-content-center align-items-center">
     <div class="bookings-list-block mt-5 py-4 px-5">
         <div class="mt-2 mb-4">
-            <form asp-action="BookingsApproval" method="get" class="col-6 col-sm-4 col-md-3 p-0">
-                <label asp-for="StartDate" class="ml-2">Вкажіть початок відпустки</label>
-                <input asp-for="StartDate" type="date" class="w-100 pl-3 py-2 border" onchange="this.form.submit()" />
+            <form asp-action="BookingsApproval" method="get">
+                <div class="d-flex justify-content-lg-start justify-content-center">
+                    <div class="col-12 col-sm-10 col-lg-5 mb-3">
+                        <button class="clear-all py-2 px-3">Очистити все</button>
+                    </div>
+                </div>
+                <input asp-for="Status" type="hidden" />
+                <div class="d-flex flex-lg-row flex-column align-items-center mb-5">
+                    <div class="col-12 col-sm-10 col-lg-5 mb-3 mb-lg-0">
+                        <label asp-for="StartDate" class="ml-2">Вкажіть початок відпустки</label>
+                        <input asp-for="StartDate" type="date" class="w-100 pl-3 py-2 border" onchange="this.form.submit()" />
+                    </div>
+                    <div class="col-12 col-sm-10 col-lg-5 ml-0 ml-lg-2 mb-3 mb-lg-0">
+                        <label asp-for="Category" class="ml-2">Вкажіть категорію відпустки</label>
+                        <select asp-for="Category"
+                                class="w-100 p-0 selectpicker"
+                                data-live-search="true" title="--Оберіть категорію відпуску--"
+                                data-style="btn-light py-2 px-4" onchange="this.form.submit()">
+                            <option>Оплачувана відпустка</option>
+                            <option>Неоплачувана відпустка</option>
+                            <option>Оплачуваний лікарняний</option>
+                            <option>Неоплачуваний лікарняний</option>
+                        </select>
+                    </div>
+                </div>
             </form>
         </div>
-        @if (Model.Bookings?.Any() == false && Model.StartDate == null)
+        @if (Model.Bookings?.Any() == false &&
+          Model.StartDate == null &&
+          string.IsNullOrEmpty(Model.Category))
         {
             <p class="text-white font-weight-bold">Немає бронювань</p>
         }
-        else if (Model.Bookings?.Any() == false && Model.StartDate != null)
+        else if (Model.Bookings?.Any() == false &&
+            (Model.StartDate != null || !string.IsNullOrEmpty(Model.Category)))
         {
-            <p class="text-white font-weight-bold">Немає бронювань після вказаної дати</p>
+            <p class="text-white font-weight-bold">Немає бронювань після вказаної дати або у вказаній категорії</p>
         }
         else
         {
@@ -123,4 +148,6 @@
     </div>
 </div> 
 
-@section Scripts {}
+@section Scripts {
+    <script src="~/js/resetButton.js" asp-append-version="true"></script>
+}

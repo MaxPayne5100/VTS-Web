@@ -55,94 +55,131 @@
     }
     <div class="bookings-list-block mt-5 py-4 px-5">
         <div class="mt-2 mb-4">
-            <form asp-action="Edit" method="get" class="col-6 col-sm-4 col-md-3 p-0">
-                <label asp-for="StartDate" class="ml-2">Вкажіть початок відпустки</label>
-                <input asp-for="StartDate" type="date" class="w-100 pl-3 py-2 border" onchange="this.form.submit()" />
+            <form asp-action="Edit" method="get">
+                <div class="d-flex justify-content-lg-start justify-content-md-center">
+                    <div class="col-12 col-md-10 col-lg-4 mb-3">
+                        <button class="clear-all py-2 px-3">Очистити все</button>
+                    </div>
+                </div>
+                <div class="d-flex flex-lg-row flex-column justify-content-between align-items-center mb-5">
+                    <div class="col-12 col-md-10 col-lg-4 mb-3 mb-lg-0">
+                        <label asp-for="StartDate" class="ml-2">Вкажіть початок відпустки</label>
+                        <input asp-for="StartDate" type="date" class="w-100 pl-3 py-2 border" onchange="this.form.submit()" />
+
+                    </div>
+                    <div class="col-12 col-md-10 col-lg-4 ml-0 ml-lg-2 mb-3 mb-lg-0">
+                        <label asp-for="Category" class="ml-2">Вкажіть категорію відпустки</label>
+                        <select asp-for="Category"
+                                class="w-100 p-0 selectpicker"
+                                data-live-search="true" title="--Оберіть категорію відпустки--"
+                                data-style="btn-light py-2 px-4" onchange="this.form.submit()">
+                            <option>Оплачувана відпустка</option>
+                            <option>Неоплачувана відпустка</option>
+                            <option>Оплачуваний лікарняний</option>
+                            <option>Неоплачуваний лікарняний</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-10 col-lg-4 ml-0 ml-lg-2 mb-3 mb-lg-0">
+                        <label asp-for="Status" class="ml-2">Вкажіть статус відпустки</label>
+                        <select asp-for="Status"
+                                class="w-100 p-0 selectpicker"
+                                data-live-search="true" title="--Оберіть статус відпустки--"
+                                data-style="btn-light py-2 px-4" onchange="this.form.submit()">
+                            <option>Підтверджено</option>
+                            <option>Скасовано</option>
+                        </select>
+                    </div>
+                </div>
             </form>
         </div>
-        @if (Model.Bookings?.Any() == false && Model.StartDate == null)
+        @if (Model.Bookings?.Any() == false &&
+           Model.StartDate == null &&
+           string.IsNullOrEmpty(Model.Category))
         {
             <p class="text-white font-weight-bold">У вас немає бронювань</p>
         }
-        else if (Model.Bookings?.Any() == false && Model.StartDate != null)
+        else if (Model.Bookings?.Any() == false &&
+            (Model.StartDate != null || !string.IsNullOrEmpty(Model.Category)))
         {
-            <p class="text-white font-weight-bold">У вас немає бронювань після вказаної дати</p>
+            <p class="text-white font-weight-bold">У вас немає бронювань після вказаної дати або у вказаній категорії</p>
         }
         else
         {
-            @foreach (var booking in Model.Bookings)
-            {
-                <div class="my-4">
-                    <div class="items-block pl-3 py-2 mb-1 font-weight-bold d-flex flex-column flex-md-row text-white">
-                        <div class="mr-sm-4">
-                            <span>Відпуск (@booking.Start.ToShortDateString() - @booking.Expires.ToShortDateString())</span>
-                        </div>
-                        <div class="mr-sm-4">
-                            @if (@booking.Category == VacationCategories.PaidDayOffs)
-                            {
-                                <span>Тип: Оплачувана відпустка</span>
-                            }
-                            else if (@booking.Category == VacationCategories.UnPaidDayOffs)
-                            {
-                                <span>Тип: Неоплачувана відпустка</span>
-                            }
-                            else if (@booking.Category == VacationCategories.PaidSickness)
-                            {
-                                <span>Тип: Оплачуваний лікарняний</span>
-                            }
-                            else if (@booking.Category == VacationCategories.UnPaidSickness)
-                            {
-                                <span>Тип: Неоплачуваний лікарняний</span>
-                            }
-                        </div>
-                        <div>
-                            <span>Подано: @booking.SubmissionTime.ToShortDateString()</span>
-                        </div>
+        @foreach (var booking in Model.Bookings)
+        {
+            <div class="my-4">
+                <div class="items-block pl-3 py-2 mb-1 font-weight-bold d-flex flex-column flex-md-row text-white">
+                    <div class="mr-sm-4">
+                        <span>Відпуск (@booking.Start.ToShortDateString() - @booking.Expires.ToShortDateString())</span>
                     </div>
-                    <div class="font-weight-bold d-flex flex-column text-white">
-                        <div class="col-12 items-block font-weight-bold mb-2 mb-md-0 px-3 py-2">
-                            <p class="m-0">@booking.Description</p>
-                        </div>
-                        <div class="d-flex flex-column flex-md-row justify-content-between text-center align-items-center mt-2">
-                            @if (@booking.HolidayAcception == null)
-                            {
-                                <p class="status mb-2 mb-md-0 py-1 px-3">
-                                    <span>Очікується підтвердження</span>
-                                </p>
-                            }
-                            else
-                            {
-                            <p class="status mb-2 mb-md-0 py-1 px-3">
-                                @if (@booking.HolidayAcception.Status == "Approved")
-                                {
-                                    <span>Підтверджено: @booking.HolidayAcception.Description</span>
-                                }
-                                else if (@booking.HolidayAcception.Status == "Canceled")
-                                {
-                                    <span>Скасовано: @booking.HolidayAcception.Description</span>
-                                }
-                            </p>
-                            }
-
-                            @if (@booking.HolidayAcception?.Status != "Approved")
-                            {
-                                <div>
-                                    @{
-                                        var routeData = new Dictionary<string, string>
-                                                                                                                                                                                                                                                                                                                                                                                                                                         {
-                                                { "Id", @booking.Id.ToString() }
-                                                };
-                                    }
-                                    <button class="cancel-button px-2 py-1" data-toggle="modal" data-target="#confirmModal"
-                                            data-url=@Url.Action("Cancel", routeData)>
-                                        Скасувати бронювання
-                                    </button>
-                                </div>
-                            }
-                        </div>
+                    <div class="mr-sm-4">
+                        @if (@booking.Category == VacationCategories.PaidDayOffs)
+                        {
+                            <span>Тип: Оплачувана відпустка</span>
+                        }
+                        else if (@booking.Category == VacationCategories.UnPaidDayOffs)
+                        {
+                            <span>Тип: Неоплачувана відпустка</span>
+                        }
+                        else if (@booking.Category == VacationCategories.PaidSickness)
+                        {
+                            <span>Тип: Оплачуваний лікарняний</span>
+                        }
+                        else if (@booking.Category == VacationCategories.UnPaidSickness)
+                        {
+                            <span>Тип: Неоплачуваний лікарняний</span>
+                        }
+                    </div>
+                    <div>
+                        <span>Подано: @booking.SubmissionTime.ToShortDateString()</span>
                     </div>
                 </div>
-            }
+                <div class="font-weight-bold d-flex flex-column text-white">
+                    <div class="col-12 items-block font-weight-bold mb-2 mb-md-0 px-3 py-2">
+                        <p class="m-0">@booking.Description</p>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between text-center align-items-center mt-2">
+                        @if (@booking.HolidayAcception == null)
+                        {
+                            <p class="status mb-2 mb-md-0 py-1 px-3">
+                                <span>Очікується підтвердження</span>
+                            </p>
+                        }
+                        else
+                        {
+                            @if (@booking.HolidayAcception.Status == "Approved")
+                            {
+                                <p class="status mb-2 mb-md-0 py-1 px-3">
+                                    <span>Підтверджено: @booking.HolidayAcception.Description</span>
+                                </p>
+                            }
+                            else if (@booking.HolidayAcception.Status == "Canceled")
+                            {
+                                <p class="cancel-label mb-2 mb-md-0 py-1 px-3">
+                                    <span>Скасовано: @booking.HolidayAcception.Description</span>
+                                </p>  
+                            }
+                        }
+
+                        @if (@booking.HolidayAcception?.Status != "Approved")
+                        {
+                            <div>
+                                @{
+                                    var routeData = new Dictionary<string, string>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {
+                                                { "Id", @booking.Id.ToString() }
+                                                };
+                                }
+                                <button class="cancel-button px-2 py-1" data-toggle="modal" data-target="#confirmModal"
+                                        data-url=@Url.Action("Cancel", routeData)>
+                                    Скасувати бронювання
+                                </button>
+                            </div>
+                                    }
+                    </div>
+                </div>
+            </div>
+         }
         }
     </div>
 </div>
@@ -170,6 +207,7 @@
 @section Scripts {
     <script src="~/lib/wow.js/js/wow.min.js" asp-append-version="true"></script>
     <script src="~/js/personalBookings.js" asp-append-version="true"></script>
+    <script src="~/js/resetButton.js" asp-append-version="true"></script>
     <script>
         new WOW().init();
     </script>

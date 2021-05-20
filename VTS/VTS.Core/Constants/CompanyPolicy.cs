@@ -34,5 +34,15 @@
         /// Min experience in company in months.
         /// </summary>
         public const uint MinExpInCompany = 6;
+
+        /// <summary>
+        /// Min number of workers in company.
+        /// </summary>
+        public const uint MinNumWorkersInCompany = 2;
+
+        /// <summary>
+        /// Min number of clerks in company.
+        /// </summary>
+        public const uint MinNumClerksInCompany = 1;
     }
 }

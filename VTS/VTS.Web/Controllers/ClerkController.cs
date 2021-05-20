@@ -213,13 +213,19 @@ namespace VTS.Web.Controllers
         /// <summary>
         /// Get method for calling booking approval page.
         /// </summary>
-        /// <param name="startDate">Date after which booking should be found.</param>
+        /// <param name="startDate">Date after which bookings should be found.</param>
+        /// <param name="category">Category in which bookings should be found.</param>
         /// <returns>IActionResult.</returns>
         [HttpGet]
-        public async Task<IActionResult> BookingsApproval(DateTime? startDate)
+        public async Task<IActionResult> BookingsApproval(DateTime? startDate, string category)
         {
-            var personalBookings = await _bookingService.FindAllBookingsByDate(startDate);
-            var model = new PersonalBookings() { StartDate = startDate, Bookings = personalBookings };
+            var allBookings = await _bookingService.FindAllBookingsWithIncludedInfo(startDate, category);
+            var model = new PersonalBookings()
+            {
+                StartDate = startDate,
+                Category = category,
+                Bookings = allBookings,
+            };
             return View(model);
         }
 
