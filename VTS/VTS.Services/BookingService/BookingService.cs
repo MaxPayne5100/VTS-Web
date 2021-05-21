@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using VTS.Core.Constants;
 using VTS.Repos.UnitOfWork;
 
 namespace VTS.Services.BookingService
@@ -52,6 +54,49 @@ namespace VTS.Services.BookingService
             }
         }
 
+        private bool CheckWorkersNumberInDateRange(
+            IEnumerable<DAL.Entities.Holiday> holidayList,
+            DateTime start,
+            DateTime end)
+        {
+            var dayList = new List<DateTime>();
+            var minHeadNum = CompanyPolicy.MinNumHeadsInCompany;
+
+            dayList = Enumerable.Range(0, 1 + end.Subtract(start).Days)
+                      .Select(offset => start.AddDays(offset))
+                      .ToList();
+
+            foreach (var day in dayList)
+            {
+                int workerCounter = 0;
+                int headCounter = 0;
+
+                foreach (var holiday in holidayList)
+                {
+                    if (holiday.Start <= day && holiday.Expires >= day)
+                    {
+                        workerCounter++;
+
+                        if (headCounter < minHeadNum)
+                        {
+                            if (_unitOfWork.Heads.FindHeadByUserId(holiday.UserId) != null)
+                            {
+                                headCounter++;
+                            }
+                        }
+                    }
+                }
+
+                if (workerCounter < CompanyPolicy.MinNumWorkersInCompany ||
+                    headCounter < minHeadNum)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BookingService"/> class.
         /// </summary>
@@ -74,6 +119,25 @@ namespace VTS.Services.BookingService
                 bookingDto.SubmissionTime = DateTime.Now;
 
                 bookingDto.Category = MapToEnumCategory(bookingDto.Category);
+
+                var ownHolidayList = await _unitOfWork.Holidays.FindPersonalBookingsInDateRange(
+                    bookingDto.UserId,
+                    bookingDto.Start,
+                    bookingDto.Expires);
+
+                if (ownHolidayList.Any())
+                {
+                    throw new ArgumentException($"У вас вже є відпустка у вказаних термінах");
+                }
+
+                var holidayList = await _unitOfWork.Holidays.FindAllBookingsInDateRange(
+                    bookingDto.Start,
+                    bookingDto.Expires);
+
+                if (!CheckWorkersNumberInDateRange(holidayList, bookingDto.Start, bookingDto.Expires))
+                {
+                    throw new ArgumentException($"Замало працівників в ці терміни відпустки");
+                }
 
                 var paidDayOffs = new PaidDayOffs();
                 var unpaidDayOffs = new UnPaidDayOffs();

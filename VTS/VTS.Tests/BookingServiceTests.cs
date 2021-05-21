@@ -6,6 +6,7 @@ using AutoMapper;
 using Moq;
 using NUnit.Framework;
 using VTS.DAL.Entities;
+using VTS.Repos.Heads;
 using VTS.Repos.Holidays;
 using VTS.Repos.HolidaysAcception;
 using VTS.Repos.UnitOfWork;
@@ -25,11 +26,13 @@ namespace VTS.Tests
 
         private Mock<IHolidayRepository> _repositoryMock;
         private Mock<IHolidayAcceptionRepository> _holidayacceptionRepositoryMock;
+        private Mock<IHeadRepository> _headRepositoryMock;
 
         private Mock<IUnitOfWork> _unitOfWorkMock;
 
         private User _registeredUser;
         private User _newUser;
+        private Head _registeredHead;
         private Holiday _registeredholiday;
         private Holiday _newUserholiday;
         private HolidayAcception _registeredholidayacception;
@@ -60,6 +63,13 @@ namespace VTS.Tests
                 Email = "registered@gmail.com",
             };
 
+            _registeredHead = new Head()
+            {
+                Id = 1,
+                UserId = _registeredUser.Id,
+                User = _registeredUser,
+            };
+
             _newUser = new User()
             {
                 Id = 111,
@@ -87,9 +97,9 @@ namespace VTS.Tests
                 UserId = _newUser.Id,
                 User = _newUser,
                 Category = Holiday.Categories.PaidSickness,
-                Hours = 96,
-                Start = DateTime.Today.AddDays(5),
-                Expires = DateTime.Today.AddDays(9),
+                Hours = 72,
+                Start = DateTime.Today.AddDays(7),
+                Expires = DateTime.Today.AddDays(10),
                 Description = "Flu",
                 HolidayAcception = _newUserholidayacception,
             };
@@ -136,6 +146,20 @@ namespace VTS.Tests
                 _registeredholiday.Category.ToString()))
                 .ReturnsAsync(new List<Holiday> { _registeredholiday });
 
+            _repositoryMock.Setup(repo => repo.FindPersonalBookingsInDateRange(
+                _registeredholiday.UserId,
+                _registeredholiday.Start.AddDays(-1),
+                _registeredholiday.Expires.AddDays(-1)))
+                .ReturnsAsync(new List<Holiday> { _registeredholiday });
+
+            _repositoryMock.Setup(repo => repo.FindAllBookingsInDateRange(
+                _registeredholiday.Start,
+                _registeredholiday.Expires))
+                .ReturnsAsync(new List<Holiday> { _registeredholiday, _newUserholiday });
+
+            _repositoryMock.Setup(repo => repo.AddAsync(It.IsAny<Holiday>())).
+                Returns(Task.FromResult(Guid.Empty));
+
             _holidayacceptionRepositoryMock = new Mock<IHolidayAcceptionRepository>();
 
             _holidayacceptionRepositoryMock.Setup(repo => repo.FindAsync(It.IsAny<Guid>()))
@@ -145,9 +169,16 @@ namespace VTS.Tests
             _holidayacceptionRepositoryMock.Setup(repo => repo.AddAsync(It.IsAny<HolidayAcception>())).
                 Returns(Task.FromResult(Guid.Empty));
 
+            _headRepositoryMock = new Mock<IHeadRepository>();
+            _headRepositoryMock.Setup(repo => repo.FindAsync(It.IsAny<int>())).ReturnsAsync((Head)null);
+            _headRepositoryMock.Setup(repo => repo.FindAsync(_registeredHead.Id)).ReturnsAsync(_registeredHead);
+            _headRepositoryMock.Setup(repo => repo.FindHeadByUserId(It.IsAny<int>())).ReturnsAsync((Head)null);
+            _headRepositoryMock.Setup(repo => repo.FindHeadByUserId(_registeredUser.Id)).ReturnsAsync(_registeredHead);
+
             _unitOfWorkMock = new Mock<IUnitOfWork>();
             _unitOfWorkMock.Setup(uow => uow.Holidays).Returns(_repositoryMock.Object);
             _unitOfWorkMock.Setup(uow => uow.HolidaysAcception).Returns(_holidayacceptionRepositoryMock.Object);
+            _unitOfWorkMock.Setup(uow => uow.Heads).Returns(_headRepositoryMock.Object);
             _unitOfWorkMock.Setup(uow => uow.CommitAsync());
             #endregion
 
@@ -181,7 +212,7 @@ namespace VTS.Tests
         /// Test new booking addition with wrong hours of holiday.
         /// </summary>
         [Test]
-        public void Add_NewBooking_ArgumentException()
+        public void Add_NewBooking_WrongDates_ArgumentException()
         {
             var bookingDto = _mapper.Map<Core.DTO.Holiday>(_newUserholiday);
 
@@ -191,6 +222,22 @@ namespace VTS.Tests
             Assert.That(
                 () => _service.Add(bookingDto),
                 Throws.ArgumentException.With.Message.EqualTo($"Терміни відпустки неправильно вказані"));
+        }
+
+        /// <summary>
+        /// Test new booking addition with already used dates of holiday.
+        /// </summary>
+        [Test]
+        public void Add_NewBooking_UsedDates_ArgumentException()
+        {
+            var bookingDto = _mapper.Map<Core.DTO.Holiday>(_registeredholiday);
+
+            bookingDto.Start = bookingDto.Start.AddDays(-1);
+            bookingDto.Expires = bookingDto.Expires.AddDays(-1);
+
+            Assert.That(
+                () => _service.Add(bookingDto),
+                Throws.ArgumentException.With.Message.EqualTo($"У вас вже є відпустка у вказаних термінах"));
         }
 
         /// <summary>

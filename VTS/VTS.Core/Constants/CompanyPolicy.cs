@@ -41,8 +41,8 @@
         public const uint MinNumWorkersInCompany = 2;
 
         /// <summary>
-        /// Min number of clerks in company.
+        /// Min number of heads in company.
         /// </summary>
-        public const uint MinNumClerksInCompany = 1;
+        public const uint MinNumHeadsInCompany = 1;
     }
 }

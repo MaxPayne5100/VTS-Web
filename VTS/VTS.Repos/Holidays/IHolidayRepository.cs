@@ -49,10 +49,30 @@ namespace VTS.Repos.Holidays
         Task<IEnumerable<Holiday>> FindAllBookingsWithIncludedInfo(DateTime? startDate, string category);
 
         /// <summary>
+        /// Find all holiday bookings on the specified dates.
+        /// </summary>
+        /// <param name="startDate">Date after which bookings should be found.</param>
+        /// <param name="endDate">Date by which bookings should be found.</param>
+        /// <returns>Task.</returns>
+        Task<IEnumerable<Holiday>> FindAllBookingsInDateRange(DateTime startDate, DateTime endDate);
+
+        /// <summary>
         /// Find personal booking by GUID identifier.
         /// </summary>
         /// <param name="id">Holiday identifier.</param>
         /// <returns>Task.</returns>
         Task<Holiday> FindPersonalBooking(Guid id);
+
+        /// <summary>
+        /// Find personal bookings on the specified dates.
+        /// </summary>
+        /// <param name="userId">User identifier.</param>
+        /// <param name="startDate">Date after which bookings should be found.</param>
+        /// <param name="endDate">Date by which bookings should be found.</param>
+        /// <returns>Task.</returns>
+        Task<IEnumerable<Holiday>> FindPersonalBookingsInDateRange(
+            int userId,
+            DateTime startDate,
+            DateTime endDate);
     }
 }

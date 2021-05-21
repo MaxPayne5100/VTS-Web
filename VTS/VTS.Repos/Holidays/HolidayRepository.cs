@@ -117,9 +117,40 @@ namespace VTS.Repos.Holidays
         }
 
         /// <inheritdoc/>
+        public async Task<IEnumerable<Holiday>> FindAllBookingsInDateRange(
+            DateTime startDate,
+            DateTime endDate)
+        {
+            var bookings = _dbContext.Holidays.Include(x => x.HolidayAcception)
+                                            .Where(x => x.HolidayAcception.Status ==
+                                            HolidayAcception.StatusType.Approved);
+
+            bookings = bookings.Where(x => x.Start >= startDate && x.Start <= endDate)
+                .Union(bookings.Where(x => x.Expires >= startDate && x.Expires <= endDate));
+
+            return await bookings.OrderBy(x => x.SubmissionTime).ToListAsync();
+        }
+
+        /// <inheritdoc/>
         public async Task<Holiday> FindPersonalBooking(Guid id)
         {
             return await _dbContext.Holidays.SingleOrDefaultAsync(x => x.Id.Equals(id));
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<Holiday>> FindPersonalBookingsInDateRange(
+            int userId,
+            DateTime startDate,
+            DateTime endDate)
+        {
+            var bookings = _dbContext.Holidays.Include(x => x.HolidayAcception)
+                                            .Where(x => x.UserId.Equals(userId) &&
+                                            x.HolidayAcception.Status == HolidayAcception.StatusType.Approved);
+
+            bookings = bookings.Where(x => x.Start >= startDate && x.Start <= endDate)
+                .Union(bookings.Where(x => x.Expires >= startDate && x.Expires <= endDate));
+
+            return await bookings.ToListAsync();
         }
     }
 }

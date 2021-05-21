@@ -94,14 +94,16 @@
         </div>
         @if (Model.Bookings?.Any() == false &&
            Model.StartDate == null &&
-           string.IsNullOrEmpty(Model.Category))
+           string.IsNullOrEmpty(Model.Category) &&
+           string.IsNullOrEmpty(Model.Status))
         {
             <p class="text-white font-weight-bold">У вас немає бронювань</p>
         }
         else if (Model.Bookings?.Any() == false &&
-            (Model.StartDate != null || !string.IsNullOrEmpty(Model.Category)))
+            (Model.StartDate != null || !string.IsNullOrEmpty(Model.Category) ||
+                !string.IsNullOrEmpty(Model.Status)))
         {
-            <p class="text-white font-weight-bold">У вас немає бронювань після вказаної дати або у вказаній категорії</p>
+            <p class="text-white font-weight-bold">У вас немає бронювань після вказаної дати, категорії чи статусу бронювання</p>
         }
         else
         {
