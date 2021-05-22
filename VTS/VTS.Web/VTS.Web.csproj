@@ -10,6 +10,8 @@
     <Compile Remove="Migrations\20200521115432_AutoIterateMigration.Designer.cs" />
     <Compile Remove="Migrations\20200521120716_AutoIncMigration.cs" />
     <Compile Remove="Migrations\20200521120716_AutoIncMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210522113209_AddedSeedData.cs" />
+    <Compile Remove="Migrations\20210522113209_AddedSeedData.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

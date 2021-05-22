@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using VTS.DAL.Configuration;
 using VTS.DAL.Entities;
+using VTS.DAL.Extensions;
 
 namespace VTS.DAL
 {
@@ -34,6 +35,8 @@ namespace VTS.DAL
             modelBuilder.ApplyConfiguration(new UserVacationInfoEntityConfiguration());
             modelBuilder.ApplyConfiguration(new HolidayEntityConfiguration());
             modelBuilder.ApplyConfiguration(new HolidayAcceptionEntityConfiguration());
+
+            modelBuilder.Seed();
         }
 
         /// <summary>

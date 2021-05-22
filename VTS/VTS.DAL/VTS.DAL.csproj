@@ -18,9 +18,5 @@
   <ItemGroup>
     <ProjectReference Include="..\VTS.Core\VTS.Core.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
 
 </Project>

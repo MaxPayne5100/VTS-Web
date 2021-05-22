@@ -37,7 +37,7 @@ namespace VTS.DAL.Entities
         /// <summary>
         /// Gets or sets Head identifier.
         /// </summary>
-        public int HeadId { get; set; }
+        public int? HeadId { get; set; }
 
         /// <summary>
         /// Gets or sets Head.

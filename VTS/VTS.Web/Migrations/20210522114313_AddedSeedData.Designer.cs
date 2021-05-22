@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VTS.DAL;
 
 namespace VTS.Web.Migrations
 {
     [DbContext(typeof(VTSDbContext))]
-    partial class VTSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210522114313_AddedSeedData")]
+    partial class AddedSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
