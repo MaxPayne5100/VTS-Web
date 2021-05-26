@@ -42,6 +42,8 @@
     });
 
     connection.on("ReceiveMessage", function (message) {
+        event.preventDefault();
+
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -50,15 +52,14 @@
             "positionClass": "toast-top-right",
             "preventDuplicates": true,
             "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "300",
-            "timeOut": "0",
-            "extendedTimeOut": "0",
+            "disableTimeOut": true,
             "showEasing": "swing",
             "hideEasing": "linear",
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         }
+
+        toastr.options.onHidden = function () { $('form[name="approve-form"]').submit(); }
 
         generalText = "Ваше бронювання "
 

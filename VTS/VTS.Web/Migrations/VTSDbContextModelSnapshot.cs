@@ -150,7 +150,7 @@ namespace VTS.Web.Migrations
                             Expires = new DateTime(2021, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Hours = 24L,
                             Start = new DateTime(2021, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SubmissionTime = new DateTime(2021, 5, 22, 14, 43, 12, 622, DateTimeKind.Local).AddTicks(7924),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4398),
                             UserId = 1
                         },
                         new
@@ -161,7 +161,7 @@ namespace VTS.Web.Migrations
                             Expires = new DateTime(2021, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Hours = 72L,
                             Start = new DateTime(2021, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SubmissionTime = new DateTime(2021, 5, 22, 14, 43, 12, 622, DateTimeKind.Local).AddTicks(8067),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4521),
                             UserId = 1
                         },
                         new
@@ -172,7 +172,7 @@ namespace VTS.Web.Migrations
                             Expires = new DateTime(2021, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Hours = 48L,
                             Start = new DateTime(2021, 5, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SubmissionTime = new DateTime(2021, 5, 22, 14, 43, 12, 622, DateTimeKind.Local).AddTicks(8081),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4531),
                             UserId = 1
                         },
                         new
@@ -183,7 +183,7 @@ namespace VTS.Web.Migrations
                             Expires = new DateTime(2021, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Hours = 24L,
                             Start = new DateTime(2021, 5, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SubmissionTime = new DateTime(2021, 5, 22, 14, 43, 12, 622, DateTimeKind.Local).AddTicks(8091),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4539),
                             UserId = 2
                         },
                         new
@@ -194,7 +194,7 @@ namespace VTS.Web.Migrations
                             Expires = new DateTime(2021, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Hours = 72L,
                             Start = new DateTime(2021, 5, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SubmissionTime = new DateTime(2021, 5, 22, 14, 43, 12, 622, DateTimeKind.Local).AddTicks(8099),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4546),
                             UserId = 3
                         });
                 });
@@ -232,7 +232,7 @@ namespace VTS.Web.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b8a26335-2787-4b15-a58d-a37615df7db9"),
+                            Id = new Guid("eeaf1dac-95c7-4e45-88a0-7faa9b038494"),
                             Description = "Have a good time :)",
                             HeadId = 1,
                             HolidayId = new Guid("2ac054d6-8508-4daf-e348-08d91b0fb7e6"),
@@ -240,7 +240,7 @@ namespace VTS.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ab62af14-f0b9-4f94-b3e4-c5be891c34c0"),
+                            Id = new Guid("4388f760-c14a-48d0-9a7c-1f26dec94e29"),
                             Description = "Wish you good health :)",
                             HeadId = 1,
                             HolidayId = new Guid("c6e7762b-ec65-42c3-e349-08d91b0fb7e6"),
@@ -248,7 +248,7 @@ namespace VTS.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f4f57284-e130-4de4-8c8d-1a8cfe9ba952"),
+                            Id = new Guid("b48bb03f-a299-4bf1-ae23-f8d4e24e025f"),
                             Description = "Wish you good health :)",
                             HeadId = 1,
                             HolidayId = new Guid("389da9dc-7bdd-43ad-80ab-08d91c73789f"),
@@ -256,7 +256,7 @@ namespace VTS.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("004db92b-d619-4b41-a0c1-8aa858f11511"),
+                            Id = new Guid("a808bc99-aa80-4ecd-818d-752972eb72f8"),
                             Description = "Have a good time :)",
                             HeadId = 1,
                             HolidayId = new Guid("1aafbbf1-0261-4522-8267-d6ae96e9fbcb"),
@@ -264,7 +264,7 @@ namespace VTS.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4da2f382-87c2-4623-b7ce-91a117606b7f"),
+                            Id = new Guid("437e4799-db1f-4961-b55e-cd11f82af017"),
                             Description = "Have a good time :)",
                             HeadId = 1,
                             HolidayId = new Guid("7e99ea45-e7ef-464a-a779-75c636d90bfb"),
@@ -338,7 +338,7 @@ namespace VTS.Web.Migrations
                         new
                         {
                             Id = 2,
-                            Email = "bordun@gmail.com",
+                            Email = "doe@gmail.com",
                             FirstName = "Joe",
                             LastName = "Doe",
                             Role = "Employee"
@@ -390,7 +390,7 @@ namespace VTS.Web.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("709596dd-bd7c-4c7c-8865-7a4f1cf30c20"),
+                            Id = new Guid("8a7b3f3c-ad20-4aea-a4e3-a3f5b2e86f2b"),
                             BonusPaidDayOffs = 0L,
                             PaidDayOffs = 15L,
                             PaidSickness = 15L,
@@ -401,7 +401,7 @@ namespace VTS.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4b619e29-8648-4b3b-938a-261f11d0fa98"),
+                            Id = new Guid("c328a406-b7d9-4303-b48b-6765ceda26b1"),
                             BonusPaidDayOffs = 0L,
                             PaidDayOffs = 15L,
                             PaidSickness = 15L,
@@ -412,7 +412,7 @@ namespace VTS.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b7054959-eb96-44f5-b618-a23ee5a05e32"),
+                            Id = new Guid("07424251-d705-49ea-8495-76bed32c9bbd"),
                             BonusPaidDayOffs = 0L,
                             PaidDayOffs = 15L,
                             PaidSickness = 15L,

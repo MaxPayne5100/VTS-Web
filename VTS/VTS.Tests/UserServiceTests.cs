@@ -85,8 +85,10 @@ namespace VTS.Tests
 
             #region setup mocks
             _repositoryMock = new Mock<IUserRepository>();
-            _repositoryMock.Setup(repo => repo.FindByRoleWithoutOwnData(It.IsAny<string>(), _registeredUser.Id)).ReturnsAsync((List<User>)null);
-            _repositoryMock.Setup(repo => repo.FindByRoleWithoutOwnData(It.IsAny<string>(), _registeredUser.Id)).ReturnsAsync(new List<User> { _registeredUser, _registeredUser2 });
+            _repositoryMock.Setup(repo => repo.FindByRoleWithoutOwnData(It.IsAny<string>(), _registeredUser.Id))
+                .ReturnsAsync((List<User>)null);
+            _repositoryMock.Setup(repo => repo.FindByRoleWithoutOwnData(It.IsAny<string>(), _registeredUser.Id))
+                .ReturnsAsync(new List<User> { _registeredUser, _registeredUser2 });
             _repositoryMock.Setup(repo => repo.FindByEmail(It.IsAny<string>())).ReturnsAsync((User)null);
             _repositoryMock.Setup(repo => repo.FindByEmail(_registeredUser.Email)).ReturnsAsync(_registeredUser);
             _repositoryMock.Setup(repo => repo.FindByEmail(_registeredUser2.Email)).ReturnsAsync(_registeredUser2);

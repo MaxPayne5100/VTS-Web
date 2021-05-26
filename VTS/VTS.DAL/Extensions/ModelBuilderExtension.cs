@@ -30,7 +30,7 @@ namespace VTS.DAL.Extensions
                     Id = 2,
                     FirstName = "Joe",
                     LastName = "Doe",
-                    Email = "bordun@gmail.com",
+                    Email = "doe@gmail.com",
                     Role = Roles.Employee,
                 },
                 new User

@@ -46,7 +46,7 @@ namespace VTS.Services.BookingService
             }
             else if (dtoStatus == "Скасовано" || dtoStatus == "Скасувати")
             {
-                return "Cancelled";
+                return "Canceled";
             }
             else
             {
@@ -56,6 +56,7 @@ namespace VTS.Services.BookingService
 
         private bool CheckWorkersNumberInDateRange(
             IEnumerable<DAL.Entities.Holiday> holidayList,
+            int userId,
             DateTime start,
             DateTime end)
         {
@@ -85,6 +86,12 @@ namespace VTS.Services.BookingService
                             }
                         }
                     }
+                }
+
+                workerCounter++;
+                if (_unitOfWork.Heads.FindHeadByUserId(userId) != null)
+                {
+                    headCounter++;
                 }
 
                 if (workerCounter < CompanyPolicy.MinNumWorkersInCompany ||
@@ -134,7 +141,7 @@ namespace VTS.Services.BookingService
                     bookingDto.Start,
                     bookingDto.Expires);
 
-                if (!CheckWorkersNumberInDateRange(holidayList, bookingDto.Start, bookingDto.Expires))
+                if (!CheckWorkersNumberInDateRange(holidayList, bookingDto.UserId, bookingDto.Start, bookingDto.Expires))
                 {
                     throw new ArgumentException($"Замало працівників в ці терміни відпустки");
                 }

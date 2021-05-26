@@ -103,7 +103,7 @@ namespace VTS.Web.Controllers
             }
             else if (returnUrl.StartsWith("/Manager"))
             {
-                message = $"Only managers  can access {returnUrl}";
+                message = $"Only managers can access {returnUrl}";
             }
             else
             {

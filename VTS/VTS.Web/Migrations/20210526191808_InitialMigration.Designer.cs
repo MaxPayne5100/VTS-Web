@@ -10,7 +10,7 @@ using VTS.DAL;
 namespace VTS.Web.Migrations
 {
     [DbContext(typeof(VTSDbContext))]
-    [Migration("20200521134711_InitialMigration")]
+    [Migration("20210526191808_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,13 @@ namespace VTS.Web.Migrations
                         .IsUnique();
 
                     b.ToTable("Clerks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HeadId = 1
+                        });
                 });
 
             modelBuilder.Entity("VTS.DAL.Entities.Employee", b =>
@@ -60,6 +67,14 @@ namespace VTS.Web.Migrations
                         .IsUnique();
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ManagerId = 1,
+                            UserId = 2
+                        });
                 });
 
             modelBuilder.Entity("VTS.DAL.Entities.Head", b =>
@@ -78,6 +93,18 @@ namespace VTS.Web.Migrations
                         .IsUnique();
 
                     b.ToTable("Heads");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("VTS.DAL.Entities.Holiday", b =>
@@ -115,6 +142,63 @@ namespace VTS.Web.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Holidays");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("2ac054d6-8508-4daf-e348-08d91b0fb7e6"),
+                            Category = "PaidDayOffs",
+                            Description = "Mind refresh",
+                            Expires = new DateTime(2021, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Hours = 24L,
+                            Start = new DateTime(2021, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4398),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("c6e7762b-ec65-42c3-e349-08d91b0fb7e6"),
+                            Category = "UnPaidSickness",
+                            Description = "Flu",
+                            Expires = new DateTime(2021, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Hours = 72L,
+                            Start = new DateTime(2021, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4521),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("389da9dc-7bdd-43ad-80ab-08d91c73789f"),
+                            Category = "PaidSickness",
+                            Description = "Flu",
+                            Expires = new DateTime(2021, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Hours = 48L,
+                            Start = new DateTime(2021, 5, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4531),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("1aafbbf1-0261-4522-8267-d6ae96e9fbcb"),
+                            Category = "UnPaidDayOffs",
+                            Description = "Mind refresh",
+                            Expires = new DateTime(2021, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Hours = 24L,
+                            Start = new DateTime(2021, 5, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4539),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("7e99ea45-e7ef-464a-a779-75c636d90bfb"),
+                            Category = "PaidDayOffs",
+                            Description = "Mind refresh",
+                            Expires = new DateTime(2021, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Hours = 72L,
+                            Start = new DateTime(2021, 5, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubmissionTime = new DateTime(2021, 5, 26, 22, 18, 7, 864, DateTimeKind.Local).AddTicks(4546),
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("VTS.DAL.Entities.HolidayAcception", b =>
@@ -128,7 +212,7 @@ namespace VTS.Web.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<int>("HeadId")
+                    b.Property<int?>("HeadId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("HolidayId")
@@ -146,6 +230,48 @@ namespace VTS.Web.Migrations
                         .IsUnique();
 
                     b.ToTable("HolidaysAcception");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("eeaf1dac-95c7-4e45-88a0-7faa9b038494"),
+                            Description = "Have a good time :)",
+                            HeadId = 1,
+                            HolidayId = new Guid("2ac054d6-8508-4daf-e348-08d91b0fb7e6"),
+                            Status = "Canceled"
+                        },
+                        new
+                        {
+                            Id = new Guid("4388f760-c14a-48d0-9a7c-1f26dec94e29"),
+                            Description = "Wish you good health :)",
+                            HeadId = 1,
+                            HolidayId = new Guid("c6e7762b-ec65-42c3-e349-08d91b0fb7e6"),
+                            Status = "Approved"
+                        },
+                        new
+                        {
+                            Id = new Guid("b48bb03f-a299-4bf1-ae23-f8d4e24e025f"),
+                            Description = "Wish you good health :)",
+                            HeadId = 1,
+                            HolidayId = new Guid("389da9dc-7bdd-43ad-80ab-08d91c73789f"),
+                            Status = "Approved"
+                        },
+                        new
+                        {
+                            Id = new Guid("a808bc99-aa80-4ecd-818d-752972eb72f8"),
+                            Description = "Have a good time :)",
+                            HeadId = 1,
+                            HolidayId = new Guid("1aafbbf1-0261-4522-8267-d6ae96e9fbcb"),
+                            Status = "Approved"
+                        },
+                        new
+                        {
+                            Id = new Guid("437e4799-db1f-4961-b55e-cd11f82af017"),
+                            Description = "Have a good time :)",
+                            HeadId = 1,
+                            HolidayId = new Guid("7e99ea45-e7ef-464a-a779-75c636d90bfb"),
+                            Status = "Approved"
+                        });
                 });
 
             modelBuilder.Entity("VTS.DAL.Entities.Manager", b =>
@@ -164,6 +290,13 @@ namespace VTS.Web.Migrations
                         .IsUnique();
 
                     b.ToTable("Managers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HeadId = 2
+                        });
                 });
 
             modelBuilder.Entity("VTS.DAL.Entities.User", b =>
@@ -194,6 +327,32 @@ namespace VTS.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "bordun@gmail.com",
+                            FirstName = "Mykhailo",
+                            LastName = "Bordun",
+                            Role = "Clerk"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "doe@gmail.com",
+                            FirstName = "Joe",
+                            LastName = "Doe",
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "payne@gmail.com",
+                            FirstName = "Max",
+                            LastName = "Payne",
+                            Role = "Manager"
+                        });
                 });
 
             modelBuilder.Entity("VTS.DAL.Entities.UserVacationInfo", b =>
@@ -229,6 +388,41 @@ namespace VTS.Web.Migrations
                         .IsUnique();
 
                     b.ToTable("UsersVacationInfo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8a7b3f3c-ad20-4aea-a4e3-a3f5b2e86f2b"),
+                            BonusPaidDayOffs = 0L,
+                            PaidDayOffs = 15L,
+                            PaidSickness = 15L,
+                            StartedWorking = new DateTime(2020, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UnPaidDayOffs = 15L,
+                            UnPaidSickness = 15L,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("c328a406-b7d9-4303-b48b-6765ceda26b1"),
+                            BonusPaidDayOffs = 0L,
+                            PaidDayOffs = 15L,
+                            PaidSickness = 15L,
+                            StartedWorking = new DateTime(2020, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UnPaidDayOffs = 15L,
+                            UnPaidSickness = 15L,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("07424251-d705-49ea-8495-76bed32c9bbd"),
+                            BonusPaidDayOffs = 0L,
+                            PaidDayOffs = 15L,
+                            PaidSickness = 15L,
+                            StartedWorking = new DateTime(2021, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UnPaidDayOffs = 15L,
+                            UnPaidSickness = 15L,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("VTS.DAL.Entities.Clerk", b =>
@@ -278,8 +472,7 @@ namespace VTS.Web.Migrations
                     b.HasOne("VTS.DAL.Entities.Head", "Head")
                         .WithMany("HolidayAcception")
                         .HasForeignKey("HeadId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("VTS.DAL.Entities.Holiday", "Holiday")
                         .WithOne("HolidayAcception")

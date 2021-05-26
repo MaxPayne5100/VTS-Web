@@ -51,7 +51,7 @@
 <div class="main-content text-dark pb-5 d-flex flex-column justify-content-center align-items-center">
     @if (User.IsInRole(Roles.Employee))
     {
-        @await Component.InvokeAsync("EmployeeManager", new { id = Model.Bookings.SingleOrDefault().UserId });
+        @await Component.InvokeAsync("EmployeeManager", new { id = Int32.Parse(User.FindFirst(ClaimKeys.Id).Value) });
     }
     <div class="bookings-list-block mt-5 py-4 px-5">
         <div class="mt-2 mb-4">
